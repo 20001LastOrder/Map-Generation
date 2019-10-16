@@ -1,0 +1,25 @@
+import epackage "models/model.ecore"
+//import viatra "../../../Domains/github-graph/queries/queries/github.vql"
+
+generate {
+	metamodel = {package map}
+	//partial-model = { "inputs/github.xmi"}
+	//constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 30
+	}
+	
+	number = 1
+	runs = 1
+	config = {
+		log-level = normal
+	}
+	
+	debug = "debug"
+	statistics = "statistics/"
+	output = "output/"
+}
