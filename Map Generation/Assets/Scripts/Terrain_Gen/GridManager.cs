@@ -38,6 +38,7 @@ public class GridManager : MonoBehaviour
                 // add Grid component
                 Grid subGrid = subGridGO.AddComponent<Grid>();
                 subGrid.m_parentGrid = m_rootGrid;
+                row.Add(subGrid);
 
                 // add LineRenderer component
                 LineRenderer lineRenderer = subGridGO.AddComponent<LineRenderer>();
@@ -69,6 +70,28 @@ public class GridManager : MonoBehaviour
                     }
                 }
                 mesh.vertices = verts;
+            }
+
+            m_rootGrid.m_subGrid.Add(row);
+        }
+
+        for(int r = 0; r < rootGridDim; r++)
+        {
+            for(int c = 0; c < rootGridDim; c++)
+            {
+                Grid cur = m_rootGrid.m_subGrid[r][c];
+
+                // top
+                if (r > 0) m_rootGrid.m_subGrid[r][c].m_top = m_rootGrid.m_subGrid[r - 1][c];
+
+                // bottom
+                if (r < (rootGridDim - 1)) m_rootGrid.m_subGrid[r][c].m_bottom = m_rootGrid.m_subGrid[r + 1][c];
+
+                // left
+                if (c > 0) m_rootGrid.m_subGrid[r][c].m_left = m_rootGrid.m_subGrid[r][c - 1];
+
+                // right
+                if (c < (rootGridDim - 1)) m_rootGrid.m_subGrid[r][c].m_right = m_rootGrid.m_subGrid[r][c + 1];
             }
         }
     }

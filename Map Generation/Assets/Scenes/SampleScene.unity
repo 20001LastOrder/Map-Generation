@@ -325,6 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootGridDim: 10
   rootGridSize: 10
+  greenMaterial: {fileID: 2100000, guid: 1a6907cc4f4f95a46b3f4a5f229b9bfb, type: 2}
 --- !u!4 &1979299340
 Transform:
   m_ObjectHideFlags: 0
