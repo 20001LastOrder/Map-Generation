@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * parse Ecore Package into corresponding ecore file based on pre-defined syntax of ecore
+ **/
 public static class EcoreParser
 {
     private static readonly string REF_PREFIX = "#//";
@@ -10,7 +13,7 @@ public static class EcoreParser
     public static string ParseEReference(EReference reference)
     {
         string basicInfo = "<eStructuralFeatures xsi:type=\"{0}\" name=\"{1}\" eType=\"" + REF_PREFIX + "{2}\"";
-        basicInfo = string.Format(basicInfo, EReference.XMI_NAME, reference.Name, reference.EType.Name);
+        basicInfo = string.Format(basicInfo, EReference.XMI_NAME, reference.Name, reference.TargetClass.Name);
 
         // set additional infomation when it is not the default ones
         if(reference.UpperBound != 1)
@@ -26,6 +29,11 @@ public static class EcoreParser
         if (reference.Conptainment)
         {
             basicInfo += string.Format(" containment=\"true\"");
+        }
+
+        if(reference.EOpposite != null)
+        {
+            basicInfo += string.Format(" eOpposite=\"{0}{1}/{2}\"", REF_PREFIX, reference.TargetClass.Name, reference.EOpposite.Name);
         }
 
         basicInfo += "/>\n";

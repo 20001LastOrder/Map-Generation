@@ -6,26 +6,30 @@ public class EClass
 {
     public static readonly string XMI_NAME = "ecore:EClass";
 
-    private string name;
-    private List<EReference> eReferences;
     private bool isAbstract = false;
     private EClass eSuperType;
 
     public EClass(string name)
     {
-        this.name = name;
-        eReferences = new List<EReference>();
+        this.Name = name;
+        EReferences = new List<EReference>();
+        EAttributes = new List<EAttribute>();
     }
 
     public string Name
     {
-        get => name;
-        set { name = value; }
+        get;
+        set;
     }
 
     public List<EReference> EReferences
     {
-        get => eReferences;
+        get;
+    }
+
+    public List<EAttribute> EAttributes
+    {
+        get;
     }
 
     public bool IsAbstract

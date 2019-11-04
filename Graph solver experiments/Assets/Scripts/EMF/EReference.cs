@@ -7,15 +7,16 @@ public class EReference
     public static readonly string XMI_NAME = "ecore:EReference";
 
     private string name;    
-    private EClass eType;
+    private EClass targetClass;
     private int upperBound = 1;
     private int lowerBound = 0;
+    private EReference eOpposite;
     private bool conptainment = false;
 
     public EReference(string name, EClass targetClass)
     {
         this.name = name;
-        this.eType = targetClass;
+        this.targetClass = targetClass;
     }
 
     public string Name
@@ -24,10 +25,29 @@ public class EReference
         set { name = value; }
     }
 
-    public EClass EType
+    public EClass TargetClass
     {
-        get => eType;
-        set { eType = value; }
+        get => targetClass;
+        set { targetClass = value; }
+    }
+
+    public EReference EOpposite
+    {
+        get => eOpposite;
+        set {
+            if (targetClass.EReferences.Contains(value))
+            {
+                eOpposite = value;
+                if(eOpposite.EOpposite != this)
+                {
+                    eOpposite.EOpposite = this;
+                }
+            }
+            else
+            {
+                throw new System.Exception("Assigned EOpposite is not belongs to the target class");
+            }
+        }
     }
 
     public int UpperBound

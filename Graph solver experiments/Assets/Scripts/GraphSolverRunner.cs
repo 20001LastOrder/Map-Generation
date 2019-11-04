@@ -1,6 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 using UnityEngine;
+using System;
+using System.Reflection;
 
 public class GraphSolverRunner : MonoBehaviour
 {
@@ -8,52 +14,108 @@ public class GraphSolverRunner : MonoBehaviour
     void Start()
     {
         // create classes
-        EClass map = new EClass("Map");
-        EClass grid = new EClass("Grid")
+        EClass mapClass = new EClass("Map");
+        EClass gridClass = new EClass("Grid");
+        EClass gridTypeClass = new EClass("GridType")
         {
             IsAbstract = true
         };
-        EClass city = new EClass("City");
-        EClass mountain = new EClass("Mountain");
-        EClass village = new EClass("Village");
-        EClass water = new EClass("Water");
+        EClass cityClass = new EClass("City");
+        EClass mountainClass = new EClass("Mountain");
+        EClass villageClass = new EClass("Village");
+        EClass riverClass = new EClass("river");
 
+        var left = new EReference("left", gridClass);
+        var right = new EReference("right", gridClass);
+        var up = new EReference("up", gridClass);
+        var down = new EReference("down", gridClass);
+        gridClass.EReferences.AddRange(new List<EReference>() { left, right, up, down });
+        left.EOpposite = right;
+        up.EOpposite = down;
 
-        grid.EReferences.Add(new EReference("left", grid));
-        grid.EReferences.Add(new EReference("right", grid));
-        grid.EReferences.Add(new EReference("up", grid));
-        grid.EReferences.Add(new EReference("down", grid));
+        cityClass.ESuperType = gridTypeClass;
+        mountainClass.ESuperType = gridTypeClass;
+        villageClass.ESuperType = gridTypeClass;
+        riverClass.ESuperType = gridTypeClass;
 
-        city.ESuperType = grid;
-        mountain.ESuperType = grid;
-        village.ESuperType = grid;
-        water.ESuperType = grid;
-
-        EReference r = new EReference("grids", grid)
+        EReference r = new EReference("grids", gridClass)
         {
             Conptainment = true,
             UpperBound = -1
         };
-        map.EReferences.Add(r);
+        mapClass.EReferences.Add(r);
+
+        EReference typesRef = new EReference("types", gridTypeClass)
+        {
+            Conptainment = true,
+            UpperBound = -1
+        };
+        gridClass.EReferences.Add(typesRef);
+
+        EReference gridRef = new EReference("grid", gridClass);
+        gridTypeClass.EReferences.Add(gridRef);
+        typesRef.EOpposite = gridRef;
 
         EPackage package = new EPackage("map");
-        package.EClasses.Add(map);
-        package.EClasses.Add(grid);
-        package.EClasses.Add(city);
-        package.EClasses.Add(mountain);
-        package.EClasses.Add(village);
-        package.EClasses.Add(water);
+        package.EClasses.AddRange(new List<EClass>() { mapClass, gridClass, gridTypeClass, cityClass, villageClass, mountainClass, riverClass });
 
 
         EcoreParser.SaveEcore(package);
         Debug.Log("finished creating package");
-        runSolver();
+        //runSolver();
+
+        //ReadXML();
     }
 
-    // Update is called once per frame
-    void Update()
+    void ReadXML()
     {
-        
+        XDocument document = XDocument.Load(Application.dataPath + "/GraphSolver/output/1.xmi");
+        var root = document.Root;
+        var map = new Map();
+        var elements = root.Elements().ToArray();
+        foreach (var ele in elements)
+        {
+            map.grids.Add(ReadElement(ele));
+        }
+        Debug.Log(map.grids[0]);
+
+        for (var i = 0; i < map.grids.Count; i++)
+        {
+            ResolveCrossReference(map, elements[i], i);
+        }
+
+        Debug.Log(map.grids[0].left);
+    }
+
+    Grid ReadElement(XElement ele)
+    {
+        var typeName = ele.Attribute("{http://www.w3.org/2001/XMLSchema-instance}type").Value.Split(':')[1];
+        Type elementType = Type.GetType(typeName);
+        if (!elementType.IsSubclassOf(typeof(Grid)))
+        {
+            throw new Exception("bad type");
+        }
+        Grid specificElement = (Grid)Activator.CreateInstance(elementType);
+        var elements = ele.Elements().ToArray();
+
+        // if (elements.Length == 0) return null;
+
+
+        return specificElement;
+    }
+
+    void ResolveCrossReference(Map root, XElement ele, int index)
+    {
+        var target = root.grids[index];
+        var type = target.GetType();
+        foreach (var attr in ele.Attributes())
+        {
+            var property = type.GetProperty(attr.Name.ToString());
+            if (property == null) continue;
+            var i = int.Parse(attr.Value.Split('.')[1]);
+
+            property.SetValue(target, root.grids[i]);
+        }
     }
 
     public void runSolver()
