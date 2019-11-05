@@ -1,16 +1,16 @@
-import epackage "models/model.ecore"
-//import viatra "../../../Domains/github-graph/queries/queries/github.vql"
+import epackage "models/map.ecore"
+import viatra "queries/map.vql"
 
 generate {
 	metamodel = {package map}
-	//partial-model = { "inputs/github.xmi"}
-	//constraints = { package queries }
+	partial-model = { "instance.xmi"}
+	constraints = { package queries }
 	
 
 	solver = ViatraSolver
 	
 	scope = {
-		#node = 30
+		#node = 33..100
 	}
 	
 	number = 1

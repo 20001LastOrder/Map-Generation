@@ -41,6 +41,22 @@ public static class EcoreParser
         return basicInfo;
     }
 
+    public static string parseEAttribute(EAttribute attr)
+    {
+        string basicInfo = "<eStructuralFeatures xsi:type=\"{0}\" name=\"{1}\" eType=\"{2}\"";
+        basicInfo = string.Format(basicInfo, EAttribute.XMI_NAME, attr.Name, attr.Type);
+
+        // set additional infomation when it is not the default ones
+        if (attr.IsId)
+        {
+            basicInfo += string.Format(" iD=\"true\"");
+        }
+
+        basicInfo += "/>\n";
+
+        return basicInfo;
+    }
+
     public static string ParseEClass(EClass cl){
         string basicInfo = "<eClassifiers xsi:type=\"{0}\" name=\"{1}\"";
         basicInfo = string.Format(basicInfo, EClass.XMI_NAME, cl.Name);
@@ -56,13 +72,25 @@ public static class EcoreParser
         }
         
         //add eReferences if there is any
-        if(cl.EReferences.Count > 0)
+        if(cl.EReferences.Count > 0 || cl.EAttributes.Count > 0)
         {
             basicInfo += ">\n";
-            foreach (EReference r in cl.EReferences)
+            if(cl.EReferences.Count > 0)
             {
-                basicInfo += "  "+ParseEReference(r);
+                foreach (EReference r in cl.EReferences)
+                {
+                    basicInfo += "  " + ParseEReference(r);
+                }
             }
+
+            if(cl.EAttributes.Count > 0)
+            {
+                foreach (var attr in cl.EAttributes)
+                {
+                    if (attr.IsId) basicInfo += "  " + parseEAttribute(attr);
+                }
+            }
+          
             basicInfo += " </eClassifiers>\n";
         }
         else
@@ -97,10 +125,10 @@ public static class EcoreParser
         return basicInfo;
     }
 
-    public static void SaveEcore(EPackage package)
+    public static void SaveEcore(EPackage package, string filename)
     {
         string path = Application.dataPath + "/GraphSolver/models/";
         string packageInfo = ParseEPackage(package);
-        System.IO.File.WriteAllText((path + "model.ecore"), FILE_HEADER+packageInfo);
+        System.IO.File.WriteAllText((path + filename), FILE_HEADER+packageInfo);
     }
 }

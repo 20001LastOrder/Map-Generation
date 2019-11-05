@@ -10,6 +10,9 @@ using System.Reflection;
 
 public class GraphSolverRunner : MonoBehaviour
 {
+    [SerializeField]
+    private string ecoreFileName = "map.ecore";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,9 @@ public class GraphSolverRunner : MonoBehaviour
         EClass cityClass = new EClass("City");
         EClass mountainClass = new EClass("Mountain");
         EClass villageClass = new EClass("Village");
-        EClass riverClass = new EClass("river");
+        EClass riverClass = new EClass("River");
+
+        gridClass.EAttributes.Add(new EAttribute("id", "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt") { IsId = true });
 
         var left = new EReference("left", gridClass);
         var right = new EReference("right", gridClass);
@@ -60,9 +65,9 @@ public class GraphSolverRunner : MonoBehaviour
         package.EClasses.AddRange(new List<EClass>() { mapClass, gridClass, gridTypeClass, cityClass, villageClass, mountainClass, riverClass });
 
 
-        EcoreParser.SaveEcore(package);
+        EcoreParser.SaveEcore(package, ecoreFileName);
         Debug.Log("finished creating package");
-        //runSolver();
+        runSolver();
 
         //ReadXML();
     }
@@ -128,6 +133,7 @@ public class GraphSolverRunner : MonoBehaviour
         startInfo.FileName = "java";
         startInfo.Arguments = "-jar app.jar map.vsconfig";
         startInfo.RedirectStandardOutput = true;
+        startInfo.RedirectStandardError = true;
         startInfo.UseShellExecute = false;
         startInfo.CreateNoWindow = true;
         process.StartInfo = startInfo;

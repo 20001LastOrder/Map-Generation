@@ -109,13 +109,17 @@ private pattern mayInstanceOfMap_class(problem:LogicProblem, interpretation:Part
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
 	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class_UndefinedPart(problem,interpretation,element);
 	neg find scopeDisallowsNewMap_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
 	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class_UndefinedPart(problem,interpretation,element);
 	neg find scopeDisallowsNewMap_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -143,25 +147,65 @@ private pattern mayInstanceOfGrid_class(problem:LogicProblem, interpretation:Par
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class_UndefinedPart(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
 	neg find scopeDisallowsNewGrid_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class_UndefinedPart(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
 	neg find scopeDisallowsNewGrid_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
 { find mustInstanceOfGrid_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "GridType class".
+ */
+private pattern mustInstanceOfGridType_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"GridType class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewGridType_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"GridType class");
+}
+
+/**
+ * An element may be an instance of type "GridType class".
+ */
+private pattern mayInstanceOfGridType_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfMountain_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find scopeDisallowsNewGridType_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfMountain_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find scopeDisallowsNewGridType_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfGridType_class(problem,interpretation,element); }
 /**
  * An element must be an instance of type "City class".
  */
@@ -185,63 +229,25 @@ private pattern mayInstanceOfCity_class(problem:LogicProblem, interpretation:Par
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
 	neg find mustInstanceOfMountain_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCity_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
 	neg find mustInstanceOfMountain_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCity_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
 { find mustInstanceOfCity_class(problem,interpretation,element); }
-/**
- * An element must be an instance of type "Mountain class".
- */
-private pattern mustInstanceOfMountain_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-	Type.name(type,"Mountain class");
-	find directInstanceOf(problem,interpretation,element,type);
-}
-private pattern scopeDisallowsNewMountain_class(problem:LogicProblem, interpretation:PartialInterpretation) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.scopes(interpretation,scope);
-	Scope.targetTypeInterpretation(scope,typeInterpretation);
-	Scope.maxNewElements(scope,0);
-	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
-	Type.name(type,"Mountain class");
-}
-
-/**
- * An element may be an instance of type "Mountain class".
- */
-private pattern mayInstanceOfMountain_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
-	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
-	neg find scopeDisallowsNewMountain_class(problem, interpretation);
-	neg find isPrimitive(element);
-} or {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
-	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
-	neg find scopeDisallowsNewMountain_class(problem, interpretation);
-	neg find isPrimitive(element);
-} or
-{ find mustInstanceOfMountain_class(problem,interpretation,element); }
 /**
  * An element must be an instance of type "Village class".
  */
@@ -265,63 +271,223 @@ private pattern mayInstanceOfVillage_class(problem:LogicProblem, interpretation:
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
 	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find scopeDisallowsNewVillage_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
 	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find scopeDisallowsNewVillage_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
 { find mustInstanceOfVillage_class(problem,interpretation,element); }
 /**
- * An element must be an instance of type "Water class".
+ * An element must be an instance of type "Mountain class".
  */
-private pattern mustInstanceOfWater_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-	Type.name(type,"Water class");
+private pattern mustInstanceOfMountain_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Mountain class");
 	find directInstanceOf(problem,interpretation,element,type);
 }
-private pattern scopeDisallowsNewWater_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+private pattern scopeDisallowsNewMountain_class(problem:LogicProblem, interpretation:PartialInterpretation) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.scopes(interpretation,scope);
 	Scope.targetTypeInterpretation(scope,typeInterpretation);
 	Scope.maxNewElements(scope,0);
 	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
-	Type.name(type,"Water class");
+	Type.name(type,"Mountain class");
 }
 
 /**
- * An element may be an instance of type "Water class".
+ * An element may be an instance of type "Mountain class".
  */
-private pattern mayInstanceOfWater_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+private pattern mayInstanceOfMountain_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
 	neg find mustInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find scopeDisallowsNewWater_class(problem, interpretation);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find scopeDisallowsNewMountain_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
 	neg find mustInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find scopeDisallowsNewWater_class(problem, interpretation);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find scopeDisallowsNewMountain_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
-{ find mustInstanceOfWater_class(problem,interpretation,element); }
+{ find mustInstanceOfMountain_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "River class".
+ */
+private pattern mustInstanceOfRiver_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"River class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewRiver_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"River class");
+}
+
+/**
+ * An element may be an instance of type "River class".
+ */
+private pattern mayInstanceOfRiver_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfMountain_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find scopeDisallowsNewRiver_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfMountain_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find scopeDisallowsNewRiver_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfRiver_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Map class DefinedPart".
+ */
+private pattern mustInstanceOfMap_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Map class DefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewMap_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Map class DefinedPart");
+}
+
+/**
+ * An element may be an instance of type "Map class DefinedPart".
+ */
+private pattern mayInstanceOfMap_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{ find mustInstanceOfMap_class_DefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Map class UndefinedPart".
+ */
+private pattern mustInstanceOfMap_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Map class UndefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewMap_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Map class UndefinedPart");
+}
+
+/**
+ * An element may be an instance of type "Map class UndefinedPart".
+ */
+private pattern mayInstanceOfMap_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find scopeDisallowsNewMap_class_UndefinedPart(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find scopeDisallowsNewMap_class_UndefinedPart(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfMap_class_UndefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Grid class DefinedPart".
+ */
+private pattern mustInstanceOfGrid_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Grid class DefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewGrid_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Grid class DefinedPart");
+}
+
+/**
+ * An element may be an instance of type "Grid class DefinedPart".
+ */
+private pattern mayInstanceOfGrid_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{ find mustInstanceOfGrid_class_DefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Grid class UndefinedPart".
+ */
+private pattern mustInstanceOfGrid_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Grid class UndefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewGrid_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Grid class UndefinedPart");
+}
+
+/**
+ * An element may be an instance of type "Grid class UndefinedPart".
+ */
+private pattern mayInstanceOfGrid_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class(problem,interpretation,element);
+	neg find scopeDisallowsNewGrid_class_UndefinedPart(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class(problem,interpretation,element);
+	neg find scopeDisallowsNewGrid_class_UndefinedPart(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfGrid_class_UndefinedPart(problem,interpretation,element); }
 
 //////////
 // 1.2 Relation Declaration Indexers
@@ -394,6 +560,10 @@ private pattern mayInRelationleft_reference_Grid(
 	// the upper bound of the multiplicity should be considered.
 	numberOfExistingReferences == count find mustInRelationleft_reference_Grid(problem,interpretation,source,_);
 	check(numberOfExistingReferences < 1);
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationright_reference_Grid(problem,interpretation,target,_);
+	check(numberOfExistingOppositeReferences < 1);
 } or {
 	find mustInRelationleft_reference_Grid(problem,interpretation,source,target);
 }
@@ -429,6 +599,10 @@ private pattern mayInRelationright_reference_Grid(
 	// the upper bound of the multiplicity should be considered.
 	numberOfExistingReferences == count find mustInRelationright_reference_Grid(problem,interpretation,source,_);
 	check(numberOfExistingReferences < 1);
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationleft_reference_Grid(problem,interpretation,target,_);
+	check(numberOfExistingOppositeReferences < 1);
 } or {
 	find mustInRelationright_reference_Grid(problem,interpretation,source,target);
 }
@@ -464,6 +638,10 @@ private pattern mayInRelationup_reference_Grid(
 	// the upper bound of the multiplicity should be considered.
 	numberOfExistingReferences == count find mustInRelationup_reference_Grid(problem,interpretation,source,_);
 	check(numberOfExistingReferences < 1);
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationdown_reference_Grid(problem,interpretation,target,_);
+	check(numberOfExistingOppositeReferences < 1);
 } or {
 	find mustInRelationup_reference_Grid(problem,interpretation,source,target);
 }
@@ -499,13 +677,447 @@ private pattern mayInRelationdown_reference_Grid(
 	// the upper bound of the multiplicity should be considered.
 	numberOfExistingReferences == count find mustInRelationdown_reference_Grid(problem,interpretation,source,_);
 	check(numberOfExistingReferences < 1);
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationup_reference_Grid(problem,interpretation,target,_);
+	check(numberOfExistingOppositeReferences < 1);
 } or {
 	find mustInRelationdown_reference_Grid(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []types reference Grid(source,target)
+ */
+private pattern mustInRelationtypes_reference_Grid(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"types reference Grid");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>types reference Grid(source,target)
+ */
+private pattern mayInRelationtypes_reference_Grid(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfGrid_class(problem,interpretation,source);
+	find mayInstanceOfGridType_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationgrid_reference_GridType(problem,interpretation,target,_);
+	check(numberOfExistingOppositeReferences < 1);
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationtypes_reference_Grid(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []grid reference GridType(source,target)
+ */
+private pattern mustInRelationgrid_reference_GridType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"grid reference GridType");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>grid reference GridType(source,target)
+ */
+private pattern mayInRelationgrid_reference_GridType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfGridType_class(problem,interpretation,source);
+	find mayInstanceOfGrid_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationgrid_reference_GridType(problem,interpretation,source,_);
+	check(numberOfExistingReferences < 1);
+	// The eOpposite of the reference is containment, then a referene cannot be created if
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,source,_);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationgrid_reference_GridType(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []id attribute Grid(source,target)
+ */
+private pattern mustInRelationid_attribute_Grid(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"id attribute Grid");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>id attribute Grid(source,target)
+ */
+private pattern mayInRelationid_attribute_Grid(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfGrid_class(problem,interpretation,source);
+	IntegerElement(target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationid_attribute_Grid(problem,interpretation,source,_);
+	check(numberOfExistingReferences < 1);
+} or {
+	find mustInRelationid_attribute_Grid(problem,interpretation,source,target);
 }
 
 //////////
 // 1.3 Relation Definition Indexers
 //////////
+// Must, May and Current queries for pattern queries haveReference
+private pattern mustInRelation_pattern_queries_haveReference(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_t)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfGrid_class(problem,interpretation,var_a);
+	find mustInstanceOfGridType_class(problem,interpretation,var_t);
+	// a is exported
+	// t is exported
+	find mustInstanceOfGrid_class(problem,interpretation,var_a);
+	find mustInRelationtypes_reference_Grid(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGridType_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_t);
+}
+private pattern mayInRelation_pattern_queries_haveReference(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_t)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfGrid_class(problem,interpretation,var_a);
+	find mayInstanceOfGridType_class(problem,interpretation,var_t);
+	// a is exported
+	// t is exported
+	find mayInstanceOfGrid_class(problem,interpretation,var_a);
+	find mayInRelationtypes_reference_Grid(problem,interpretation,var_a,var_virtual0);
+	find mayInstanceOfGridType_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, var_t);
+}
+private pattern currentInRelation_pattern_queries_haveReference(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_t)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfGrid_class(problem,interpretation,var_a);
+	find mustInstanceOfGridType_class(problem,interpretation,var_t);
+	// a is exported
+	// t is exported
+	find mustInstanceOfGrid_class(problem,interpretation,var_a);
+	find mustInRelationtypes_reference_Grid(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGridType_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_t);
+}
+// Must, May and Current queries for pattern queries noReference
+private pattern mustInRelation_pattern_queries_noReference(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfGrid_class(problem,interpretation,var_a);
+	// a is exported
+	neg find mayInRelation_pattern_queries_haveReference(problem,interpretation,var_a,_var__0);
+}
+private pattern mayInRelation_pattern_queries_noReference(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfGrid_class(problem,interpretation,var_a);
+	// a is exported
+	neg find mustInRelation_pattern_queries_haveReference(problem,interpretation,var_a,_var__0);
+}
+private pattern currentInRelation_pattern_queries_noReference(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfGrid_class(problem,interpretation,var_a);
+	// a is exported
+	neg find currentInRelation_pattern_queries_haveReference(problem,interpretation,var_a,_var__0);
+}
+// Must, May and Current queries for pattern queries noSameVillageType
+private pattern mustInRelation_pattern_queries_noSameVillageType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfVillage_class(problem,interpretation,var_a);
+	find mustInstanceOfVillage_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mayEquivalent(problem, interpretation, var_a, var_b);
+	find mustInstanceOfGridType_class(problem,interpretation,var_a);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mustInstanceOfGridType_class(problem,interpretation,var_b);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mustEquivalent(problem, interpretation, var_g1, var_g2);
+}
+private pattern mayInRelation_pattern_queries_noSameVillageType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfVillage_class(problem,interpretation,var_a);
+	find mayInstanceOfVillage_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mustEquivalent(problem, interpretation, var_a, var_b);
+	find mayInstanceOfGridType_class(problem,interpretation,var_a);
+	find mayInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mayInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mayInstanceOfGridType_class(problem,interpretation,var_b);
+	find mayInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mayInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mayEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mayEquivalent(problem, interpretation, var_g1, var_g2);
+}
+private pattern currentInRelation_pattern_queries_noSameVillageType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfVillage_class(problem,interpretation,var_a);
+	find mustInstanceOfVillage_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mustEquivalent(problem, interpretation, var_a, var_b);
+	find mustInstanceOfGridType_class(problem,interpretation,var_a);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mustInstanceOfGridType_class(problem,interpretation,var_b);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mustEquivalent(problem, interpretation, var_g1, var_g2);
+}
+// Must, May and Current queries for pattern queries noSameCityType
+private pattern mustInRelation_pattern_queries_noSameCityType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCity_class(problem,interpretation,var_a);
+	find mustInstanceOfCity_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mayEquivalent(problem, interpretation, var_a, var_b);
+	find mustInstanceOfGridType_class(problem,interpretation,var_a);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mustInstanceOfGridType_class(problem,interpretation,var_b);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mustEquivalent(problem, interpretation, var_g1, var_g2);
+}
+private pattern mayInRelation_pattern_queries_noSameCityType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfCity_class(problem,interpretation,var_a);
+	find mayInstanceOfCity_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mustEquivalent(problem, interpretation, var_a, var_b);
+	find mayInstanceOfGridType_class(problem,interpretation,var_a);
+	find mayInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mayInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mayInstanceOfGridType_class(problem,interpretation,var_b);
+	find mayInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mayInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mayEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mayEquivalent(problem, interpretation, var_g1, var_g2);
+}
+private pattern currentInRelation_pattern_queries_noSameCityType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCity_class(problem,interpretation,var_a);
+	find mustInstanceOfCity_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mustEquivalent(problem, interpretation, var_a, var_b);
+	find mustInstanceOfGridType_class(problem,interpretation,var_a);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mustInstanceOfGridType_class(problem,interpretation,var_b);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mustEquivalent(problem, interpretation, var_g1, var_g2);
+}
+// Must, May and Current queries for pattern queries noSameRiverType
+private pattern mustInRelation_pattern_queries_noSameRiverType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfRiver_class(problem,interpretation,var_a);
+	find mustInstanceOfRiver_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mayEquivalent(problem, interpretation, var_a, var_b);
+	find mustInstanceOfGridType_class(problem,interpretation,var_a);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mustInstanceOfGridType_class(problem,interpretation,var_b);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mustEquivalent(problem, interpretation, var_g1, var_g2);
+}
+private pattern mayInRelation_pattern_queries_noSameRiverType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfRiver_class(problem,interpretation,var_a);
+	find mayInstanceOfRiver_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mustEquivalent(problem, interpretation, var_a, var_b);
+	find mayInstanceOfGridType_class(problem,interpretation,var_a);
+	find mayInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mayInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mayInstanceOfGridType_class(problem,interpretation,var_b);
+	find mayInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mayInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mayEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mayEquivalent(problem, interpretation, var_g1, var_g2);
+}
+private pattern currentInRelation_pattern_queries_noSameRiverType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfRiver_class(problem,interpretation,var_a);
+	find mustInstanceOfRiver_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mustEquivalent(problem, interpretation, var_a, var_b);
+	find mustInstanceOfGridType_class(problem,interpretation,var_a);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mustInstanceOfGridType_class(problem,interpretation,var_b);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mustEquivalent(problem, interpretation, var_g1, var_g2);
+}
+// Must, May and Current queries for pattern queries noSameMountainType
+private pattern mustInRelation_pattern_queries_noSameMountainType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfMountain_class(problem,interpretation,var_a);
+	find mustInstanceOfMountain_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mayEquivalent(problem, interpretation, var_a, var_b);
+	find mustInstanceOfGridType_class(problem,interpretation,var_a);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mustInstanceOfGridType_class(problem,interpretation,var_b);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mustEquivalent(problem, interpretation, var_g1, var_g2);
+}
+private pattern mayInRelation_pattern_queries_noSameMountainType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfMountain_class(problem,interpretation,var_a);
+	find mayInstanceOfMountain_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mustEquivalent(problem, interpretation, var_a, var_b);
+	find mayInstanceOfGridType_class(problem,interpretation,var_a);
+	find mayInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mayInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mayInstanceOfGridType_class(problem,interpretation,var_b);
+	find mayInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mayInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mayEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mayEquivalent(problem, interpretation, var_g1, var_g2);
+}
+private pattern currentInRelation_pattern_queries_noSameMountainType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfMountain_class(problem,interpretation,var_a);
+	find mustInstanceOfMountain_class(problem,interpretation,var_b);
+	// a is exported
+	// b is exported
+	neg find mustEquivalent(problem, interpretation, var_a, var_b);
+	find mustInstanceOfGridType_class(problem,interpretation,var_a);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_a,var_virtual0);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_g1);
+	find mustInstanceOfGridType_class(problem,interpretation,var_b);
+	find mustInRelationgrid_reference_GridType(problem,interpretation,var_b,var_virtual1);
+	find mustInstanceOfGrid_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_g2);
+	find mustEquivalent(problem, interpretation, var_g1, var_g2);
+}
 
 //////////
 // 1.4 Containment Indexer
@@ -516,7 +1128,9 @@ private pattern mustContains2(source: DefinedElement, target: DefinedElement) {
 	
 private pattern mustContains4(problem:LogicProblem, interpretation:PartialInterpretation,
 	source: DefinedElement, target: DefinedElement)
-	{ find mustInRelationgrids_reference_Map(problem,interpretation,source,target); }
+	{ find mustInRelationgrids_reference_Map(problem,interpretation,source,target); }or
+	
+	{ find mustInRelationtypes_reference_Grid(problem,interpretation,source,target); }
 
 private pattern mustTransitiveContains(source,target) {
 	find mustContains2+(source,target);
@@ -527,6 +1141,31 @@ private pattern mustTransitiveContains(source,target) {
 //////////
 // 2.1 Invalidated by WF Queries
 //////////
+pattern invalidatedBy_pattern_queries_noReference(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find mustInRelation_pattern_queries_noReference(problem,interpretation,var_a);
+}
+pattern invalidatedBy_pattern_queries_noSameVillageType(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find mustInRelation_pattern_queries_noSameVillageType(problem,interpretation,var_a,var_b);
+}
+pattern invalidatedBy_pattern_queries_noSameCityType(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find mustInRelation_pattern_queries_noSameCityType(problem,interpretation,var_a,var_b);
+}
+pattern invalidatedBy_pattern_queries_noSameRiverType(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find mustInRelation_pattern_queries_noSameRiverType(problem,interpretation,var_a,var_b);
+}
+pattern invalidatedBy_pattern_queries_noSameMountainType(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find mustInRelation_pattern_queries_noSameMountainType(problem,interpretation,var_a,var_b);
+}
 
 //////////
 // 3. Unfinishedness Indexers
@@ -537,6 +1176,31 @@ private pattern mustTransitiveContains(source,target) {
 //////////
 // 3.2 Unfinishedness Measured by WF Queries
 //////////
+pattern unfinishedBy_pattern_queries_noReference(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find currentInRelation_pattern_queries_noReference(problem,interpretation,var_a);
+}
+pattern unfinishedBy_pattern_queries_noSameVillageType(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find currentInRelation_pattern_queries_noSameVillageType(problem,interpretation,var_a,var_b);
+}
+pattern unfinishedBy_pattern_queries_noSameCityType(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find currentInRelation_pattern_queries_noSameCityType(problem,interpretation,var_a,var_b);
+}
+pattern unfinishedBy_pattern_queries_noSameRiverType(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find currentInRelation_pattern_queries_noSameRiverType(problem,interpretation,var_a,var_b);
+}
+pattern unfinishedBy_pattern_queries_noSameMountainType(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find currentInRelation_pattern_queries_noSameMountainType(problem,interpretation,var_a,var_b);
+}
 
 //////////
 // 4. Refinement Indexers
@@ -546,19 +1210,11 @@ private pattern mustTransitiveContains(source,target) {
 private pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
 {
 	find interpretation(problem,interpretation);
+	find mustInstanceOfRiver_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
 	find mustInstanceOfMountain_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfGrid_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfWater_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfCity_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
@@ -568,48 +1224,78 @@ private pattern hasElementInContainment(problem:LogicProblem, interpretation:Par
 	find interpretation(problem,interpretation);
 	find mustInstanceOfMap_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfGridType_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCity_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfGrid_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfMap_class_DefinedPart(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfMap_class_UndefinedPart(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfGrid_class_DefinedPart(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfGrid_class_UndefinedPart(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
 }
-pattern createObject_Village_class_by_grids_reference_Map(
+pattern createObject_Grid_class_UndefinedPart_by_grids_reference_Map(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
 	container:DefinedElement)
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Village class");
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Grid class UndefinedPart");
 	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
 	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"grids reference Map");
 	find mustInstanceOfMap_class(problem,interpretation,container);
-	find mayInstanceOfVillage_class(problem,interpretation,newObject);
+	find mayInstanceOfGrid_class_UndefinedPart(problem,interpretation,newObject);
 	find mayInRelationgrids_reference_Map(problem,interpretation,container,newObject);
 	find mustExist(problem, interpretation, container);
 	neg find mustExist(problem, interpretation, newObject);
 }
-pattern createObject_Village_class(
+pattern createObject_Grid_class_UndefinedPart(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	typeInterpretation:PartialComplexTypeInterpretation)
 {
 	find interpretation(problem,interpretation);
 	neg find hasElementInContainment(problem,interpretation);
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Village class");
-	find mayInstanceOfVillage_class(problem,interpretation,newObject);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Grid class UndefinedPart");
+	find mayInstanceOfGrid_class_UndefinedPart(problem,interpretation,newObject);
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
-pattern createObject_Mountain_class_by_grids_reference_Map(
+pattern createObject_Mountain_class_by_types_reference_Grid_with_grid_reference_GridType(
 	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
 	container:DefinedElement)
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
 	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Mountain class");
 	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"grids reference Map");
-	find mustInstanceOfMap_class(problem,interpretation,container);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"types reference Grid");
+	PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(inverseInterpretation,"grid reference GridType");
+	find mustInstanceOfGrid_class(problem,interpretation,container);
 	find mayInstanceOfMountain_class(problem,interpretation,newObject);
-	find mayInRelationgrids_reference_Map(problem,interpretation,container,newObject);
+	find mayInRelationtypes_reference_Grid(problem,interpretation,container,newObject);
 	find mustExist(problem, interpretation, container);
 	neg find mustExist(problem, interpretation, newObject);
 }
@@ -625,19 +1311,93 @@ pattern createObject_Mountain_class(
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
-pattern createObject_City_class_by_grids_reference_Map(
+pattern createObject_Village_class_by_types_reference_Grid_with_grid_reference_GridType(
 	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Village class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"types reference Grid");
+	PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(inverseInterpretation,"grid reference GridType");
+	find mustInstanceOfGrid_class(problem,interpretation,container);
+	find mayInstanceOfVillage_class(problem,interpretation,newObject);
+	find mayInRelationtypes_reference_Grid(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Village_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Village class");
+	find mayInstanceOfVillage_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Map_class_UndefinedPart(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Map class UndefinedPart");
+	find mayInstanceOfMap_class_UndefinedPart(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_River_class_by_types_reference_Grid_with_grid_reference_GridType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"River class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"types reference Grid");
+	PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(inverseInterpretation,"grid reference GridType");
+	find mustInstanceOfGrid_class(problem,interpretation,container);
+	find mayInstanceOfRiver_class(problem,interpretation,newObject);
+	find mayInRelationtypes_reference_Grid(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_River_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"River class");
+	find mayInstanceOfRiver_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_City_class_by_types_reference_Grid_with_grid_reference_GridType(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
 	container:DefinedElement)
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
 	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"City class");
 	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"grids reference Map");
-	find mustInstanceOfMap_class(problem,interpretation,container);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"types reference Grid");
+	PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(inverseInterpretation,"grid reference GridType");
+	find mustInstanceOfGrid_class(problem,interpretation,container);
 	find mayInstanceOfCity_class(problem,interpretation,newObject);
-	find mayInRelationgrids_reference_Map(problem,interpretation,container,newObject);
+	find mayInRelationtypes_reference_Grid(problem,interpretation,container,newObject);
 	find mustExist(problem, interpretation, container);
 	neg find mustExist(problem, interpretation, newObject);
 }
@@ -653,109 +1413,84 @@ pattern createObject_City_class(
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
-pattern createObject_Map_class(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Map class");
-	find mayInstanceOfMap_class(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_Water_class_by_grids_reference_Map(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
-	container:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Water class");
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"grids reference Map");
-	find mustInstanceOfMap_class(problem,interpretation,container);
-	find mayInstanceOfWater_class(problem,interpretation,newObject);
-	find mayInRelationgrids_reference_Map(problem,interpretation,container,newObject);
-	find mustExist(problem, interpretation, container);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_Water_class(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Water class");
-	find mayInstanceOfWater_class(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
-}
 
 //////////
 // 4.2 Type refinement
 //////////
-pattern refineTypeTo_Village_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+pattern refineTypeTo_Grid_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	find mayInstanceOfGrid_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class_UndefinedPart(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
 }
 pattern refineTypeTo_Mountain_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	find mayInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
 	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+}
+pattern refineTypeTo_Village_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfVillage_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfMountain_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+}
+pattern refineTypeTo_Map_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfMap_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfGridType_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class_UndefinedPart(problem,interpretation,element);
+}
+pattern refineTypeTo_River_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfGrid_class(problem,interpretation,element);
+	neg find mustInstanceOfMountain_class(problem,interpretation,element);
+	neg find mustInstanceOfVillage_class(problem,interpretation,element);
+	neg find mustInstanceOfMap_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
 }
 pattern refineTypeTo_City_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	find mayInstanceOfCity_class(problem,interpretation,element);
-	neg find mustInstanceOfVillage_class(problem,interpretation,element);
 	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
-	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
-}
-pattern refineTypeTo_Map_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfMap_class(problem,interpretation,element);
 	neg find mustInstanceOfGrid_class(problem,interpretation,element);
-	neg find mustInstanceOfMap_class(problem,interpretation,element);
-}
-pattern refineTypeTo_Water_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfWater_class(problem,interpretation,element);
 	neg find mustInstanceOfVillage_class(problem,interpretation,element);
-	neg find mustInstanceOfMountain_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find mustInstanceOfMap_class(problem,interpretation,element);
-	neg find mustInstanceOfWater_class(problem,interpretation,element);
+	neg find mustInstanceOfRiver_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
 }
 
 //////////
 // 4.3 Relation refinement
 //////////
-pattern refineRelation_left_reference_Grid(
+pattern refineRelation_left_reference_Grid_and_right_reference_Grid(
 	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationIterpretation:PartialRelationInterpretation,
+	relationIterpretation:PartialRelationInterpretation, oppositeInterpretation:PartialRelationInterpretation,
 	from: DefinedElement, to: DefinedElement)
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
 	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"left reference Grid");
+	PartialInterpretation.partialrelationinterpretation(interpretation,oppositeInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(oppositeInterpretation,"right reference Grid");
 	find mustExist(problem, interpretation, from);
 	find mustExist(problem, interpretation, to);
 	find mustInstanceOfGrid_class(problem,interpretation,from);
@@ -763,49 +1498,36 @@ pattern refineRelation_left_reference_Grid(
 	find mayInRelationleft_reference_Grid(problem,interpretation,from,to);
 	neg find mustInRelationleft_reference_Grid(problem,interpretation,from,to);
 }
-pattern refineRelation_right_reference_Grid(
+pattern refineRelation_down_reference_Grid_and_up_reference_Grid(
 	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationIterpretation:PartialRelationInterpretation,
-	from: DefinedElement, to: DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"right reference Grid");
-	find mustExist(problem, interpretation, from);
-	find mustExist(problem, interpretation, to);
-	find mustInstanceOfGrid_class(problem,interpretation,from);
-	find mustInstanceOfGrid_class(problem,interpretation,to);
-	find mayInRelationright_reference_Grid(problem,interpretation,from,to);
-	neg find mustInRelationright_reference_Grid(problem,interpretation,from,to);
-}
-pattern refineRelation_up_reference_Grid(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationIterpretation:PartialRelationInterpretation,
-	from: DefinedElement, to: DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"up reference Grid");
-	find mustExist(problem, interpretation, from);
-	find mustExist(problem, interpretation, to);
-	find mustInstanceOfGrid_class(problem,interpretation,from);
-	find mustInstanceOfGrid_class(problem,interpretation,to);
-	find mayInRelationup_reference_Grid(problem,interpretation,from,to);
-	neg find mustInRelationup_reference_Grid(problem,interpretation,from,to);
-}
-pattern refineRelation_down_reference_Grid(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationIterpretation:PartialRelationInterpretation,
+	relationIterpretation:PartialRelationInterpretation, oppositeInterpretation:PartialRelationInterpretation,
 	from: DefinedElement, to: DefinedElement)
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
 	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"down reference Grid");
+	PartialInterpretation.partialrelationinterpretation(interpretation,oppositeInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(oppositeInterpretation,"up reference Grid");
 	find mustExist(problem, interpretation, from);
 	find mustExist(problem, interpretation, to);
 	find mustInstanceOfGrid_class(problem,interpretation,from);
 	find mustInstanceOfGrid_class(problem,interpretation,to);
 	find mayInRelationdown_reference_Grid(problem,interpretation,from,to);
 	neg find mustInRelationdown_reference_Grid(problem,interpretation,from,to);
+}
+pattern refineRelation_id_attribute_Grid(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"id attribute Grid");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfGrid_class(problem,interpretation,from);
+	IntegerElement(to);
+	find mayInRelationid_attribute_Grid(problem,interpretation,from,to);
+	neg find mustInRelationid_attribute_Grid(problem,interpretation,from,to);
 }
 

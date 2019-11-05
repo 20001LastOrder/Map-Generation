@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf35f9a701e1ff24cb5b551b55f25c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ecoreFileName: map.ecore
 --- !u!1001 &2375419426901258833
 PrefabInstance:
   m_ObjectHideFlags: 0
