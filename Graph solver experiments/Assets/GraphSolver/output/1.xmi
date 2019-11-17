@@ -1,61 +1,67 @@
 <?xml version="1.0" encoding="ASCII"?>
 <map.map:Map xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:map.map="map.map" xsi:schemaLocation="map.map models/map.ecore">
   <grids left="7" up="4" down="12" id="8">
-    <types xsi:type="map.map:Village"/>
+    <types xsi:type="map.map:City"/>
+    <types xsi:type="map.map:River"/>
   </grids>
   <grids left="13" right="15" up="10" id="14">
-    <types xsi:type="map.map:Mountain"/>
-    <types xsi:type="map.map:Village"/>
+    <types xsi:type="map.map:City"/>
   </grids>
   <grids left="9" right="11" up="6" down="14" id="10">
-    <types xsi:type="map.map:Village"/>
-  </grids>
-  <grids right="2" down="5" id="1">
-    <types xsi:type="map.map:City"/>
     <types xsi:type="map.map:Mountain"/>
     <types xsi:type="map.map:Village"/>
   </grids>
   <grids right="10" up="5" down="13" id="9">
-    <types xsi:type="map.map:River"/>
+    <types xsi:type="map.map:City"/>
+    <types xsi:type="map.map:Village"/>
     <types xsi:type="map.map:Mountain"/>
-    <types xsi:type="map.map:City"/>
-  </grids>
-  <grids left="14" right="16" up="11" id="15">
-    <types xsi:type="map.map:City"/>
   </grids>
   <grids left="3" down="8" id="4">
-    <types xsi:type="map.map:Mountain"/>
+    <types xsi:type="map.map:River"/>
   </grids>
   <grids left="10" right="12" up="7" down="15" id="11">
     <types xsi:type="map.map:Mountain"/>
-    <types xsi:type="map.map:Village"/>
-    <types xsi:type="map.map:River"/>
   </grids>
   <grids left="11" up="8" down="16" id="12">
+    <types xsi:type="map.map:City"/>
     <types xsi:type="map.map:River"/>
   </grids>
   <grids right="6" up="1" down="9" id="5">
+    <types xsi:type="map.map:Mountain"/>
+    <types xsi:type="map.map:River"/>
     <types xsi:type="map.map:Village"/>
   </grids>
   <grids right="14" up="9" id="13">
-    <types xsi:type="map.map:City"/>
-    <types xsi:type="map.map:Mountain"/>
-    <types xsi:type="map.map:Village"/>
-  </grids>
-  <grids left="1" right="3" down="6" id="2">
-    <types xsi:type="map.map:City"/>
-  </grids>
-  <grids left="5" right="7" up="2" down="10" id="6">
     <types xsi:type="map.map:River"/>
+    <types xsi:type="map.map:Village"/>
+    <types xsi:type="map.map:Mountain"/>
   </grids>
   <grids left="6" right="8" up="3" down="11" id="7">
-    <types xsi:type="map.map:City"/>
+    <types xsi:type="map.map:River"/>
+    <types xsi:type="map.map:Village"/>
     <types xsi:type="map.map:Mountain"/>
   </grids>
   <grids left="2" right="4" down="7" id="3">
+    <types xsi:type="map.map:Mountain"/>
+    <types xsi:type="map.map:City"/>
     <types xsi:type="map.map:Village"/>
   </grids>
   <grids left="15" up="12" id="16">
+    <types xsi:type="map.map:Village"/>
+  </grids>
+  <grids right="2" down="5" id="1">
+    <types xsi:type="map.map:Mountain"/>
     <types xsi:type="map.map:City"/>
+    <types xsi:type="map.map:River"/>
+  </grids>
+  <grids left="14" right="16" up="11" id="15">
+    <types xsi:type="map.map:River"/>
+  </grids>
+  <grids left="1" right="3" down="6" id="2">
+    <types xsi:type="map.map:River"/>
+    <types xsi:type="map.map:Village"/>
+  </grids>
+  <grids left="5" right="7" up="2" down="10" id="6">
+    <types xsi:type="map.map:Village"/>
   </grids>
 </map.map:Map>
