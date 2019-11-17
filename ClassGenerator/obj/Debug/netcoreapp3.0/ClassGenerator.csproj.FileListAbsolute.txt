@@ -1,0 +1,13 @@
+C:\Users\cplant17\source\repos\ClassGenerator\bin\Debug\netcoreapp3.0\ClassGenerator.exe
+C:\Users\cplant17\source\repos\ClassGenerator\obj\Debug\netcoreapp3.0\ClassGenerator.csprojAssemblyReference.cache
+C:\Users\cplant17\source\repos\ClassGenerator\obj\Debug\netcoreapp3.0\ClassGenerator.AssemblyInfoInputs.cache
+C:\Users\cplant17\source\repos\ClassGenerator\obj\Debug\netcoreapp3.0\ClassGenerator.AssemblyInfo.cs
+C:\Users\cplant17\source\repos\ClassGenerator\bin\Debug\netcoreapp3.0\ClassGenerator.deps.json
+C:\Users\cplant17\source\repos\ClassGenerator\bin\Debug\netcoreapp3.0\ClassGenerator.runtimeconfig.json
+C:\Users\cplant17\source\repos\ClassGenerator\bin\Debug\netcoreapp3.0\ClassGenerator.runtimeconfig.dev.json
+C:\Users\cplant17\source\repos\ClassGenerator\bin\Debug\netcoreapp3.0\ClassGenerator.dll
+C:\Users\cplant17\source\repos\ClassGenerator\bin\Debug\netcoreapp3.0\ClassGenerator.pdb
+C:\Users\cplant17\source\repos\ClassGenerator\bin\Debug\netcoreapp3.0\System.CodeDom.dll
+C:\Users\cplant17\source\repos\ClassGenerator\obj\Debug\netcoreapp3.0\ClassGenerator.csproj.CopyComplete
+C:\Users\cplant17\source\repos\ClassGenerator\obj\Debug\netcoreapp3.0\ClassGenerator.dll
+C:\Users\cplant17\source\repos\ClassGenerator\obj\Debug\netcoreapp3.0\ClassGenerator.pdb
