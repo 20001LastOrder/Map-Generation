@@ -26,6 +26,11 @@ public class GraphEditor : EditorWindow
         GetWindow<GraphEditor>("Graph Editor");
     }
 
+    public List<Node> getNodes()
+    {
+        return nodes;
+    }
+
     private void OnEnable()
     {
         nodeStyle = new GUIStyle();

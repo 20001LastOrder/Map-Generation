@@ -102,6 +102,8 @@ public class GridManager : MonoBehaviour
         m_rootGrid = rootGridGO.AddComponent<Grid>();
 
         initRootGrid();
+
+        Pipeline.execute();
     }
 
     // Update is called once per frame
