@@ -13,7 +13,7 @@ namespace GeneratedClasses
     using System;
     
     
-    public class Village
+    public class Village : GridType
     {
         
         public Village()

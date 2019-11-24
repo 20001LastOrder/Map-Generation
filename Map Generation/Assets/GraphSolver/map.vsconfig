@@ -3,7 +3,7 @@ import viatra "queries/map.vql"
 
 generate {
 	metamodel = {package map}
-	partial-model = { "instance.xmi"}
+	partial-model = { "instance1.xmi"}
 	constraints = { package queries }
 	
 

@@ -67,9 +67,11 @@ public class GraphSolverRunner : MonoBehaviour
 
         EcoreParser.SaveEcore(package, ecoreFileName);
         Debug.Log("finished creating package");
+        var map = MapShapeGenerator.GenerateDefaultShape(4, 4);
+        //InstanceParser.WriteMapInstance(map);
         //runSolver();
-        Parser.ECoreToCS(package, "Assets/Scripts/MapClasses/");
-        //ReadXML();
+        InstanceParser.ReadMapInstance("Assets/GraphSolver/output/1.xmi", map);
+        Debug.Log(map.Grids[1].Types.Count);
     }
 
     /*void ReadXML()
@@ -100,6 +102,7 @@ public class GraphSolverRunner : MonoBehaviour
         {
             throw new Exception("bad type");
         }
+
         Grid specificElement = (Grid)Activator.CreateInstance(elementType);
         var elements = ele.Elements().ToArray();
 

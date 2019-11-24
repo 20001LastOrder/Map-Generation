@@ -11,11 +11,15 @@
 namespace GeneratedClasses
 {
     using System;
-    
-    
+    using System.Collections.Generic;
+
     public class Map
     {
-        
+        public List<Grid> Grids {
+            get;
+            set;
+        }
+
         public Map()
         {
         }

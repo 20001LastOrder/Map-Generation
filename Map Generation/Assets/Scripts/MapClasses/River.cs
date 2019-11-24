@@ -13,7 +13,7 @@ namespace GeneratedClasses
     using System;
     
     
-    public class River
+    public class River : GridType
     {
         
         public River()

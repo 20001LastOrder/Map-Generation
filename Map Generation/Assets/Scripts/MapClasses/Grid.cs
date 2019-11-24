@@ -11,19 +11,48 @@
 namespace GeneratedClasses
 {
     using System;
-    
+    using System.Collections.Generic;
     
     public class Grid
     {
         
-        private System.Type id;
+        private int id;
         
-        public Grid(System.Type id)
+        public Grid Left {
+            get;
+            set;
+        }
+
+        public Grid Right
+        {
+            get;
+            set;
+        }
+
+        public Grid Up
+        {
+            get;
+            set;
+        }
+
+        public Grid Down
+        {
+            get;
+            set;
+        }
+
+        public List<GridType> Types
+        {
+            get;
+            set;
+        }
+
+        public Grid(int id)
         {
             this.id = id;
         }
         
-        public System.Type Id
+        public int Id
         {
             get
             {
