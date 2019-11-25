@@ -94,6 +94,9 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Title:");
             selectedNode.title = GUILayout.TextField(selectedNode.title);
 
+            GUILayout.Label("Weight:");
+            selectedNode.weight = EditorGUILayout.Slider(selectedNode.weight, 0, 1.0f);
+
             RenderAttributeFields();
 
             if (GUILayout.Button("Add attribute"))
