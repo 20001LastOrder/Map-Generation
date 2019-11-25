@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Globalization;
+using System;
 
 public class GraphEditor : EditorWindow
 {
@@ -76,6 +77,7 @@ public class GraphEditor : EditorWindow
 
     private void DrawInspector()
     {
+        // Draw inspector components for a selected connection
         if (selectedConnection != null)
         {
             GUILayout.Label(selectedConnection.inPoint.node.title + " -> " + selectedConnection.outPoint.node.title);
@@ -85,6 +87,8 @@ public class GraphEditor : EditorWindow
                 selectedConnection.probability = EditorGUILayout.Slider(selectedConnection.probability, 0, 1.0f);
             }
         }
+
+        // Draw inspector components for a selected node
         if (selectedNode != null)
         {
             GUILayout.Label("Title:");
@@ -126,15 +130,20 @@ public class GraphEditor : EditorWindow
     {
         if (selectedNode != null)
         {
+            GUILayout.Label("Attributes:");
             for (int i = 0; i < selectedNode.GetNumAttributes(); i++)
             {
-                GUILayout.Label("Attribute " + i + ":");
+                GUILayout.BeginHorizontal();
 
                 string key, value;
                 (key, value) = selectedNode.GetAttributeAt(i);
 
-                GUILayout.BeginHorizontal();
-                key = GUILayout.TextField(key);
+                // Select attribute type
+                int selected = Array.IndexOf(Connection.types, key) == -1 ? 0 : Array.IndexOf(Connection.types, key);
+                selected = EditorGUILayout.Popup(selected, Connection.types, GUILayout.MaxWidth(75.0f));
+                key = Connection.types[selected];
+
+                // Select attribute value
                 value = GUILayout.TextField(value);
                 if (GUILayout.Button("x", GUILayout.Width(15), GUILayout.Height(15)))
                 {
