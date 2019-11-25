@@ -29,6 +29,7 @@ public class Node
 
     // Node Attributes
     public string title;
+    public float weight;
     private List<(string, string)> attributes;
 
     public Node(Vector2 position, GUIStyle nodeStyle, GUIStyle selectedStyle, Action<Node> OnClickRemoveNode, Action<Node> OnClickCreateConnection, Action<Node> OnClickCompleteConnection)
@@ -45,6 +46,7 @@ public class Node
         OnCompleteConnection = OnClickCompleteConnection;
 
         title = "";
+        weight = 0f;
         attributes = new List<(string key, string value)>();
     }
 
