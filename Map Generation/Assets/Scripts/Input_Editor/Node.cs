@@ -28,6 +28,7 @@ public class Node
     private static int doubleClickThresh = 250;
 
     // Node Attributes
+    public static readonly string[] types = { "int", "double", "string", "bool" };
     public string title;
     public float weight;
     private List<(string, string)> attributes;
@@ -72,7 +73,7 @@ public class Node
                     long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                     if (now - lastSelected < doubleClickThresh && rect.Contains(e.mousePosition))
                     {
-                        Debug.Log("Double Click " + now);
+                        Debug.Log("Double Click");
                     }
 
                     if (rect.Contains(e.mousePosition))
@@ -159,6 +160,11 @@ public class Node
     public void SetAttributeAt(string key, string value, int i)
     {
         attributes[i] = (key, value);
+    }
+
+    public List<(string, string)> GetAttributes()
+    {
+        return attributes;
     }
 
     public void RemoveAttributeAt(int i)

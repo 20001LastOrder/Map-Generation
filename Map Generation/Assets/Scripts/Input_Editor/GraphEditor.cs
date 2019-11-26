@@ -104,6 +104,14 @@ public class GraphEditor : EditorWindow
                 selectedNode.AddAttribute();
             }
         }
+
+        // Add generate button
+        GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Generate"))
+        {
+            Generate.generateEPackage(nodes, connections);
+            // Pipeline.execute();
+        }
     }
 
     private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
@@ -142,9 +150,9 @@ public class GraphEditor : EditorWindow
                 (key, value) = selectedNode.GetAttributeAt(i);
 
                 // Select attribute type
-                int selected = Array.IndexOf(Connection.types, key) == -1 ? 0 : Array.IndexOf(Connection.types, key);
-                selected = EditorGUILayout.Popup(selected, Connection.types, GUILayout.MaxWidth(75.0f));
-                key = Connection.types[selected];
+                int selected = Array.IndexOf(Node.types, key) == -1 ? 0 : Array.IndexOf(Node.types, key);
+                selected = EditorGUILayout.Popup(selected, Node.types, GUILayout.MaxWidth(75.0f));
+                key = Node.types[selected];
 
                 // Select attribute value
                 value = GUILayout.TextField(value);
@@ -349,7 +357,6 @@ public class GraphEditor : EditorWindow
 
     public void SetSelectedNode(Node node)
     {
-        Debug.Log("Set node");
         selectedNode = node;
     }
 }

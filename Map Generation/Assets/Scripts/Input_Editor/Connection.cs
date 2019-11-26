@@ -16,7 +16,6 @@ public class Connection
     public ConnectionPoint outPoint;
     public Action<Connection> OnClickConnection;
     public float probability;
-    public static readonly string[] types = { "int", "float", "string", "bool" };
 
     public Connection(ConnectionPoint inPoint, ConnectionPoint outPoint, Action<Connection> OnClickConnection)
     {
