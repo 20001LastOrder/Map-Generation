@@ -37,6 +37,7 @@ namespace CodeGenerator
             targetUnit = new CodeCompileUnit();
             CodeNamespace samples = new CodeNamespace("GeneratedClasses");
             samples.Imports.Add(new CodeNamespaceImport("System"));
+            samples.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
             targetClass = new CodeTypeDeclaration(className);
             targetClass.IsClass = true;
             targetClass.TypeAttributes = TypeAttributes.Public;
@@ -45,31 +46,47 @@ namespace CodeGenerator
         }
 
         /// <summary>
+        /// Adds association to specified class.
+        /// </summary>
+        public void AddReference(string className, string refName, int multiplicity)
+        {
+            CodeMemberField association = new CodeMemberField();
+            association.Attributes = MemberAttributes.Public;
+            association.Name = refName;
+            if (multiplicity == -1)
+            {  
+                association.Type = new CodeTypeReference("List<"+className+">");
+            }
+            else
+            {
+                association.Type = new CodeTypeReference(className);
+            }
+            targetClass.Members.Add(association);
+        }
+
+        /// <summary>
         /// Adds field to the class.
         /// </summary>
         public void AddField(string name, string type)
         {
-            Type fieldType = typeof(Type);
+            Type sType = typeof(int); ;
             switch (type)
             {
-                case "int":
-                    fieldType = typeof(int);
+                case "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble":
+                    sType = typeof(double);
                     break;
-                case "double":
-                    fieldType = typeof(double);
+                case "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString":
+                    sType = typeof(string);
                     break;
-                case "string":
-                    fieldType = typeof(string);
-                    break;
-                case "bool":
-                    fieldType = typeof(bool);
+                case "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean":
+                    sType = typeof(bool);
                     break;
             }
 
             CodeMemberField field = new CodeMemberField();
             field.Attributes = MemberAttributes.Private;
             field.Name = name;
-            field.Type = new CodeTypeReference(fieldType);
+            field.Type = new CodeTypeReference(sType);
             targetClass.Members.Add(field);
         }
         /// <summary>
@@ -77,20 +94,17 @@ namespace CodeGenerator
         /// </summary>
         public void AddProperty(string name, string type)
         {
-            Type propType = typeof(Type);
+            Type sType = typeof(int);
             switch (type)
             {
-                case "int":
-                    propType = typeof(int);
+                case "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble":
+                    sType = typeof(double);
                     break;
-                case "double":
-                    propType = typeof(double);
+                case "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString":
+                    sType = typeof(string);
                     break;
-                case "string":
-                    propType = typeof(string);
-                    break;
-                case "bool":
-                    propType = typeof(bool);
+                case "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean":
+                    sType = typeof(bool);
                     break;
             }
 
@@ -100,7 +114,7 @@ namespace CodeGenerator
             property.Name = name;
             property.HasGet = true;
             property.HasSet = true;
-            property.Type = new CodeTypeReference(propType);
+            property.Type = new CodeTypeReference(sType);
             property.GetStatements.Add(new CodeMethodReturnStatement(
                 new CodeFieldReferenceExpression(
                     new CodeThisReferenceExpression(), name)));
@@ -108,6 +122,14 @@ namespace CodeGenerator
                 new CodeFieldReferenceExpression(
                     new CodeThisReferenceExpression(), name), new CodePropertySetValueReferenceExpression()));
             targetClass.Members.Add(property);
+        }
+
+        /// <summary>
+        /// Adds a supertype to the class.
+        /// </summary>
+        public void AddSupertype(string className)
+        {
+            targetClass.BaseTypes.Add(new CodeTypeReference(className));
         }
 
         /// <summary>
@@ -127,7 +149,7 @@ namespace CodeGenerator
                     // Add parameters
                     CodeMemberField field = (CodeMemberField)member;
                     constructor.Parameters.Add(new CodeParameterDeclarationExpression(
-                        Type.GetType(field.Type.BaseType), field.Name));
+                        field.Type, field.Name));
                     CodeFieldReferenceExpression fieldRef =
                         new CodeFieldReferenceExpression(
                         new CodeThisReferenceExpression(), field.Name);
@@ -153,18 +175,6 @@ namespace CodeGenerator
                 provider.GenerateCodeFromCompileUnit(
                     targetUnit, sourceWriter, options);
             }
-        }
-
-        /// <summary>
-        /// Create the CodeDOM graph and generate the code.
-        /// </summary>
-        static void Main()
-        {
-            ClassGenerator sample = new ClassGenerator("randomclass");
-            sample.AddField("random", "int");
-            sample.AddProperty("random", "int");
-            sample.AddConstructor();
-            sample.GenerateCSharpCode(outputFileName);
         }
     }
 }
