@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Grid : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class Grid : MonoBehaviour
         Lake
     };
 
+    public GeneratedClasses.Grid gridData;
+
     public List<List<Grid>> m_subGrid = new List<List<Grid>>();
     public Grid m_parentGrid;
     public Grid m_left;
@@ -18,14 +22,9 @@ public class Grid : MonoBehaviour
     public Grid m_top;
     public Grid m_bottom;
 
-    void Start()
+    void OnDrawGizmos()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Type myType = gridData.Types[0].GetType();
+        Handles.Label(transform.position, myType.ToString());
     }
 }

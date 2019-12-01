@@ -5,10 +5,21 @@ using UnityEngine;
 /**
  * parse Ecore Package into corresponding ecore file based on pre-defined syntax of ecore
  **/
-public static class EcoreParser
+public class EcoreParser : PipelineStage
 {
     private static readonly string REF_PREFIX = "#//";
     private static readonly string FILE_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+
+
+    public System.Object execute(System.Object input)
+    {
+        Debug.Log("-----Executing ECoreGenerator-----");
+
+        EPackage package = (EPackage)input;
+        SaveEcore(package, "map.ecore");
+
+        return input;
+    }
 
     public static string ParseEReference(EReference reference)
     {

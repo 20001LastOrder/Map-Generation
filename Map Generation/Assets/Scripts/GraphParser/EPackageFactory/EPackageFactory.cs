@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public static class Generate
+public class EPackageFactory : PipelineStage
 {
-    public static EPackage generateEPackage(List<Node> nodes, List<Connection> connections)
+    public System.Object execute(System.Object input)
     {
+        Debug.Log("-----Executing EPackageFactory-----");
+
+        GraphEditor graphEditor = EditorWindow.GetWindow<GraphEditor>("Graph Editor");
+        List<Node> nodes = graphEditor.getNodes();
+        List<Connection> connections = graphEditor.GetConnections();
+
         List<EClass> eClasses = new List<EClass>();
 
         // Create necessary grid, gridtype, map classes
@@ -37,7 +43,7 @@ public static class Generate
         EReference typesRef = new EReference("types", gridTypeClass)
         {
             Conptainment = true,
-            UpperBound = -1
+            UpperBound = 1
         };
         gridClass.EReferences.Add(typesRef);
 
@@ -79,6 +85,7 @@ public static class Generate
 
         eClasses.AddRange(new List<EClass> { mapClass, gridClass, gridTypeClass });
         package.EClasses.AddRange(eClasses);
+
 
         return package;
     }

@@ -1,11 +1,20 @@
 ﻿using CodeGenerator;
 using System;
 using UnityEditor;
+using UnityEngine;
 
-public static class Parser
+public class Parser : PipelineStage
 {
-   
-    public static void ECoreToCS(EPackage ePackage, String destinationFolder) 
+    public System.Object execute(System.Object input)
+    {
+        Debug.Log("-----Executing Code Generation-----");
+        EPackage ePackage = (EPackage)input;
+
+        ECoreToCS(ePackage, "Assets/Scripts/MapClasses");
+        return input;
+    }
+
+    public void ECoreToCS(EPackage ePackage, String destinationFolder) 
     {
         foreach (EClass eClass in ePackage.EClasses)
         {

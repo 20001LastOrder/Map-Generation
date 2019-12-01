@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" minNewElements="16" maxNewElements="83">
+<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" minNewElements="7" maxNewElements="74">
   <problem href="debug/generation.logicproblem#/"/>
   <partialrelationinterpretation>
     <interpretationOf href="debug/generation.logicproblem#//@relations.0"/>
@@ -67,6 +67,42 @@
       <param1 href="debug/generation.logicproblem#//@elements.0"/>
       <param2 href="debug/generation.logicproblem#//@elements.16"/>
     </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.17"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.18"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.19"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.20"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.21"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.22"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.23"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.24"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.0"/>
+      <param2 href="debug/generation.logicproblem#//@elements.25"/>
+    </relationlinks>
     <param1 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.0/@parameters.0"/>
     <param2 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.0/@parameters.1"/>
   </partialrelationinterpretation>
@@ -85,8 +121,8 @@
       <param2 href="debug/generation.logicproblem#//@elements.3"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.6"/>
-      <param2 href="debug/generation.logicproblem#//@elements.5"/>
+      <param1 href="debug/generation.logicproblem#//@elements.5"/>
+      <param2 href="debug/generation.logicproblem#//@elements.4"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.7"/>
@@ -97,16 +133,20 @@
       <param2 href="debug/generation.logicproblem#//@elements.7"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.9"/>
+      <param2 href="debug/generation.logicproblem#//@elements.8"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.10"/>
       <param2 href="debug/generation.logicproblem#//@elements.9"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.11"/>
-      <param2 href="debug/generation.logicproblem#//@elements.10"/>
-    </relationlinks>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.12"/>
       <param2 href="debug/generation.logicproblem#//@elements.11"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.13"/>
+      <param2 href="debug/generation.logicproblem#//@elements.12"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.14"/>
@@ -117,8 +157,36 @@
       <param2 href="debug/generation.logicproblem#//@elements.14"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.16"/>
-      <param2 href="debug/generation.logicproblem#//@elements.15"/>
+      <param1 href="debug/generation.logicproblem#//@elements.17"/>
+      <param2 href="debug/generation.logicproblem#//@elements.16"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.18"/>
+      <param2 href="debug/generation.logicproblem#//@elements.17"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.19"/>
+      <param2 href="debug/generation.logicproblem#//@elements.18"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.20"/>
+      <param2 href="debug/generation.logicproblem#//@elements.19"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.22"/>
+      <param2 href="debug/generation.logicproblem#//@elements.21"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.23"/>
+      <param2 href="debug/generation.logicproblem#//@elements.22"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.24"/>
+      <param2 href="debug/generation.logicproblem#//@elements.23"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.25"/>
+      <param2 href="debug/generation.logicproblem#//@elements.24"/>
     </relationlinks>
     <param1 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.1/@parameters.0"/>
     <param2 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.1/@parameters.1"/>
@@ -138,8 +206,8 @@
       <param2 href="debug/generation.logicproblem#//@elements.4"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.5"/>
-      <param2 href="debug/generation.logicproblem#//@elements.6"/>
+      <param1 href="debug/generation.logicproblem#//@elements.4"/>
+      <param2 href="debug/generation.logicproblem#//@elements.5"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.6"/>
@@ -150,16 +218,20 @@
       <param2 href="debug/generation.logicproblem#//@elements.8"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.8"/>
+      <param2 href="debug/generation.logicproblem#//@elements.9"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.9"/>
       <param2 href="debug/generation.logicproblem#//@elements.10"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.10"/>
-      <param2 href="debug/generation.logicproblem#//@elements.11"/>
-    </relationlinks>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.11"/>
       <param2 href="debug/generation.logicproblem#//@elements.12"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.12"/>
+      <param2 href="debug/generation.logicproblem#//@elements.13"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.13"/>
@@ -170,8 +242,36 @@
       <param2 href="debug/generation.logicproblem#//@elements.15"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.15"/>
-      <param2 href="debug/generation.logicproblem#//@elements.16"/>
+      <param1 href="debug/generation.logicproblem#//@elements.16"/>
+      <param2 href="debug/generation.logicproblem#//@elements.17"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.17"/>
+      <param2 href="debug/generation.logicproblem#//@elements.18"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.18"/>
+      <param2 href="debug/generation.logicproblem#//@elements.19"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.19"/>
+      <param2 href="debug/generation.logicproblem#//@elements.20"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.21"/>
+      <param2 href="debug/generation.logicproblem#//@elements.22"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.22"/>
+      <param2 href="debug/generation.logicproblem#//@elements.23"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.23"/>
+      <param2 href="debug/generation.logicproblem#//@elements.24"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.24"/>
+      <param2 href="debug/generation.logicproblem#//@elements.25"/>
     </relationlinks>
     <param1 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.2/@parameters.0"/>
     <param2 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.2/@parameters.1"/>
@@ -179,52 +279,84 @@
   <partialrelationinterpretation>
     <interpretationOf href="debug/generation.logicproblem#//@relations.3"/>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.5"/>
+      <param1 href="debug/generation.logicproblem#//@elements.6"/>
       <param2 href="debug/generation.logicproblem#//@elements.1"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.6"/>
+      <param1 href="debug/generation.logicproblem#//@elements.7"/>
       <param2 href="debug/generation.logicproblem#//@elements.2"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.7"/>
+      <param1 href="debug/generation.logicproblem#//@elements.8"/>
       <param2 href="debug/generation.logicproblem#//@elements.3"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.8"/>
+      <param1 href="debug/generation.logicproblem#//@elements.9"/>
       <param2 href="debug/generation.logicproblem#//@elements.4"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.9"/>
+      <param1 href="debug/generation.logicproblem#//@elements.10"/>
       <param2 href="debug/generation.logicproblem#//@elements.5"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.10"/>
+      <param1 href="debug/generation.logicproblem#//@elements.11"/>
       <param2 href="debug/generation.logicproblem#//@elements.6"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.11"/>
+      <param1 href="debug/generation.logicproblem#//@elements.12"/>
       <param2 href="debug/generation.logicproblem#//@elements.7"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.12"/>
+      <param1 href="debug/generation.logicproblem#//@elements.13"/>
       <param2 href="debug/generation.logicproblem#//@elements.8"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.13"/>
+      <param1 href="debug/generation.logicproblem#//@elements.14"/>
       <param2 href="debug/generation.logicproblem#//@elements.9"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.14"/>
+      <param1 href="debug/generation.logicproblem#//@elements.15"/>
       <param2 href="debug/generation.logicproblem#//@elements.10"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.15"/>
+      <param1 href="debug/generation.logicproblem#//@elements.16"/>
       <param2 href="debug/generation.logicproblem#//@elements.11"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.16"/>
+      <param1 href="debug/generation.logicproblem#//@elements.17"/>
       <param2 href="debug/generation.logicproblem#//@elements.12"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.18"/>
+      <param2 href="debug/generation.logicproblem#//@elements.13"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.19"/>
+      <param2 href="debug/generation.logicproblem#//@elements.14"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.20"/>
+      <param2 href="debug/generation.logicproblem#//@elements.15"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.21"/>
+      <param2 href="debug/generation.logicproblem#//@elements.16"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.22"/>
+      <param2 href="debug/generation.logicproblem#//@elements.17"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.23"/>
+      <param2 href="debug/generation.logicproblem#//@elements.18"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.24"/>
+      <param2 href="debug/generation.logicproblem#//@elements.19"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.25"/>
+      <param2 href="debug/generation.logicproblem#//@elements.20"/>
     </relationlinks>
     <param1 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.3/@parameters.0"/>
     <param2 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.3/@parameters.1"/>
@@ -233,51 +365,83 @@
     <interpretationOf href="debug/generation.logicproblem#//@relations.4"/>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="debug/generation.logicproblem#//@elements.1"/>
-      <param2 href="debug/generation.logicproblem#//@elements.5"/>
-    </relationlinks>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.2"/>
       <param2 href="debug/generation.logicproblem#//@elements.6"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.3"/>
+      <param1 href="debug/generation.logicproblem#//@elements.2"/>
       <param2 href="debug/generation.logicproblem#//@elements.7"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.4"/>
+      <param1 href="debug/generation.logicproblem#//@elements.3"/>
       <param2 href="debug/generation.logicproblem#//@elements.8"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.5"/>
+      <param1 href="debug/generation.logicproblem#//@elements.4"/>
       <param2 href="debug/generation.logicproblem#//@elements.9"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.6"/>
+      <param1 href="debug/generation.logicproblem#//@elements.5"/>
       <param2 href="debug/generation.logicproblem#//@elements.10"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.7"/>
+      <param1 href="debug/generation.logicproblem#//@elements.6"/>
       <param2 href="debug/generation.logicproblem#//@elements.11"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.8"/>
+      <param1 href="debug/generation.logicproblem#//@elements.7"/>
       <param2 href="debug/generation.logicproblem#//@elements.12"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.9"/>
+      <param1 href="debug/generation.logicproblem#//@elements.8"/>
       <param2 href="debug/generation.logicproblem#//@elements.13"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.10"/>
+      <param1 href="debug/generation.logicproblem#//@elements.9"/>
       <param2 href="debug/generation.logicproblem#//@elements.14"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.11"/>
+      <param1 href="debug/generation.logicproblem#//@elements.10"/>
       <param2 href="debug/generation.logicproblem#//@elements.15"/>
     </relationlinks>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
-      <param1 href="debug/generation.logicproblem#//@elements.12"/>
+      <param1 href="debug/generation.logicproblem#//@elements.11"/>
       <param2 href="debug/generation.logicproblem#//@elements.16"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.12"/>
+      <param2 href="debug/generation.logicproblem#//@elements.17"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.13"/>
+      <param2 href="debug/generation.logicproblem#//@elements.18"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.14"/>
+      <param2 href="debug/generation.logicproblem#//@elements.19"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.15"/>
+      <param2 href="debug/generation.logicproblem#//@elements.20"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.16"/>
+      <param2 href="debug/generation.logicproblem#//@elements.21"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.17"/>
+      <param2 href="debug/generation.logicproblem#//@elements.22"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.18"/>
+      <param2 href="debug/generation.logicproblem#//@elements.23"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.19"/>
+      <param2 href="debug/generation.logicproblem#//@elements.24"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="debug/generation.logicproblem#//@elements.20"/>
+      <param2 href="debug/generation.logicproblem#//@elements.25"/>
     </relationlinks>
     <param1 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.4/@parameters.0"/>
     <param2 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.4/@parameters.1"/>
@@ -342,6 +506,33 @@
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.17">
       <param1 href="debug/generation.logicproblem#//@elements.16"/>
     </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.18">
+      <param1 href="debug/generation.logicproblem#//@elements.17"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.19">
+      <param1 href="debug/generation.logicproblem#//@elements.18"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.20">
+      <param1 href="debug/generation.logicproblem#//@elements.19"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.21">
+      <param1 href="debug/generation.logicproblem#//@elements.20"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.22">
+      <param1 href="debug/generation.logicproblem#//@elements.21"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.23">
+      <param1 href="debug/generation.logicproblem#//@elements.22"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.24">
+      <param1 href="debug/generation.logicproblem#//@elements.23"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.25">
+      <param1 href="debug/generation.logicproblem#//@elements.24"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param2="//@newElements.26">
+      <param1 href="debug/generation.logicproblem#//@elements.25"/>
+    </relationlinks>
     <param1 xsi:type="language:ComplexTypeReference" href="debug/generation.logicproblem#//@relations.7/@parameters.0"/>
     <param2 xsi:type="language:IntTypeReference" href="debug/generation.logicproblem#//@relations.7/@parameters.1"/>
   </partialrelationinterpretation>
@@ -363,15 +554,30 @@
   <newElements xsi:type="partialinterpretation:IntegerElement" name="14" valueSet="true" value="14"/>
   <newElements xsi:type="partialinterpretation:IntegerElement" name="15" valueSet="true" value="15"/>
   <newElements xsi:type="partialinterpretation:IntegerElement" name="16" valueSet="true" value="16"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="17" valueSet="true" value="17"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="18" valueSet="true" value="18"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="19" valueSet="true" value="19"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="20" valueSet="true" value="20"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="21" valueSet="true" value="21"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="22" valueSet="true" value="22"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="23" valueSet="true" value="23"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="24" valueSet="true" value="24"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="25" valueSet="true" value="25"/>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialBooleanInterpretation" elements="//@newElements.0 //@newElements.1"/>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialIntegerInterpretation" elements="//@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@openWorldElements.0"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialIntegerInterpretation" elements="//@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@openWorldElements.0"/>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialRealInterpretation" elements="//@openWorldElements.1"/>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialStringInterpretation" elements="//@openWorldElements.2"/>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.0">
-    <elements href="debug/generation.logicproblem#//@elements.0"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.0" supertypeInterpretation="//@partialtypeinterpratation.8">
     <interpretationOf href="debug/generation.logicproblem#//@types.0"/>
   </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.1">
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.1" supertypeInterpretation="//@partialtypeinterpratation.8">
+    <interpretationOf href="debug/generation.logicproblem#//@types.1"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.2">
+    <elements href="debug/generation.logicproblem#//@elements.0"/>
+    <interpretationOf href="debug/generation.logicproblem#//@types.2"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.3">
     <elements href="debug/generation.logicproblem#//@elements.1"/>
     <elements href="debug/generation.logicproblem#//@elements.2"/>
     <elements href="debug/generation.logicproblem#//@elements.3"/>
@@ -388,28 +594,25 @@
     <elements href="debug/generation.logicproblem#//@elements.14"/>
     <elements href="debug/generation.logicproblem#//@elements.15"/>
     <elements href="debug/generation.logicproblem#//@elements.16"/>
-    <interpretationOf href="debug/generation.logicproblem#//@types.1"/>
-  </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.2">
-    <interpretationOf href="debug/generation.logicproblem#//@types.2"/>
-  </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.3" supertypeInterpretation="//@partialtypeinterpratation.6">
+    <elements href="debug/generation.logicproblem#//@elements.17"/>
+    <elements href="debug/generation.logicproblem#//@elements.18"/>
+    <elements href="debug/generation.logicproblem#//@elements.19"/>
+    <elements href="debug/generation.logicproblem#//@elements.20"/>
+    <elements href="debug/generation.logicproblem#//@elements.21"/>
+    <elements href="debug/generation.logicproblem#//@elements.22"/>
+    <elements href="debug/generation.logicproblem#//@elements.23"/>
+    <elements href="debug/generation.logicproblem#//@elements.24"/>
+    <elements href="debug/generation.logicproblem#//@elements.25"/>
     <interpretationOf href="debug/generation.logicproblem#//@types.3"/>
   </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.4" supertypeInterpretation="//@partialtypeinterpratation.6">
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.4">
     <interpretationOf href="debug/generation.logicproblem#//@types.4"/>
   </partialtypeinterpratation>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.5" supertypeInterpretation="//@partialtypeinterpratation.6">
-    <interpretationOf href="debug/generation.logicproblem#//@types.5"/>
-  </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.6" supertypeInterpretation="//@partialtypeinterpratation.6">
     <interpretationOf href="debug/generation.logicproblem#//@types.6"/>
   </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.7" supertypeInterpretation="//@partialtypeinterpratation.4">
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.6" supertypeInterpretation="//@partialtypeinterpratation.7">
     <interpretationOf href="debug/generation.logicproblem#//@types.8"/>
-  </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.8" supertypeInterpretation="//@partialtypeinterpratation.5">
-    <interpretationOf href="debug/generation.logicproblem#//@types.10"/>
   </partialtypeinterpratation>
   <openWorldElements xsi:type="partialinterpretation:IntegerElement" name="New Integers"/>
   <openWorldElements xsi:type="partialinterpretation:RealElement" name="New Reals"/>
@@ -422,6 +625,4 @@
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.8"/>
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.9"/>
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.10"/>
-  <scopes targetTypeInterpretation="//@partialtypeinterpratation.11"/>
-  <scopes targetTypeInterpretation="//@partialtypeinterpratation.12"/>
 </partialinterpretation:PartialInterpretation>

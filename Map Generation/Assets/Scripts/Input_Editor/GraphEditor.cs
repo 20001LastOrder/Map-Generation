@@ -32,6 +32,11 @@ public class GraphEditor : EditorWindow
         return nodes;
     }
 
+    public List<Connection> GetConnections()
+    {
+        return connections;
+    }
+
     private void OnEnable()
     {
         nodeStyle = new GUIStyle();
@@ -109,8 +114,8 @@ public class GraphEditor : EditorWindow
         GUILayout.FlexibleSpace();
         if (GUILayout.Button("Generate"))
         {
-            Generate.generateEPackage(nodes, connections);
-            // Pipeline.execute();
+            //Generate.generateEPackage(nodes, connections);
+            Pipeline.execute();
         }
     }
 

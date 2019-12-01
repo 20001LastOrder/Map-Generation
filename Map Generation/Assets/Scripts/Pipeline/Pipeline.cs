@@ -6,11 +6,22 @@ public class Pipeline
 {
     // add pipeline stages here in order of executation
     private static List<PipelineStage> pipelineStages =
-       new List<PipelineStage>() { new EPackageFactory() };
+       new List<PipelineStage>() {
+        new EPackageFactory(),
+        new Parser(),
+        new EcoreParser(),
+        new GraphSolverRunner(),
+        new MapGen()
+       };
 
     public static void execute()
     {
         Debug.Log("-----Executing Pipeline-----");
-        foreach (PipelineStage stage in pipelineStages) stage.execute();
+
+        System.Object cur_input = null;
+        foreach (PipelineStage stage in pipelineStages)
+        {
+            cur_input = stage.execute(cur_input);
+        }
     }
 }

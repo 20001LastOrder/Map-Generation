@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface PipelineStage
+public interface PipelineStage
 {
-    void execute();
+    System.Object execute(System.Object input);
 }

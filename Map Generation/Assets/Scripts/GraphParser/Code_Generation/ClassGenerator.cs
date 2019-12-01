@@ -3,6 +3,7 @@ using System.Reflection;
 using System.IO;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using Microsoft.CSharp;
 
 namespace CodeGenerator

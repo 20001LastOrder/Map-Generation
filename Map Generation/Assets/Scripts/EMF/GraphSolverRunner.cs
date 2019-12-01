@@ -8,14 +8,23 @@ using UnityEngine;
 using System;
 using System.Reflection;
 
-public class GraphSolverRunner : MonoBehaviour
+public class GraphSolverRunner : PipelineStage
 {
     [SerializeField]
     private string ecoreFileName = "map.ecore";
 
-    // Start is called before the first frame update
-    void Start()
+    public System.Object execute(System.Object input)
     {
+        Debug.Log("-----Executing GraphSolverRunner-----");
+
+        EPackage package = (EPackage)input;
+        return Start(package);
+    }
+
+    // Start is called before the first frame update
+    System.Object Start(EPackage package)
+    {
+        /*
         // create classes
         EClass mapClass = new EClass("Map");
         EClass gridClass = new EClass("Grid");
@@ -63,15 +72,18 @@ public class GraphSolverRunner : MonoBehaviour
 
         EPackage package = new EPackage("map");
         package.EClasses.AddRange(new List<EClass>() { mapClass, gridClass, gridTypeClass, cityClass, villageClass, mountainClass, riverClass });
+        */
 
+        //EcoreParser.SaveEcore(package, ecoreFileName);
+        //Debug.Log("finished creating package");
 
-        EcoreParser.SaveEcore(package, ecoreFileName);
-        Debug.Log("finished creating package");
-        var map = MapShapeGenerator.GenerateDefaultShape(4, 4);
-        //InstanceParser.WriteMapInstance(map);
-        //runSolver();
+        var map = MapShapeGenerator.GenerateDefaultShape(GridManager.rootGridDim, GridManager.rootGridDim);
+        InstanceParser.WriteMapInstance(map);
+        runSolver();
         InstanceParser.ReadMapInstance("Assets/GraphSolver/output/1.xmi", map);
-        Debug.Log(map.Grids[1].Types.Count);
+        Debug.Log("Map type count:" + map.Grids[1].Types.Count);
+
+        return map;
     }
 
     /*void ReadXML()

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public int rootGridDim = 10;
+    public static int rootGridDim = 5;
     public int rootGridSize = 10;
     public Material greenMaterial;
 
-    Grid m_rootGrid;
+    public Grid m_rootGrid;
     
-    void initRootGrid()
+    public void initRootGrid()
     {
         if(m_rootGrid == null)
         {
@@ -58,7 +58,7 @@ public class GridManager : MonoBehaviour
                 planeGO.transform.localPosition = Vector3.zero;
                 planeGO.GetComponent<MeshRenderer>().material = greenMaterial;
 
-                Mesh mesh = planeGO.GetComponent<MeshFilter>().mesh;
+                Mesh mesh = planeGO.GetComponent<MeshFilter>().sharedMesh;
                 Vector3[] verts = mesh.vertices;
                 int vertDim = (int)Mathf.Sqrt(verts.Length);
                 float[,] noise = NoiseMapGeneration.GenerateNoiseMap(vertDim, vertDim, Random.value);
@@ -103,7 +103,7 @@ public class GridManager : MonoBehaviour
 
         initRootGrid();
 
-        Pipeline.execute();
+        //Pipeline.execute();
     }
 
     // Update is called once per frame

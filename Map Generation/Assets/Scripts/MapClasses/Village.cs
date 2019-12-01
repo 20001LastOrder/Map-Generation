@@ -11,6 +11,7 @@
 namespace GeneratedClasses
 {
     using System;
+    using System.Collections.Generic;
     
     
     public class Village : GridType
