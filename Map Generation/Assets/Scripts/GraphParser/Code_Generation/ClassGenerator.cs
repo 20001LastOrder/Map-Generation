@@ -142,19 +142,28 @@ namespace CodeGenerator
             constructor.Attributes =
                 MemberAttributes.Public | MemberAttributes.Final;
 
+            List<CodeTypeReference> fieldTypes = new List<CodeTypeReference>();
+            fieldTypes.Add(new CodeTypeReference(typeof(bool)));
+            fieldTypes.Add(new CodeTypeReference(typeof(int)));
+            fieldTypes.Add(new CodeTypeReference(typeof(double)));
+            fieldTypes.Add(new CodeTypeReference(typeof(string)));
+
             foreach (CodeTypeMember member in targetClass.Members)
             {
                 if (member is CodeMemberField)
                 {
                     // Add parameters
                     CodeMemberField field = (CodeMemberField)member;
-                    constructor.Parameters.Add(new CodeParameterDeclarationExpression(
-                        field.Type, field.Name));
-                    CodeFieldReferenceExpression fieldRef =
-                        new CodeFieldReferenceExpression(
-                        new CodeThisReferenceExpression(), field.Name);
-                    constructor.Statements.Add(new CodeAssignStatement(fieldRef,
-                        new CodeArgumentReferenceExpression(field.Name)));
+                    if (fieldTypes.Contains(field.Type))
+                    {
+                        constructor.Parameters.Add(new CodeParameterDeclarationExpression(
+                            field.Type, field.Name));
+                        CodeFieldReferenceExpression fieldRef =
+                            new CodeFieldReferenceExpression(
+                            new CodeThisReferenceExpression(), field.Name);
+                        constructor.Statements.Add(new CodeAssignStatement(fieldRef,
+                            new CodeArgumentReferenceExpression(field.Name)));
+                    }
                 }
             }
 
