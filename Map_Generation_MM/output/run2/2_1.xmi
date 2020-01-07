@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ca.mcgill.ecse459.map:Map xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ca.mcgill.ecse459.map="ca.mcgill.ecse459.map" xsi:schemaLocation="ca.mcgill.ecse459.map models/map.ecore">
+  <grid xsi:type="ca.mcgill.ecse459.map:Lake" left="//@grid.6" right="//@grid.6" up="//@grid.15" down="//@grid.9"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Mountain" left="//@grid.1" right="//@grid.14" up="//@grid.26" down="//@grid.12"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.20" right="//@grid.2" up="//@grid.13" down="//@grid.12"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Forest" left="//@grid.3" right="//@grid.3" up="//@grid.12" down="//@grid.12"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Forest" left="//@grid.12" right="//@grid.3" up="//@grid.10" down="//@grid.9"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Mountain" left="//@grid.23" right="//@grid.7" up="//@grid.22" down="//@grid.5"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.10" right="//@grid.10" up="//@grid.15" down="//@grid.19"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.10" right="//@grid.10" up="//@grid.3" down="//@grid.10"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.10" right="//@grid.8" up="//@grid.10" down="//@grid.19"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Forest" left="//@grid.19" right="//@grid.9" up="//@grid.12" down="//@grid.10"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.3" right="//@grid.15" up="//@grid.10" down="//@grid.15"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Mountain" left="//@grid.17" right="//@grid.9" up="//@grid.19" down="//@grid.19"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.12" right="//@grid.12" up="//@grid.19" down="//@grid.15"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.13" right="//@grid.6" up="//@grid.0" down="//@grid.0"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Forest" left="//@grid.21" right="//@grid.26" up="//@grid.23" down="//@grid.12"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.12" right="//@grid.15" up="//@grid.15" down="//@grid.12"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Mountain" left="//@grid.26" right="//@grid.22" up="//@grid.3" down="//@grid.22"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Lake" left="//@grid.26" right="//@grid.19" up="//@grid.2" down="//@grid.16"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.15" right="//@grid.19" up="//@grid.8" down="//@grid.23"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Mountain" left="//@grid.19" right="//@grid.15" up="//@grid.15" down="//@grid.19"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Forest" left="//@grid.3" right="//@grid.16" up="//@grid.9" down="//@grid.10"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Lake" left="//@grid.12" right="//@grid.19" up="//@grid.25" down="//@grid.5"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Forest" left="//@grid.7" right="//@grid.12" up="//@grid.6" down="//@grid.0"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.0" right="//@grid.19" up="//@grid.6" down="//@grid.9"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.7" right="//@grid.21" up="//@grid.0" down="//@grid.20"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.15" right="//@grid.25" up="//@grid.8" down="//@grid.6"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Forest" left="//@grid.25" right="//@grid.7" up="//@grid.13" down="//@grid.0"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:City" left="//@grid.6" right="//@grid.9" up="//@grid.6" down="//@grid.22"/>
+  <grid xsi:type="ca.mcgill.ecse459.map:Forest"/>
+</ca.mcgill.ecse459.map:Map>

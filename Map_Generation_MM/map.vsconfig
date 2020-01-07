@@ -1,0 +1,25 @@
+import epackage "models/map.ecore"
+import viatra "queries/queries/map.vql"
+
+generate {
+	metamodel = {package map}
+	partial-model = { "instance.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#<Grid> += 0,
+		#node = 100..300
+	}
+	
+	number = 1
+	runs = 1
+	config = {
+		log-level = none
+	}
+	
+	debug = "debug"
+	output = "output/"
+}
