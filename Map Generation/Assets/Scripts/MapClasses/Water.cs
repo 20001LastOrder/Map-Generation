@@ -14,10 +14,10 @@ namespace GeneratedClasses
     using System.Collections.Generic;
     
     
-    public class City : GridType
+    public class Water : GridType
     {
         
-        public City()
+        public Water()
         {
         }
     }

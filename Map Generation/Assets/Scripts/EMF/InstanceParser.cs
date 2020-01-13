@@ -93,7 +93,6 @@ public static class InstanceParser
                        .Where(t => t.Namespace == "GeneratedClasses")
                        .ToList();
             var subtype = generatedTypes.Find(a => a.Name.Equals(type));
-
             types.Add((GridType)Activator.CreateInstance(subtype));
         }
 

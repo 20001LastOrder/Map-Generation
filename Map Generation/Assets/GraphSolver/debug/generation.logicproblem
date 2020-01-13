@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <language:LogicProblem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/ecore2logicannotation" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem" xmlns:language_1="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partial2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/partial2logicannotation" xmlns:viatra2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/viatra2logicannotation">
   <types xsi:type="language_1:TypeDeclaration" name="Terrain class" supertypes="//@types.4"/>
-  <types xsi:type="language_1:TypeDeclaration" name="Village class" supertypes="//@types.4"/>
+  <types xsi:type="language_1:TypeDeclaration" name="Water class" supertypes="//@types.4"/>
   <types xsi:type="language_1:TypeDeclaration" name="Map class" subtypes="//@types.5 //@types.6" isAbstract="true"/>
   <types xsi:type="language_1:TypeDeclaration" name="Grid class" subtypes="//@types.7 //@types.8" isAbstract="true"/>
   <types xsi:type="language_1:TypeDeclaration" name="GridType class" subtypes="//@types.0 //@types.1" isAbstract="true"/>
@@ -947,7 +947,7 @@
   <elements name="o 24" definedInType="//@types.7"/>
   <elements name="o 25" definedInType="//@types.7"/>
   <elements name="o 26" definedInType="//@types.7"/>
-  <containmentHierarchies typesOrderedInHierarchy="//@types.1 //@types.4 //@types.2 //@types.0 //@types.3 //@types.5 //@types.6 //@types.7 //@types.8" containmentRelations="//@relations.0 //@relations.5"/>
+  <containmentHierarchies typesOrderedInHierarchy="//@types.2 //@types.0 //@types.3 //@types.1 //@types.4 //@types.5 //@types.6 //@types.7 //@types.8" containmentRelations="//@relations.0 //@relations.5"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.0" relation="//@relations.1" upper="1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.1" relation="//@relations.2" upper="1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.2" relation="//@relations.3" upper="1"/>
