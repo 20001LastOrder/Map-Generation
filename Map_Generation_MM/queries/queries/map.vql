@@ -5,60 +5,8 @@ pattern haveReference(a : Grid, t: GridType) {
 	Grid.types(a, t);
 }
 
-pattern islandNoNeighbour(a: Island,  neighbour: Grid){
-	GridType.grid(a, g);
-	Grid.left(g, neighbour);
-	neg find haveReference(neighbour, _);
-} or{
-	GridType.grid(a, g);
-	Grid.right(g, neighbour);
-	neg find haveReference(neighbour, _);
-} or {
-	GridType.grid(a, g);
-	Grid.up(g, neighbour);
-	neg find haveReference(neighbour, _);
-} or {
-	GridType.grid(a, g);
-	Grid.down(g, neighbour);
-	neg find haveReference(neighbour, _);
-}
-
-pattern seaNoNeighbour(a: Sea, neighbour: Grid){
-	GridType.grid(a, g);
-	Grid.left(g, neighbour);
-	neg find haveReference(neighbour, _);
-} or{
-	GridType.grid(a, g);
-	Grid.right(g, neighbour);
-	neg find haveReference(neighbour, _);
-} or {
-	GridType.grid(a, g);
-	Grid.up(g, neighbour);
-	neg find haveReference(neighbour, _);
-} or {
-	GridType.grid(a, g);
-	Grid.down(g, neighbour);
-	neg find haveReference(neighbour, _);
-}
-
 @Constraint(key={a}, severity="error", message="error")
 pattern noReference(a : Grid){
 	neg find haveReference(a, _);
 }
-
-//@Constraint(key={a, b}, severity="error", message="error")
-//pattern noSameVillageType(a : Island, b: Island){
-//	a != b;
-//	GridType.grid(a, g1);
-//	GridType.grid(b, g2);
-//	g1 == g2;
-//}
-//
-//@Constraint(key={a, b}, severity="error", message="error")
-//pattern noSameCityType(a : City, b: City){
-//	a != b;
-//	GridType.grid(a, g1);
-//	GridType.grid(b, g2);
-//	g1 == g2;
-//}
 

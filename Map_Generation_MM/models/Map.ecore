@@ -2,15 +2,13 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="map" nsURI="ca.mcgill.ecse459.map" nsPrefix="ca.mcgill.ecse459.map">
   <eClassifiers xsi:type="ecore:EClass" name="Grid">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="up" eType="#//Grid" eOpposite="#//Grid/down"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="down" eType="#//Grid" eOpposite="#//Grid/up"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Grid" eOpposite="#//Grid/right"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Grid"
-        eOpposite="#//Grid/left"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" eType="#//GridType"
         containment="true" eOpposite="#//GridType/grid"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="near" upperBound="-1" eType="#//Grid"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inside" upperBound="-1"
+        eType="#//Grid" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Map">
     <eStructuralFeatures xsi:type="ecore:EReference" name="grids" upperBound="-1"
@@ -20,5 +18,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="grid" eType="#//Grid" eOpposite="#//Grid/types"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Island" eSuperTypes="#//GridType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Sea" eSuperTypes="#//GridType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Water" eSuperTypes="#//GridType"/>
 </ecore:EPackage>

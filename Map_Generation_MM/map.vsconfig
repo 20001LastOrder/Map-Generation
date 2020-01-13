@@ -10,14 +10,14 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#<Grid> += 0,
-		#node = 100..300
+		//#<Grid> += 0,
+		#node = 9
 	}
 	
 	number = 1
 	runs = 1
 	config = {
-		log-level = none
+		log-level = normal
 	}
 	
 	debug = "debug"

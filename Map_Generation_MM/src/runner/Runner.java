@@ -11,7 +11,7 @@ public class Runner {
 	}
 		
 	public static void main(String args[]) {
-		Utils.createInitialInput();
+		//Utils.createInitialInput();
 		
 		String ecoreFile = args[0];
 		System.out.println("Generation Started");
@@ -21,7 +21,7 @@ public class Runner {
 			return;
 		}
 		System.out.println("Finished");
-		DrawMap();
+		//DrawMap();
 	}
 	
 	public static void DrawMap() {

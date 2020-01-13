@@ -180,20 +180,7 @@ public class SimulationBasedSearchStrategy implements IStrategy {
 		final Object[] firstTrajectory = context.getTrajectory().toArray(new Object[0]);
 		TrajectoryWithFitness currentTrajectoryWithFittness = new TrajectoryWithFitness(firstTrajectory, firstFittness);
 		trajectoiresToExplore.add(currentTrajectoryWithFittness);
-		
-		
-		
-		
-		//if(configuration)
-		visualiseCurrentState();
-//		for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
-//			System.out.println(matcher.getPatternName());
-//			System.out.println("---------");
-//			for(IPatternMatch m : matcher.getAllMatches()) {
-//				System.out.println(m);
-//			}
-//			System.out.println("---------");
-//		}
+	
 
 		int i = 0;
 		
@@ -215,20 +202,20 @@ public class SimulationBasedSearchStrategy implements IStrategy {
 			
 		
 			List<Object> activationIds = selectActivation();
-			activationIds.removeIf(it -> ((Pair<String, Integer>)it).getKey().matches(".*(Grid).*(Grid)"));
+			//activationIds.removeIf(it -> ((Pair<String, Integer>)it).getKey().matches(".*(Grid).*(Grid)"));
 			
-			List<Object> activationIdsToExecute = new ArrayList<>();
+			//List<Object> activationIdsToExecute = new ArrayList<>();
 			
-			if(i > 3) {
-				findActivation(activationIds, activationIdsToExecute, 1, "Sea", "Island");
-				findActivation(activationIds, activationIdsToExecute, 0, "Island", "Sea");
-			}
+//			if(i > 3) {
+//				findActivation(activationIds, activationIdsToExecute, 1, "Sea", "Island");
+//				findActivation(activationIds, activationIdsToExecute, 0, "Island", "Sea");
+//			}
 
 			Iterator<Object> iterator = activationIds.iterator();
-			if(activationIdsToExecute.size() > 0) {
-				 Collections.shuffle(activationIdsToExecute);
-				 iterator = activationIdsToExecute.iterator();
-			}
+//			if(activationIdsToExecute.size() > 0) {
+//				 Collections.shuffle(activationIdsToExecute);
+//				 iterator = activationIdsToExecute.iterator();
+//			}
 			i ++;
 			while (!isInterrupted && !configuration.progressMonitor.isCancelled() && iterator.hasNext()) {
 				final Object nextActivation = iterator.next();
@@ -261,7 +248,7 @@ public class SimulationBasedSearchStrategy implements IStrategy {
 
 					TrajectoryWithFitness nextTrajectoryWithFittness = new TrajectoryWithFitness(
 							context.getTrajectory().toArray(), nextFitness);
-//					trajectoiresToExplore.add(nextTrajectoryWithFittness);
+					trajectoiresToExplore.add(nextTrajectoryWithFittness);
 
 					int compare = objectiveComparatorHelper.compare(currentTrajectoryWithFittness.fitness,
 							nextTrajectoryWithFittness.fitness);
