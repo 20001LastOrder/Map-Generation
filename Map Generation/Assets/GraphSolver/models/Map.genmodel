@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/Map_Generation_MM/src" modelPluginID="Map_Generation_MM"
+    modelName="Map" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Map.ecore</foreignModel>
+  <genPackages prefix="Map" disposableProviderFactory="true" ecorePackage="Map.ecore#/">
+    <genClasses ecoreClass="Map.ecore#//Grid">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Map.ecore#//Grid/insides"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Map.ecore#//Grid/close"/>
+    </genClasses>
+    <genClasses ecoreClass="Map.ecore#//Island"/>
+    <genClasses ecoreClass="Map.ecore#//Sea"/>
+    <genClasses ecoreClass="Map.ecore#//City"/>
+    <genClasses ecoreClass="Map.ecore#//Lake"/>
+  </genPackages>
+</genmodel:GenModel>
