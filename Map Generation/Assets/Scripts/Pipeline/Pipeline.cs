@@ -10,8 +10,8 @@ public class Pipeline
         new EPackageFactory(),
         new Parser(),
         new EcoreParser(),
-        new GraphSolverRunner(),
-        new MapGen()
+        new GraphSolverRunner()
+        //new MapGen()
        };
 
     public static void execute()

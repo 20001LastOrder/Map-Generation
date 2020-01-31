@@ -1,5 +1,5 @@
 package queries
-import epackage "ca.mcgill.ecse459.map"
+import epackage "map.map"
 
 pattern isIsland(a: Region){
 	Island(a);

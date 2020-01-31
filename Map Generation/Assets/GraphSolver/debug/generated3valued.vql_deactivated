@@ -87,78 +87,6 @@ private pattern isPrimitive(element: PrimitiveElement) {
 // 1.1.2 domain-specific Type Indexers
 //////////
 /**
- * An element must be an instance of type "Region class".
- */
-private pattern mustInstanceOfRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-	Type.name(type,"Region class");
-	find directInstanceOf(problem,interpretation,element,type);
-}
-private pattern scopeDisallowsNewRegion_class(problem:LogicProblem, interpretation:PartialInterpretation) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.scopes(interpretation,scope);
-	Scope.targetTypeInterpretation(scope,typeInterpretation);
-	Scope.maxNewElements(scope,0);
-	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
-	Type.name(type,"Region class");
-}
-
-/**
- * An element may be an instance of type "Region class".
- */
-private pattern mayInstanceOfRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfRegion_class_UndefinedPart(problem,interpretation,element);
-	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
-	neg find scopeDisallowsNewRegion_class(problem, interpretation);
-	neg find isPrimitive(element);
-} or {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfRegion_class_UndefinedPart(problem,interpretation,element);
-	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
-	neg find scopeDisallowsNewRegion_class(problem, interpretation);
-	neg find isPrimitive(element);
-} or
-{ find mustInstanceOfRegion_class(problem,interpretation,element); }
-/**
- * An element must be an instance of type "Island class".
- */
-private pattern mustInstanceOfIsland_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-	Type.name(type,"Island class");
-	find directInstanceOf(problem,interpretation,element,type);
-}
-private pattern scopeDisallowsNewIsland_class(problem:LogicProblem, interpretation:PartialInterpretation) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.scopes(interpretation,scope);
-	Scope.targetTypeInterpretation(scope,typeInterpretation);
-	Scope.maxNewElements(scope,0);
-	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
-	Type.name(type,"Island class");
-}
-
-/**
- * An element may be an instance of type "Island class".
- */
-private pattern mayInstanceOfIsland_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfSea_class(problem,interpretation,element);
-	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
-	neg find scopeDisallowsNewIsland_class(problem, interpretation);
-	neg find isPrimitive(element);
-} or {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfSea_class(problem,interpretation,element);
-	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
-	neg find scopeDisallowsNewIsland_class(problem, interpretation);
-	neg find isPrimitive(element);
-} or
-{ find mustInstanceOfIsland_class(problem,interpretation,element); }
-/**
  * An element must be an instance of type "Sea class".
  */
 private pattern mustInstanceOfSea_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
@@ -192,6 +120,42 @@ private pattern mayInstanceOfSea_class(problem:LogicProblem, interpretation:Part
 	neg find isPrimitive(element);
 } or
 { find mustInstanceOfSea_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Island class".
+ */
+private pattern mustInstanceOfIsland_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Island class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewIsland_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Island class");
+}
+
+/**
+ * An element may be an instance of type "Island class".
+ */
+private pattern mayInstanceOfIsland_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfSea_class(problem,interpretation,element);
+	neg find scopeDisallowsNewIsland_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfSea_class(problem,interpretation,element);
+	neg find scopeDisallowsNewIsland_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfIsland_class(problem,interpretation,element); }
 /**
  * An element must be an instance of type "City class".
  */
@@ -265,6 +229,80 @@ private pattern mayInstanceOfLake_class(problem:LogicProblem, interpretation:Par
 } or
 { find mustInstanceOfLake_class(problem,interpretation,element); }
 /**
+ * An element must be an instance of type "Region class".
+ */
+private pattern mustInstanceOfRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Region class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewRegion_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Region class");
+}
+
+/**
+ * An element may be an instance of type "Region class".
+ */
+private pattern mayInstanceOfRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfRegion_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
+	neg find scopeDisallowsNewRegion_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfRegion_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
+	neg find scopeDisallowsNewRegion_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfRegion_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "ElementaryRegion class".
+ */
+private pattern mustInstanceOfElementaryRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"ElementaryRegion class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewElementaryRegion_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"ElementaryRegion class");
+}
+
+/**
+ * An element may be an instance of type "ElementaryRegion class".
+ */
+private pattern mayInstanceOfElementaryRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfLake_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
+	neg find scopeDisallowsNewElementaryRegion_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfLake_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
+	neg find scopeDisallowsNewElementaryRegion_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfElementaryRegion_class(problem,interpretation,element); }
+/**
  * An element must be an instance of type "CompositeRegion class".
  */
 private pattern mustInstanceOfCompositeRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
@@ -300,101 +338,6 @@ private pattern mayInstanceOfCompositeRegion_class(problem:LogicProblem, interpr
 	neg find isPrimitive(element);
 } or
 { find mustInstanceOfCompositeRegion_class(problem,interpretation,element); }
-/**
- * An element must be an instance of type "ElementaryRegion class".
- */
-private pattern mustInstanceOfElementaryRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-	Type.name(type,"ElementaryRegion class");
-	find directInstanceOf(problem,interpretation,element,type);
-}
-private pattern scopeDisallowsNewElementaryRegion_class(problem:LogicProblem, interpretation:PartialInterpretation) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.scopes(interpretation,scope);
-	Scope.targetTypeInterpretation(scope,typeInterpretation);
-	Scope.maxNewElements(scope,0);
-	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
-	Type.name(type,"ElementaryRegion class");
-}
-
-/**
- * An element may be an instance of type "ElementaryRegion class".
- */
-private pattern mayInstanceOfElementaryRegion_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
-	neg find mustInstanceOfLake_class(problem,interpretation,element);
-	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
-	neg find scopeDisallowsNewElementaryRegion_class(problem, interpretation);
-	neg find isPrimitive(element);
-} or {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
-	neg find mustInstanceOfLake_class(problem,interpretation,element);
-	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
-	neg find scopeDisallowsNewElementaryRegion_class(problem, interpretation);
-	neg find isPrimitive(element);
-} or
-{ find mustInstanceOfElementaryRegion_class(problem,interpretation,element); }
-/**
- * An element must be an instance of type "Region class DefinedPart".
- */
-private pattern mustInstanceOfRegion_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-	Type.name(type,"Region class DefinedPart");
-	find directInstanceOf(problem,interpretation,element,type);
-}
-private pattern scopeDisallowsNewRegion_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.scopes(interpretation,scope);
-	Scope.targetTypeInterpretation(scope,typeInterpretation);
-	Scope.maxNewElements(scope,0);
-	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
-	Type.name(type,"Region class DefinedPart");
-}
-
-/**
- * An element may be an instance of type "Region class DefinedPart".
- */
-private pattern mayInstanceOfRegion_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
-{ find mustInstanceOfRegion_class_DefinedPart(problem,interpretation,element); }
-/**
- * An element must be an instance of type "Region class UndefinedPart".
- */
-private pattern mustInstanceOfRegion_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-	Type.name(type,"Region class UndefinedPart");
-	find directInstanceOf(problem,interpretation,element,type);
-}
-private pattern scopeDisallowsNewRegion_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.scopes(interpretation,scope);
-	Scope.targetTypeInterpretation(scope,typeInterpretation);
-	Scope.maxNewElements(scope,0);
-	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
-	Type.name(type,"Region class UndefinedPart");
-}
-
-/**
- * An element may be an instance of type "Region class UndefinedPart".
- */
-private pattern mayInstanceOfRegion_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
-	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
-	neg find scopeDisallowsNewRegion_class_UndefinedPart(problem, interpretation);
-	neg find isPrimitive(element);
-} or {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
-	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
-	neg find scopeDisallowsNewRegion_class_UndefinedPart(problem, interpretation);
-	neg find isPrimitive(element);
-} or
-{ find mustInstanceOfRegion_class_UndefinedPart(problem,interpretation,element); }
 /**
  * An element must be an instance of type "Sea class DefinedPart".
  */
@@ -439,19 +382,76 @@ private pattern mayInstanceOfSea_class_UndefinedPart(problem:LogicProblem, inter
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfIsland_class(problem,interpretation,element);
 	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfIsland_class(problem,interpretation,element);
 	neg find scopeDisallowsNewSea_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfIsland_class(problem,interpretation,element);
 	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfIsland_class(problem,interpretation,element);
 	neg find scopeDisallowsNewSea_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
 } or
 { find mustInstanceOfSea_class_UndefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Region class DefinedPart".
+ */
+private pattern mustInstanceOfRegion_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Region class DefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewRegion_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Region class DefinedPart");
+}
+
+/**
+ * An element may be an instance of type "Region class DefinedPart".
+ */
+private pattern mayInstanceOfRegion_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{ find mustInstanceOfRegion_class_DefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Region class UndefinedPart".
+ */
+private pattern mustInstanceOfRegion_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Region class UndefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewRegion_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Region class UndefinedPart");
+}
+
+/**
+ * An element may be an instance of type "Region class UndefinedPart".
+ */
+private pattern mayInstanceOfRegion_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
+	neg find scopeDisallowsNewRegion_class_UndefinedPart(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
+	neg find scopeDisallowsNewRegion_class_UndefinedPart(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfRegion_class_UndefinedPart(problem,interpretation,element); }
 /**
  * An element must be an instance of type "CompositeRegion class DefinedPart".
  */
@@ -496,17 +496,17 @@ private pattern mayInstanceOfCompositeRegion_class_UndefinedPart(problem:LogicPr
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfIsland_class(problem,interpretation,element);
-	neg find mustInstanceOfSea_class(problem,interpretation,element);
 	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfSea_class(problem,interpretation,element);
+	neg find mustInstanceOfIsland_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCompositeRegion_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfIsland_class(problem,interpretation,element);
-	neg find mustInstanceOfSea_class(problem,interpretation,element);
 	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfSea_class(problem,interpretation,element);
+	neg find mustInstanceOfIsland_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCompositeRegion_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -1069,27 +1069,7 @@ pattern unfinishedBy_pattern_queries_cityClose(problem:LogicProblem, interpretat
 private pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
 {
 	find interpretation(problem,interpretation);
-	find mustInstanceOfSea_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfElementaryRegion_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfCity_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfCompositeRegion_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
 	find mustInstanceOfIsland_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfRegion_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
@@ -1097,11 +1077,23 @@ private pattern hasElementInContainment(problem:LogicProblem, interpretation:Par
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
-	find mustInstanceOfRegion_class_DefinedPart(problem,interpretation,root);
+	find mustInstanceOfElementaryRegion_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
-	find mustInstanceOfRegion_class_UndefinedPart(problem,interpretation,root);
+	find mustInstanceOfSea_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCompositeRegion_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfRegion_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCity_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
@@ -1113,6 +1105,14 @@ private pattern hasElementInContainment(problem:LogicProblem, interpretation:Par
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
+	find mustInstanceOfRegion_class_DefinedPart(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfRegion_class_UndefinedPart(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
 	find mustInstanceOfCompositeRegion_class_DefinedPart(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }or{
@@ -1120,59 +1120,31 @@ private pattern hasElementInContainment(problem:LogicProblem, interpretation:Par
 	find mustInstanceOfCompositeRegion_class_UndefinedPart(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }
-pattern createObject_Island_class_by_insides_reference_CompositeRegion(
+pattern createObject_Lake_class_by_insides_reference_CompositeRegion(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
 	container:DefinedElement)
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Island class");
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Lake class");
 	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
 	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"insides reference CompositeRegion");
 	find mustInstanceOfCompositeRegion_class(problem,interpretation,container);
-	find mayInstanceOfIsland_class(problem,interpretation,newObject);
+	find mayInstanceOfLake_class(problem,interpretation,newObject);
 	find mayInRelationinsides_reference_CompositeRegion(problem,interpretation,container,newObject);
 	find mustExist(problem, interpretation, container);
 	neg find mustExist(problem, interpretation, newObject);
 }
-pattern createObject_Island_class(
+pattern createObject_Lake_class(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	typeInterpretation:PartialComplexTypeInterpretation)
 {
 	find interpretation(problem,interpretation);
 	neg find hasElementInContainment(problem,interpretation);
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Island class");
-	find mayInstanceOfIsland_class(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_City_class_by_insides_reference_CompositeRegion(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
-	container:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"City class");
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"insides reference CompositeRegion");
-	find mustInstanceOfCompositeRegion_class(problem,interpretation,container);
-	find mayInstanceOfCity_class(problem,interpretation,newObject);
-	find mayInRelationinsides_reference_CompositeRegion(problem,interpretation,container,newObject);
-	find mustExist(problem, interpretation, container);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_City_class(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"City class");
-	find mayInstanceOfCity_class(problem,interpretation,newObject);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Lake class");
+	find mayInstanceOfLake_class(problem,interpretation,newObject);
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
@@ -1204,31 +1176,59 @@ pattern createObject_Sea_class_UndefinedPart(
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
-pattern createObject_Lake_class_by_insides_reference_CompositeRegion(
+pattern createObject_City_class_by_insides_reference_CompositeRegion(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
 	container:DefinedElement)
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Lake class");
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"City class");
 	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
 	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"insides reference CompositeRegion");
 	find mustInstanceOfCompositeRegion_class(problem,interpretation,container);
-	find mayInstanceOfLake_class(problem,interpretation,newObject);
+	find mayInstanceOfCity_class(problem,interpretation,newObject);
 	find mayInRelationinsides_reference_CompositeRegion(problem,interpretation,container,newObject);
 	find mustExist(problem, interpretation, container);
 	neg find mustExist(problem, interpretation, newObject);
 }
-pattern createObject_Lake_class(
+pattern createObject_City_class(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	typeInterpretation:PartialComplexTypeInterpretation)
 {
 	find interpretation(problem,interpretation);
 	neg find hasElementInContainment(problem,interpretation);
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Lake class");
-	find mayInstanceOfLake_class(problem,interpretation,newObject);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"City class");
+	find mayInstanceOfCity_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Island_class_by_insides_reference_CompositeRegion(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Island class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"insides reference CompositeRegion");
+	find mustInstanceOfCompositeRegion_class(problem,interpretation,container);
+	find mayInstanceOfIsland_class(problem,interpretation,newObject);
+	find mayInRelationinsides_reference_CompositeRegion(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Island_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Island class");
+	find mayInstanceOfIsland_class(problem,interpretation,newObject);
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
@@ -1236,37 +1236,37 @@ pattern createObject_Lake_class(
 //////////
 // 4.2 Type refinement
 //////////
-pattern refineTypeTo_Island_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+pattern refineTypeTo_Lake_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfIsland_class(problem,interpretation,element);
-	neg find mustInstanceOfIsland_class(problem,interpretation,element);
-	neg find mustInstanceOfSea_class(problem,interpretation,element);
-	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
-}
-pattern refineTypeTo_City_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfCity_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	find mayInstanceOfLake_class(problem,interpretation,element);
 	neg find mustInstanceOfLake_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
 }
 pattern refineTypeTo_Sea_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	find mayInstanceOfSea_class_UndefinedPart(problem,interpretation,element);
-	neg find mustInstanceOfIsland_class(problem,interpretation,element);
-	neg find mustInstanceOfSea_class_UndefinedPart(problem,interpretation,element);
 	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfSea_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfIsland_class(problem,interpretation,element);
 }
-pattern refineTypeTo_Lake_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+pattern refineTypeTo_City_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfLake_class(problem,interpretation,element);
-	neg find mustInstanceOfCity_class(problem,interpretation,element);
+	find mayInstanceOfCity_class(problem,interpretation,element);
 	neg find mustInstanceOfLake_class(problem,interpretation,element);
+	neg find mustInstanceOfCity_class(problem,interpretation,element);
 	neg find mustInstanceOfCompositeRegion_class(problem,interpretation,element);
+}
+pattern refineTypeTo_Island_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfIsland_class(problem,interpretation,element);
+	neg find mustInstanceOfElementaryRegion_class(problem,interpretation,element);
+	neg find mustInstanceOfSea_class(problem,interpretation,element);
+	neg find mustInstanceOfIsland_class(problem,interpretation,element);
 }
 
 //////////

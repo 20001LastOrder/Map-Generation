@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="map" nsURI="ca.mcgill.ecse459.map" nsPrefix="ca.mcgill.ecse459.map">
-  <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="close" eType="#//Region"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Island" eSuperTypes="#//CompositeRegion"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Sea" eSuperTypes="#//CompositeRegion"/>
-  <eClassifiers xsi:type="ecore:EClass" name="City" eSuperTypes="#//ElementaryRegion"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Lake" eSuperTypes="#//ElementaryRegion"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeRegion" abstract="true" eSuperTypes="#//Region">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="insides" lowerBound="1"
-        upperBound="-1" eType="#//Region" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ElementaryRegion" abstract="true" eSuperTypes="#//Region"/>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="map" nsURI="map.map" nsPrefix="map.map">
+ <eClassifiers xsi:type="ecore:EClass" name="Sea" eSuperTypes="#//CompositeRegion"/>
+ <eClassifiers xsi:type="ecore:EClass" name="Island" eSuperTypes="#//CompositeRegion"/>
+ <eClassifiers xsi:type="ecore:EClass" name="City" eSuperTypes="#//ElementaryRegion"/>
+ <eClassifiers xsi:type="ecore:EClass" name="Lake" eSuperTypes="#//ElementaryRegion"/>
+ <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true">
+  <eStructuralFeatures xsi:type="ecore:EReference" name="close" eType="#//Region"/>
+ </eClassifiers>
+ <eClassifiers xsi:type="ecore:EClass" name="ElementaryRegion" abstract="true" eSuperTypes="#//Region"/>
+ <eClassifiers xsi:type="ecore:EClass" name="CompositeRegion" abstract="true" eSuperTypes="#//Region">
+  <eStructuralFeatures xsi:type="ecore:EReference" name="insides" eType="#//Region" upperBound="-1" lowerBound="1" containment="true"/>
+ </eClassifiers>
 </ecore:EPackage>

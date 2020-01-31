@@ -31,6 +31,7 @@ public class Node
     public static readonly string[] types = { "int", "double", "string", "bool" };
     public string title;
     public float weight;
+    public bool isComposite;
     private List<(string, string)> attributes;
 
     public Node(Vector2 position, GUIStyle nodeStyle, GUIStyle selectedStyle, Action<Node> OnClickRemoveNode, Action<Node> OnClickCreateConnection, Action<Node> OnClickCompleteConnection)

@@ -1,8 +1,9 @@
-Error occured (IllegalArgumentException): TypeConstraint applicable for enumerable input keys only; received instead org.eclipse.viatra.query.patternlanguage.emf.types.BottomTypeKey@2a50b32d
-    org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint.<init>(TypeConstraint.java:44)
-    org.eclipse.viatra.query.patternlanguage.emf.specification.internal.EPMToPBody.acceptTypeConstraint(EPMToPBody.java:118)
-    org.eclipse.viatra.query.patternlanguage.emf.specification.internal.PatternBodyTransformer.preprocessParameters(PatternBodyTransformer.java:170)
-    org.eclipse.viatra.query.patternlanguage.emf.specification.internal.PatternBodyTransformer.transform(PatternBodyTransformer.java:125)
+Error occured (NullPointerException): 
+    org.eclipse.viatra.query.patternlanguage.emf.specification.internal.PatternBodyTransformer.gatherPathSegment(PatternBodyTransformer.java:267)
+    org.eclipse.viatra.query.patternlanguage.emf.specification.internal.PatternBodyTransformer.gatherPathExpression(PatternBodyTransformer.java:249)
+    org.eclipse.viatra.query.patternlanguage.emf.specification.internal.PatternBodyTransformer.gatherConstraint(PatternBodyTransformer.java:214)
+    org.eclipse.viatra.query.patternlanguage.emf.specification.internal.PatternBodyTransformer.gatherBodyConstraints(PatternBodyTransformer.java:184)
+    org.eclipse.viatra.query.patternlanguage.emf.specification.internal.PatternBodyTransformer.transform(PatternBodyTransformer.java:126)
     org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder.getBodies(SpecificationBuilder.java:302)
     org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder.buildBodies(SpecificationBuilder.java:288)
     org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder.buildSpecification(SpecificationBuilder.java:199)

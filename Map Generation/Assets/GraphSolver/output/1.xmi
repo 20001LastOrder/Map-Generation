@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ca.mcgill.ecse459.map:Sea xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ca.mcgill.ecse459.map="ca.mcgill.ecse459.map" xsi:schemaLocation="ca.mcgill.ecse459.map models/map.ecore">
-  <insides xsi:type="ca.mcgill.ecse459.map:Island">
-    <insides xsi:type="ca.mcgill.ecse459.map:City" close="//@insides.0/@insides.5"/>
-    <insides xsi:type="ca.mcgill.ecse459.map:Lake"/>
-    <insides xsi:type="ca.mcgill.ecse459.map:Lake"/>
-    <insides xsi:type="ca.mcgill.ecse459.map:City" close="//@insides.1/@insides.0"/>
-    <insides xsi:type="ca.mcgill.ecse459.map:City" close="//@insides.0/@insides.1"/>
-    <insides xsi:type="ca.mcgill.ecse459.map:Lake"/>
+<map.map:Sea xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:map.map="map.map" xsi:schemaLocation="map.map models/map.ecore">
+  <insides xsi:type="map.map:Island">
+    <insides xsi:type="map.map:Lake"/>
+    <insides xsi:type="map.map:City" close="//@insides.1/@insides.4"/>
+    <insides xsi:type="map.map:Lake"/>
   </insides>
-  <insides xsi:type="ca.mcgill.ecse459.map:Island">
-    <insides xsi:type="ca.mcgill.ecse459.map:Lake"/>
-    <insides xsi:type="ca.mcgill.ecse459.map:Lake"/>
+  <insides xsi:type="map.map:Island">
+    <insides xsi:type="map.map:Lake"/>
+    <insides xsi:type="map.map:City" close="//@insides.1/@insides.4"/>
+    <insides xsi:type="map.map:City" close="//@insides.1/@insides.3"/>
+    <insides xsi:type="map.map:Lake"/>
+    <insides xsi:type="map.map:Lake"/>
   </insides>
-</ca.mcgill.ecse459.map:Sea>
+</map.map:Sea>
