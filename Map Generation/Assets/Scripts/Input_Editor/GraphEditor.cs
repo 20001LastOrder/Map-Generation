@@ -102,6 +102,8 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Weight:");
             selectedNode.weight = EditorGUILayout.Slider(selectedNode.weight, 0, 1.0f);
 
+            RenderRequiredAttributes();
+
             RenderAttributeFields();
 
             if (GUILayout.Button("Add attribute"))
@@ -114,7 +116,6 @@ public class GraphEditor : EditorWindow
         GUILayout.FlexibleSpace();
         if (GUILayout.Button("Generate"))
         {
-            //Generate.generateEPackage(nodes, connections);
             Pipeline.execute();
         }
     }
@@ -140,6 +141,39 @@ public class GraphEditor : EditorWindow
         }
 
         Handles.color = Color.white;
+    }
+
+    private void RenderRequiredAttributes()
+    {
+        if (selectedNode != null)
+        {
+            GUILayout.Label("Required Attributes:");
+
+            int index = 0;
+            foreach ((string mapParamType, string mapParamName) in selectedNode.mapParams)
+            {
+                RenderAttribute(mapParamType, mapParamName, index);
+                index++;
+            }
+
+            GUILayout.Label("");
+        }
+    }
+
+    private string RenderAttribute(string attrType, string attrName, int i)
+    {
+        (string type, string name, string value) = selectedNode.GetMapParamAt(i);
+        GUILayout.BeginHorizontal();
+
+        GUILayout.Label(attrName);
+
+        // Select attribute value
+        value = GUILayout.TextField(value);
+        GUILayout.EndHorizontal();
+
+        selectedNode.SetMapParam(attrType, attrName, value, i);
+
+        return value;
     }
 
     private void RenderAttributeFields()
