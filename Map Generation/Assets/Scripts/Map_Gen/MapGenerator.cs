@@ -7,7 +7,8 @@ public class MapGenerator : MonoBehaviour
     public enum DrawMode
     {
         NoiseMap,
-        ColorMap
+        ColorMap,
+        Mesh
     };
     public DrawMode drawMode;
 
@@ -33,6 +34,22 @@ public class MapGenerator : MonoBehaviour
         float[,] noiseMap = Noise.getNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves,
             persistance, lacunarity, offset);
 
+        Color[] colorMap = new Color[mapWidth * mapHeight];
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                float curHeight = noiseMap[x, y];
+                for (int i = 0; i < regions.Length; i++)
+                {
+                    if (curHeight <= regions[i].height)
+                    {
+                        colorMap[y * mapWidth + x] = regions[i].color;
+                        break;
+                    }
+                }
+            }
+        }
 
         MapDisplay display = FindObjectOfType<MapDisplay>();
 
@@ -42,24 +59,13 @@ public class MapGenerator : MonoBehaviour
         }
         else if(drawMode == DrawMode.ColorMap)
         {
-            Color[] colorMap = new Color[mapWidth * mapHeight];
-            for (int y = 0; y < mapHeight; y++)
-            {
-                for (int x = 0; x < mapWidth; x++)
-                {
-                    float curHeight = noiseMap[x, y];
-                    for (int i = 0; i < regions.Length; i++)
-                    {
-                        if (curHeight <= regions[i].height)
-                        {
-                            colorMap[y * mapWidth + x] = regions[i].color;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
+            display.DrawTexture(
+                TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
+        }
+        else if(drawMode == DrawMode.Mesh)
+        {
+            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap),
+                TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
         }
     }
 
