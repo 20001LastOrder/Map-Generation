@@ -23,60 +23,7 @@ public class GraphSolverRunner : PipelineStage
 
     // Start is called before the first frame update
     System.Object Start(EPackage package)
-    {
-        /*
-        // create classes
-        EClass mapClass = new EClass("Map");
-        EClass gridClass = new EClass("Grid");
-        EClass gridTypeClass = new EClass("GridType")
-        {
-            IsAbstract = true
-        };
-        EClass cityClass = new EClass("City");
-        EClass mountainClass = new EClass("Mountain");
-        EClass villageClass = new EClass("Village");
-        EClass riverClass = new EClass("River");
-
-        gridClass.EAttributes.Add(new EAttribute("id", "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt") { IsId = true });
-
-        var left = new EReference("left", gridClass);
-        var right = new EReference("right", gridClass);
-        var up = new EReference("up", gridClass);
-        var down = new EReference("down", gridClass);
-        gridClass.EReferences.AddRange(new List<EReference>() { left, right, up, down });
-        left.EOpposite = right;
-        up.EOpposite = down;
-
-        cityClass.ESuperType = gridTypeClass;
-        mountainClass.ESuperType = gridTypeClass;
-        villageClass.ESuperType = gridTypeClass;
-        riverClass.ESuperType = gridTypeClass;
-
-        EReference r = new EReference("grids", gridClass)
-        {
-            Conptainment = true,
-            UpperBound = -1
-        };
-        mapClass.EReferences.Add(r);
-
-        EReference typesRef = new EReference("types", gridTypeClass)
-        {
-            Conptainment = true,
-            UpperBound = -1
-        };
-        gridClass.EReferences.Add(typesRef);
-
-        EReference gridRef = new EReference("grid", gridClass);
-        gridTypeClass.EReferences.Add(gridRef);
-        typesRef.EOpposite = gridRef;
-
-        EPackage package = new EPackage("map");
-        package.EClasses.AddRange(new List<EClass>() { mapClass, gridClass, gridTypeClass, cityClass, villageClass, mountainClass, riverClass });
-        */
-
-        //EcoreParser.SaveEcore(package, ecoreFileName);
-        //Debug.Log("finished creating package");
-
+    { 
         var map = MapShapeGenerator.GenerateDefaultShape(GridManager.rootGridDim, GridManager.rootGridDim);
         InstanceParser.WriteMapInstance(map);
         runSolver();

@@ -15,19 +15,19 @@ public class EPackageFactory : PipelineStage
 
         List<EClass> eClasses = new List<EClass>();
 
-        // Create necessary grid, gridtype, map classes
+        // Create necessary abstract classes
         var regionClass = new EClass("Region") { IsAbstract = true};
         var compositeRegionClass = new EClass("CompositeRegion") { IsAbstract = true, ESuperType = regionClass };
         var elementaryRegionClass = new EClass("ElementaryRegion") { IsAbstract = true, ESuperType = regionClass };
-        //gridClass.EAttributes.Add(new EAttribute("id", "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt") { IsId = true });
-        var insides = new EReference("insides", regionClass) { UpperBound = -1, LowerBound = 1, Containment = true};
+        
+        var insides = new EReference("insides", regionClass) { UpperBound = -1, LowerBound = 0, Containment = true};
         var close = new EReference("close", regionClass) { UpperBound = 1, LowerBound = 0};
         
         compositeRegionClass.EReferences.Add(insides);
         regionClass.EReferences.Add(close);
 
         // set composite regions
-        foreach(var connection in graphEditor.GetConnections())
+        foreach(var connection in connections)
         {
             if(connection.type == ConnectionType.Insides)
             {

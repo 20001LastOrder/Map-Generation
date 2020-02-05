@@ -10,10 +10,10 @@ public class Pipeline
         new EPackageFactory(),
         new Parser(),
         new EcoreParser(),
+        new ConstraintParser(),
         new GraphSolverRunner()
         //new MapGen()
        };
-
     public static void execute()
     {
         Debug.Log("-----Executing Pipeline-----");

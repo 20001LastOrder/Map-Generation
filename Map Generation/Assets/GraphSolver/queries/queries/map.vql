@@ -19,35 +19,43 @@ pattern isLake(a: Region){
 
 @Constraint(key={a}, severity="error", message="error")
 pattern SeaInside(a: Sea){
-	CompositeRegion.insides(a, b);
+	Sea.insides(a, b);
 	neg find isIsland(b);
 }
 
 @Constraint(key={a}, severity="error", message="error")
 pattern islandInside(a: Island){
-	CompositeRegion.insides(a, b);
+	Island.insides(a, b);
 	neg find isCity(b);
 	neg find isLake(b);
 }
 
 @Constraint(key={a, b}, severity="error", message="error")
 pattern SeaClose(a: Sea, b:Region){
-	Region.close(a, b);
+	Sea.close(a, b);
 }
 
 @Constraint(key={a, b}, severity="error", message="error")
 pattern IslandClose(a: Island, b:Region){
-	Region.close(a, b);
+	Island.close(a, b);
 }
 
 @Constraint(key={a, b}, severity="error", message="error")
 pattern LakeClose(a: Lake, b:Region){
-	Region.close(a, b);
+	Lake.close(a, b);
 }
 
 @Constraint(key={a, b}, severity="error", message="error")
 pattern cityClose(a:City, b: Region){
-	Region.close(a, b);
+	City.close(a, b);
 	neg find isLake(b);
 }
 
+@Constraint(key={a,b}, severity="error", message="error")
+pattern outerClose(a: Region, b:Region){
+	Region.close(a, b);
+	CompositeRegion.insides(R1, a);
+	CompositeRegion.insides(R2, b);
+	R1 != R2;
+}
+	
