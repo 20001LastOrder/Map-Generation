@@ -17,10 +17,18 @@ namespace GeneratedClasses
     public class Region
     {
         
-        public Region close;
-        
+        public List<Region> closeTo;
+        public List<Region> inside;
+
+        public double Depth
+        { get; set; }
+        public double Scale
+        { get; set; }
+
         public Region()
         {
+            closeTo = new List<Region>();
+            inside = new List<Region>();
         }
     }
 }
