@@ -14,15 +14,11 @@ namespace GeneratedClasses
     using System.Collections.Generic;
     
     
-    public class Region
+    public class Test : Region
     {
         
-        public Region close;
-        public List<Region> subregions;
-        
-        public Region()
+        public Test()
         {
-            subregions = new List<Region>();
         }
     }
 }

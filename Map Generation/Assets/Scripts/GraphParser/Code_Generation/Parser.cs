@@ -18,15 +18,17 @@ public class Parser : PipelineStage
     {
         foreach (EClass eClass in ePackage.EClasses)
         {
-            if (eClass.Name == "Map" || eClass.Name == "Grid" || eClass.Name == "GridType")
+            if (eClass.Name == "Map" || eClass.Name == "Grid" || eClass.Name == "GridType" || eClass.Name == "Region")
             {
                 continue;
             }
             ClassGenerator classGen = new ClassGenerator(eClass.Name);
-            if (eClass.ESuperType != null)
-            {
-                classGen.AddSupertype(eClass.ESuperType.Name);
-            }
+
+            //if (eClass.ESuperType != null)
+            //{
+            //    classGen.AddSupertype(eClass.ESuperType.Name);
+            //}
+            classGen.AddSupertype("Region");
 
             foreach (EReference eRef in eClass.EReferences)
             {

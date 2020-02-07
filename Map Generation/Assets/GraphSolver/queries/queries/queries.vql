@@ -1,31 +1,23 @@
 package queries 
 import epackage "map.map"
 
-pattern isSea(a:Region){
-	Sea(a);
+pattern isTest(a:Region){
+	Test(a);
 }
-pattern isIsland(a:Region){
-	Island(a);
-}
-pattern isContinent(a:Region){
-	Continent(a);
+pattern isOtherTest(a:Region){
+	OtherTest(a);
 }
 @Constraint(key={a}, severity="error", message="error")
-pattern SeaInside(a: Sea){
-	Sea.insides(a,b);
-	neg find isIsland(b);
-	neg find isContinent(b);
+pattern TestInside(a: Test){
+	Test.insides(a,b);
+	neg find isOtherTest(b);
 }
 @Constraint(key={a, b}, severity="error", message="error")
-pattern SeaClose(a: Sea, b: Region){
-	Sea.close(a,b);}
+pattern TestClose(a: Test, b: Region){
+	Test.close(a,b);}
 @Constraint(key={a, b}, severity="error", message="error")
-pattern IslandClose(a: Island, b: Region){
-	Island.close(a,b);	 neg find isContinent(b);
-}
-@Constraint(key={a, b}, severity="error", message="error")
-pattern ContinentClose(a: Continent, b: Region){
-	Continent.close(a,b);}
+pattern OtherTestClose(a: OtherTest, b: Region){
+	OtherTest.close(a,b);}
 @Constraint(key={a,b}, severity="error", message="error")pattern outerClose(a: Region, b: Region){
 Region.close(a, b);
 CompositeRegion.insides(R1, a);
