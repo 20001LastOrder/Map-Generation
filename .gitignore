@@ -37,3 +37,9 @@ sysinfo.txt
 
 # MacOS
 .DS_Store
+
+# Serializing objects
+nodes.dat
+connections.dat
+connections.dat.meta
+nodes.dat.meta

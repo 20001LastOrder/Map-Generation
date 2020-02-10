@@ -1,8 +1,11 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Globalization;
 using System;
+using System.IO;
 
 public class GraphEditor : EditorWindow
 {
@@ -99,8 +102,20 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Title:");
             selectedNode.title = GUILayout.TextField(selectedNode.title);
 
-            GUILayout.Label("Weight:");
-            selectedNode.weight = EditorGUILayout.Slider(selectedNode.weight, 0, 1.0f);
+            GUILayout.Label("Octaves:");
+            selectedNode.octaves = EditorGUILayout.IntField(selectedNode.octaves);
+
+            GUILayout.Label("Persistence:");
+            selectedNode.persistence = EditorGUILayout.Slider(selectedNode.persistence, 0, 1.0f);
+
+            GUILayout.Label("Lacunarity:");
+            selectedNode.lacunarity = EditorGUILayout.Slider(selectedNode.lacunarity, 0, 1.0f);
+
+            GUILayout.Label("Mesh Height Multiplier:");
+            selectedNode.meshHeightMultiplier = EditorGUILayout.Slider(selectedNode.meshHeightMultiplier, 0, 1.0f);
+
+            GUILayout.Label("Mesh Height Curve");
+            selectedNode.meshHeightCurve = EditorGUILayout.CurveField(selectedNode.meshHeightCurve);
 
             RenderAttributeFields();
 
@@ -112,9 +127,17 @@ public class GraphEditor : EditorWindow
 
         // Add generate button
         GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Save"))
+        {
+            Save();
+        }
+        if (GUILayout.Button("Load"))
+        {
+            LoadNodes();
+            LoadConnections();
+        }
         if (GUILayout.Button("Generate"))
         {
-            //Generate.generateEPackage(nodes, connections);
             Pipeline.execute();
         }
     }
@@ -363,5 +386,115 @@ public class GraphEditor : EditorWindow
     public void SetSelectedNode(Node node)
     {
         selectedNode = node;
+    }
+
+    public void Save()
+    {
+        File.WriteAllText(@"Assets/Scripts/Input_Editor/Objects/nodes.dat", string.Empty);
+        File.WriteAllText(@"Assets/Scripts/Input_Editor/Objects/connections.dat", string.Empty);
+
+        using (StreamWriter file = new StreamWriter(@"Assets/Scripts/Input_Editor/Objects/nodes.dat"))
+        {
+            foreach (Node node in nodes)
+            {
+                serializeNode(node, file);
+            }
+            file.Close();
+        }
+
+        using (StreamWriter file = new StreamWriter(@"Assets/Scripts/Input_Editor/Objects/connections.dat"))
+        {
+            foreach (Connection connection in connections)
+            {
+                serializeConnection(connection, file);
+            }
+            file.Close();
+        }
+    }
+
+    public void serializeNode(Node node, StreamWriter file)
+    {
+        file.WriteLine(JsonUtility.ToJson(new Vector2(node.rect.x, node.rect.y)));
+        file.WriteLine(node.title);
+        file.WriteLine(node.octaves);
+        file.WriteLine(node.persistence);
+        file.WriteLine(node.lacunarity);
+        file.WriteLine(node.meshHeightMultiplier);
+        file.WriteLine(JsonUtility.ToJson(node.meshHeightCurve));
+        file.WriteLine(node.isComposite);
+    }
+
+    public void serializeConnection(Connection connection, StreamWriter file)
+    {
+        int inNodeIndex = nodes.IndexOf(connection.inPoint.node);
+        int outNodeIndex = nodes.IndexOf(connection.outPoint.node);
+        ConnectionType conType = connection.type;
+
+        file.WriteLine(inNodeIndex);
+        file.WriteLine(outNodeIndex);
+        file.WriteLine(JsonUtility.ToJson(conType));
+    }
+
+    public void LoadNodes()
+    {
+        if (nodes == null)
+        {
+            nodes = new List<Node>();
+        }
+        else
+        {
+            nodes.Clear();
+            selectedNode = null;
+            selectedInNode = null;
+            selectedOutNode = null;
+        }
+        
+        StreamReader file = new StreamReader(@"Assets/Scripts/Input_Editor/Objects/nodes.dat");
+        string line = "";
+        while ((line = file.ReadLine()) != null)
+        {
+            Vector2 positionSaved = JsonUtility.FromJson<Vector2>(line);
+
+            Node node = new Node(positionSaved, nodeStyle, selectedNodeStyle, OnClickRemoveNode, OnClickCreateConnection, OnClickNode);
+
+            node.title = file.ReadLine();
+            node.octaves = int.Parse(file.ReadLine());
+            node.persistence = float.Parse(file.ReadLine());
+            node.lacunarity = float.Parse(file.ReadLine());
+            node.meshHeightMultiplier = float.Parse(file.ReadLine());
+            node.meshHeightCurve = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
+            node.isComposite = bool.Parse(file.ReadLine());
+
+            nodes.Add(node);
+        }
+        file.Close();
+    }
+
+    public void LoadConnections()
+    {
+        if (connections == null)
+        {
+            connections = new List<Connection>();
+        }
+        else
+        {
+            connections.Clear();
+            selectedConnection = null;
+        }
+
+        StreamReader file = new StreamReader(@"Assets/Scripts/Input_Editor/Objects/connections.dat");
+        string line = "";
+        while ((line = file.ReadLine()) != null)
+        {
+            int inNodeIndex = int.Parse(line);
+            int outNodeIndex = int.Parse(file.ReadLine());
+            ConnectionType connectionType = JsonUtility.FromJson<ConnectionType>(file.ReadLine());
+
+            Connection connection = new Connection(nodes[inNodeIndex].inPoint, nodes[outNodeIndex].outPoint, OnClickConnection);
+            connection.type = connectionType;
+
+            connections.Add(connection);
+        }
+        file.Close();
     }
 }
