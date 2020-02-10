@@ -102,8 +102,20 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Title:");
             selectedNode.title = GUILayout.TextField(selectedNode.title);
 
-            GUILayout.Label("Weight:");
+            GUILayout.Label("Octaves:");
+            selectedNode.octaves = EditorGUILayout.IntField(selectedNode.octaves);
+
+            GUILayout.Label("Persistence:");
             selectedNode.persistence = EditorGUILayout.Slider(selectedNode.persistence, 0, 1.0f);
+
+            GUILayout.Label("Lacunarity:");
+            selectedNode.lacunarity = EditorGUILayout.Slider(selectedNode.lacunarity, 0, 1.0f);
+
+            GUILayout.Label("Mesh Height Multiplier:");
+            selectedNode.meshHeightMultiplier = EditorGUILayout.Slider(selectedNode.meshHeightMultiplier, 0, 1.0f);
+
+            GUILayout.Label("Mesh Height Curve");
+            selectedNode.meshHeightCurve = EditorGUILayout.CurveField(selectedNode.meshHeightCurve);
 
             RenderAttributeFields();
 
@@ -402,15 +414,14 @@ public class GraphEditor : EditorWindow
 
     public void serializeNode(Node node, StreamWriter file)
     {
-        Vector2 positionSave = new Vector2(node.rect.x, node.rect.y);
-        string titleSave = node.title;
-        float persistence = node.persistence;
-        bool isComposite = node.isComposite;
-
-        file.WriteLine(JsonUtility.ToJson(positionSave));
-        file.WriteLine(titleSave);
-        file.WriteLine(persistence);
-        file.WriteLine(isComposite);
+        file.WriteLine(JsonUtility.ToJson(new Vector2(node.rect.x, node.rect.y)));
+        file.WriteLine(node.title);
+        file.WriteLine(node.octaves);
+        file.WriteLine(node.persistence);
+        file.WriteLine(node.lacunarity);
+        file.WriteLine(node.meshHeightMultiplier);
+        file.WriteLine(JsonUtility.ToJson(node.meshHeightCurve));
+        file.WriteLine(node.isComposite);
     }
 
     public void serializeConnection(Connection connection, StreamWriter file)
@@ -444,14 +455,15 @@ public class GraphEditor : EditorWindow
         {
             Vector2 positionSaved = JsonUtility.FromJson<Vector2>(line);
 
-            string titleSaved = file.ReadLine();
-            float persistenceSaved = float.Parse(file.ReadLine());
-            bool isCompositeSaved = bool.Parse(file.ReadLine());
-            
             Node node = new Node(positionSaved, nodeStyle, selectedNodeStyle, OnClickRemoveNode, OnClickCreateConnection, OnClickNode);
-            node.title = titleSaved;
-            node.persistence = persistenceSaved;
-            node.isComposite = isCompositeSaved;
+
+            node.title = file.ReadLine();
+            node.octaves = int.Parse(file.ReadLine());
+            node.persistence = float.Parse(file.ReadLine());
+            node.lacunarity = float.Parse(file.ReadLine());
+            node.meshHeightMultiplier = float.Parse(file.ReadLine());
+            node.meshHeightCurve = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
+            node.isComposite = bool.Parse(file.ReadLine());
 
             nodes.Add(node);
         }

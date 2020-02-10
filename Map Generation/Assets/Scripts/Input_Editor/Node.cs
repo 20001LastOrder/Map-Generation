@@ -31,11 +31,11 @@ public class Node
     // Node Attributes
     public static readonly string[] types = { "int", "double", "string", "bool" };
     public string title;
+    public int octaves;
     public float persistence;
     public float lacunarity;
     public float meshHeightMultiplier;
-    // todo: AnimationCurve meshHeightCurve
-    public int octaves;
+    public AnimationCurve meshHeightCurve;
 
     public bool isComposite;
     private List<(string, string)> attributes;
@@ -54,10 +54,11 @@ public class Node
         OnCompleteConnection = OnClickCompleteConnection;
 
         title = "";
+        octaves = 0;
         persistence = 0f;
         lacunarity = 0f;
         meshHeightMultiplier = 0f;
-        octaves = 0;
+        meshHeightCurve = new AnimationCurve();
         attributes = new List<(string key, string value)>();
     }
 
