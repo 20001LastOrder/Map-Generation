@@ -129,7 +129,7 @@ public class GraphEditor : EditorWindow
         GUILayout.FlexibleSpace();
         if (GUILayout.Button("Save"))
         {
-            Save(nodes);
+            Save();
         }
         if (GUILayout.Button("Load"))
         {
@@ -388,7 +388,7 @@ public class GraphEditor : EditorWindow
         selectedNode = node;
     }
 
-    public void Save(List<Node> nodes)
+    public void Save()
     {
         File.WriteAllText(@"Assets/Scripts/Input_Editor/Objects/nodes.dat", string.Empty);
         File.WriteAllText(@"Assets/Scripts/Input_Editor/Objects/connections.dat", string.Empty);

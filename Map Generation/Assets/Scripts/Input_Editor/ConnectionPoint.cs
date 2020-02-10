@@ -1,10 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
 public enum ConnectionPointType { In, Out }
 
-[Serializable]
 public class ConnectionPoint
 {
     public Rect rect;

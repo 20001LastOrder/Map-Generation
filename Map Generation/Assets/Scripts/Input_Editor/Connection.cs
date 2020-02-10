@@ -2,7 +2,6 @@
 using UnityEditor;
 using UnityEngine;
 
-[Serializable]
 public enum ConnectionType {
     Default,
     Prohibited,
@@ -12,7 +11,6 @@ public enum ConnectionType {
     Close
 }
 
-[Serializable]
 public class Connection
 {
     public ConnectionType type;
