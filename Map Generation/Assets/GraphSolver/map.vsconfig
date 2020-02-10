@@ -1,5 +1,5 @@
-import epackage "models/map.ecore"
-import viatra "queries/queries/map.vql"
+import epackage "models/Map.ecore"
+import viatra "queries/queries/queries.vql"
 
 generate {
 	metamodel = {package map}
@@ -10,11 +10,11 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#<Island> += 2,
-		#<Lake> += 5,
-		#<City> += 3
-		//#<Sea> += 1
-		//#node = 5
+		//#<Island> += 5,
+		//#<Continent> += 5,
+		//#<City> += 4,
+		//#<Town> += 6
+		#node = 20
 	}
 	
 	number = 1
