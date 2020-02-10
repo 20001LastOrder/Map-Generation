@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+[Serializable]
 public class Node
 {
     // For Display
@@ -29,12 +30,15 @@ public class Node
 
     // Node Attributes
     public static readonly string[] types = { "int", "double", "string", "bool" };
-    public readonly (string, string)[] mapParams = { ("int", "max_height"), ("int", "min_height"), ("double", "smoothness") };
     public string title;
-    public float weight;
+    public float persistence;
+    public float lacunarity;
+    public float meshHeightMultiplier;
+    // todo: AnimationCurve meshHeightCurve
+    public int octaves;
+
     public bool isComposite;
     private List<(string, string)> attributes;
-    private List<(string, string, string)> mapParamValues;
 
     public Node(Vector2 position, GUIStyle nodeStyle, GUIStyle selectedStyle, Action<Node> OnClickRemoveNode, Action<Node> OnClickCreateConnection, Action<Node> OnClickCompleteConnection)
     {
@@ -50,13 +54,11 @@ public class Node
         OnCompleteConnection = OnClickCompleteConnection;
 
         title = "";
-        weight = 0f;
+        persistence = 0f;
+        lacunarity = 0f;
+        meshHeightMultiplier = 0f;
+        octaves = 0;
         attributes = new List<(string key, string value)>();
-        mapParamValues = new List<(string type, string name, string value)>();
-        foreach ((string mapParamType, string mapParamName) in mapParams)
-        {
-            mapParamValues.Add((mapParamType, mapParamName, ""));
-        }
     }
 
     public void Drag(Vector2 delta)
@@ -170,11 +172,6 @@ public class Node
         attributes[i] = (key, value);
     }
 
-    public void SetMapParam(string type, string name, string value, int i)
-    {
-        mapParamValues[i] = (type, name, value);
-    }
-
     public List<(string, string)> GetAttributes()
     {
         return attributes;
@@ -197,15 +194,6 @@ public class Node
         return ("", "");
     }
 
-    public (string, string, string) GetMapParamAt(int i)
-    {
-        if (mapParamValues != null && i < mapParamValues.Count)
-        {
-            return mapParamValues[i];
-        }
-        return ("", "", "");
-    }
-
     public int GetNumAttributes()
     {
         if (attributes != null)
@@ -213,10 +201,5 @@ public class Node
             return attributes.Count;
         }
         return 0;
-    }
-
-    public List<(string, string, string)> GetMapParams()
-    {
-        return mapParamValues;
     }
 }

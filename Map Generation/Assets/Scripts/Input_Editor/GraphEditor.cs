@@ -1,8 +1,11 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Globalization;
 using System;
+using System.IO;
 
 public class GraphEditor : EditorWindow
 {
@@ -100,9 +103,7 @@ public class GraphEditor : EditorWindow
             selectedNode.title = GUILayout.TextField(selectedNode.title);
 
             GUILayout.Label("Weight:");
-            selectedNode.weight = EditorGUILayout.Slider(selectedNode.weight, 0, 1.0f);
-
-            RenderRequiredAttributes();
+            selectedNode.persistence = EditorGUILayout.Slider(selectedNode.persistence, 0, 1.0f);
 
             RenderAttributeFields();
 
@@ -114,6 +115,15 @@ public class GraphEditor : EditorWindow
 
         // Add generate button
         GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Save"))
+        {
+            Save(nodes);
+        }
+        if (GUILayout.Button("Load"))
+        {
+            LoadNodes();
+            LoadConnections();
+        }
         if (GUILayout.Button("Generate"))
         {
             Pipeline.execute();
@@ -141,39 +151,6 @@ public class GraphEditor : EditorWindow
         }
 
         Handles.color = Color.white;
-    }
-
-    private void RenderRequiredAttributes()
-    {
-        if (selectedNode != null)
-        {
-            GUILayout.Label("Required Attributes:");
-
-            int index = 0;
-            foreach ((string mapParamType, string mapParamName) in selectedNode.mapParams)
-            {
-                RenderAttribute(mapParamType, mapParamName, index);
-                index++;
-            }
-
-            GUILayout.Label("");
-        }
-    }
-
-    private string RenderAttribute(string attrType, string attrName, int i)
-    {
-        (string type, string name, string value) = selectedNode.GetMapParamAt(i);
-        GUILayout.BeginHorizontal();
-
-        GUILayout.Label(attrName);
-
-        // Select attribute value
-        value = GUILayout.TextField(value);
-        GUILayout.EndHorizontal();
-
-        selectedNode.SetMapParam(attrType, attrName, value, i);
-
-        return value;
     }
 
     private void RenderAttributeFields()
@@ -397,5 +374,115 @@ public class GraphEditor : EditorWindow
     public void SetSelectedNode(Node node)
     {
         selectedNode = node;
+    }
+
+    public void Save(List<Node> nodes)
+    {
+        File.WriteAllText(@"Assets/Scripts/Input_Editor/Objects/nodes.dat", string.Empty);
+        File.WriteAllText(@"Assets/Scripts/Input_Editor/Objects/connections.dat", string.Empty);
+
+        using (StreamWriter file = new StreamWriter(@"Assets/Scripts/Input_Editor/Objects/nodes.dat"))
+        {
+            foreach (Node node in nodes)
+            {
+                serializeNode(node, file);
+            }
+            file.Close();
+        }
+
+        using (StreamWriter file = new StreamWriter(@"Assets/Scripts/Input_Editor/Objects/connections.dat"))
+        {
+            foreach (Connection connection in connections)
+            {
+                serializeConnection(connection, file);
+            }
+            file.Close();
+        }
+    }
+
+    public void serializeNode(Node node, StreamWriter file)
+    {
+        Vector2 positionSave = new Vector2(node.rect.x, node.rect.y);
+        string titleSave = node.title;
+        float persistence = node.persistence;
+        bool isComposite = node.isComposite;
+
+        file.WriteLine(JsonUtility.ToJson(positionSave));
+        file.WriteLine(titleSave);
+        file.WriteLine(persistence);
+        file.WriteLine(isComposite);
+    }
+
+    public void serializeConnection(Connection connection, StreamWriter file)
+    {
+        int inNodeIndex = nodes.IndexOf(connection.inPoint.node);
+        int outNodeIndex = nodes.IndexOf(connection.outPoint.node);
+        ConnectionType conType = connection.type;
+
+        file.WriteLine(inNodeIndex);
+        file.WriteLine(outNodeIndex);
+        file.WriteLine(JsonUtility.ToJson(conType));
+    }
+
+    public void LoadNodes()
+    {
+        if (nodes == null)
+        {
+            nodes = new List<Node>();
+        }
+        else
+        {
+            nodes.Clear();
+            selectedNode = null;
+            selectedInNode = null;
+            selectedOutNode = null;
+        }
+        
+        StreamReader file = new StreamReader(@"Assets/Scripts/Input_Editor/Objects/nodes.dat");
+        string line = "";
+        while ((line = file.ReadLine()) != null)
+        {
+            Vector2 positionSaved = JsonUtility.FromJson<Vector2>(line);
+
+            string titleSaved = file.ReadLine();
+            float persistenceSaved = float.Parse(file.ReadLine());
+            bool isCompositeSaved = bool.Parse(file.ReadLine());
+            
+            Node node = new Node(positionSaved, nodeStyle, selectedNodeStyle, OnClickRemoveNode, OnClickCreateConnection, OnClickNode);
+            node.title = titleSaved;
+            node.persistence = persistenceSaved;
+            node.isComposite = isCompositeSaved;
+
+            nodes.Add(node);
+        }
+        file.Close();
+    }
+
+    public void LoadConnections()
+    {
+        if (connections == null)
+        {
+            connections = new List<Connection>();
+        }
+        else
+        {
+            connections.Clear();
+            selectedConnection = null;
+        }
+
+        StreamReader file = new StreamReader(@"Assets/Scripts/Input_Editor/Objects/connections.dat");
+        string line = "";
+        while ((line = file.ReadLine()) != null)
+        {
+            int inNodeIndex = int.Parse(line);
+            int outNodeIndex = int.Parse(file.ReadLine());
+            ConnectionType connectionType = JsonUtility.FromJson<ConnectionType>(file.ReadLine());
+
+            Connection connection = new Connection(nodes[inNodeIndex].inPoint, nodes[outNodeIndex].outPoint, OnClickConnection);
+            connection.type = connectionType;
+
+            connections.Add(connection);
+        }
+        file.Close();
     }
 }
