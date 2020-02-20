@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using UnityEngine;
 using System;
 using System.Reflection;
+using GeneratedClasses;
 
 public class GraphSolverRunner : PipelineStage
 {
@@ -24,66 +25,15 @@ public class GraphSolverRunner : PipelineStage
     // Start is called before the first frame update
     System.Object Start(EPackage package)
     { 
-        var map = MapShapeGenerator.GenerateDefaultShape(GridManager.rootGridDim, GridManager.rootGridDim);
-        InstanceParser.WriteMapInstance(map);
+        //var map = MapShapeGenerator.GenerateDefaultShape(GridManager.rootGridDim, GridManager.rootGridDim);
+        // No need to write Map Instance Anymore
+        //InstanceParser.WriteMapInstance(map);
         runSolver();
-        InstanceParser.ReadMapInstance("Assets/GraphSolver/output/1.xmi", map);
-        Debug.Log("Map type count:" + map.Grids[1].Types.Count);
+        Region r = InstanceParser.ReadMapInstance("Assets/GraphSolver/output/1.xmi");
+        //Debug.Log("Map type count:" + map.Grids[1].Types.Count);
 
-        return map;
+        return r;
     }
-
-    /*void ReadXML()
-    {
-        XDocument document = XDocument.Load(Application.dataPath + "/GraphSolver/output/1.xmi");
-        var root = document.Root;
-        var map = new Map();
-        var elements = root.Elements().ToArray();
-        foreach (var ele in elements)
-        {
-            map.grids.Add(ReadElement(ele));
-        }
-        Debug.Log(map.grids[0]);
-
-        for (var i = 0; i < map.grids.Count; i++)
-        {
-            ResolveCrossReference(map, elements[i], i);
-        }
-
-        Debug.Log(map.grids[0].left);
-    }*/
-
-    /*Grid ReadElement(XElement ele)
-    {
-        var typeName = ele.Attribute("{http://www.w3.org/2001/XMLSchema-instance}type").Value.Split(':')[1];
-        Type elementType = Type.GetType(typeName);
-        if (!elementType.IsSubclassOf(typeof(Grid)))
-        {
-            throw new Exception("bad type");
-        }
-
-        Grid specificElement = (Grid)Activator.CreateInstance(elementType);
-        var elements = ele.Elements().ToArray();
-
-        // if (elements.Length == 0) return null;
-
-
-        return specificElement;
-    }*/
-
-    /*void ResolveCrossReference(Map root, XElement ele, int index)
-    {
-        var target = root.grids[index];
-        var type = target.GetType();
-        foreach (var attr in ele.Attributes())
-        {
-            var property = type.GetProperty(attr.Name.ToString());
-            if (property == null) continue;
-            var i = int.Parse(attr.Value.Split('.')[1]);
-
-            property.SetValue(target, root.grids[i]);
-        }
-    }*/
 
     public void runSolver()
     {

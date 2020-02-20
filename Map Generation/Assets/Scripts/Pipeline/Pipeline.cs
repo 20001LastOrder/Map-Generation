@@ -11,7 +11,7 @@ public class Pipeline
         new Parser(),
         new EcoreParser(),
         new ConstraintParser(),
-        new GraphSolverRunner()
+        new GraphSolverRunner(),
         //new MapGen()
        };
     public static void execute()
