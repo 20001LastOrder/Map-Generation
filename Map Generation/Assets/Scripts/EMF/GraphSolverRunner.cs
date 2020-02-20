@@ -8,12 +8,14 @@ using UnityEngine;
 using System;
 using System.Reflection;
 using GeneratedClasses;
-
+using System.Threading;
 public class GraphSolverRunner : PipelineStage
 {
     [SerializeField]
     private string ecoreFileName = "map.ecore";
 
+    private volatile bool isSolverRunning = false;
+    private string path;
     public System.Object execute(System.Object input)
     {
         Debug.Log("-----Executing GraphSolverRunner-----");
@@ -37,22 +39,24 @@ public class GraphSolverRunner : PipelineStage
 
     public void runSolver()
     {
-        string path = Application.dataPath + "/GraphSolver/";
+        path = Application.dataPath + "/GraphSolver/";
+        isSolverRunning = true;
         System.Diagnostics.Process process = new System.Diagnostics.Process();
         System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-        startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+        startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
         startInfo.WorkingDirectory = path;
         startInfo.FileName = "java";
         startInfo.Arguments = "-jar app.jar map.vsconfig";
-        startInfo.RedirectStandardOutput = true;
-        startInfo.RedirectStandardError = true;
-        startInfo.UseShellExecute = false;
-        startInfo.CreateNoWindow = true;
+        startInfo.RedirectStandardOutput = false;
+        startInfo.RedirectStandardError = false;
+        startInfo.UseShellExecute = true;
+        //startInfo.CreateNoWindow = true;
         process.StartInfo = startInfo;
         process.Start();
-        string output = process.StandardOutput.ReadToEnd();
-        Debug.Log(output);
+        //string output = process.StandardOutput.ReadToEnd();
+        //Debug.Log(output);
         process.WaitForExit();
+        isSolverRunning = false;
         Debug.Log("Done");
     }
 }

@@ -433,7 +433,7 @@
     </value>
   </relations>
   <elements name="o 1" definedInType="//@types.7 //@types.9 //@types.11"/>
-  <containmentHierarchies typesOrderedInHierarchy="//@types.4 //@types.5 //@types.6 //@types.0 //@types.2 //@types.1 //@types.3 //@types.7 //@types.8 //@types.9 //@types.10 //@types.11 //@types.12" containmentRelations="//@relations.1"/>
+  <containmentHierarchies typesOrderedInHierarchy="//@types.4 //@types.6 //@types.2 //@types.3 //@types.5 //@types.0 //@types.1 //@types.7 //@types.8 //@types.9 //@types.10 //@types.11 //@types.12" containmentRelations="//@relations.1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.0" relation="//@relations.0" upper="1"/>
   <annotations xsi:type="viatra2logicannotations:TransfomedViatraQuery" target="//@relations.2" patternFullyQualifiedName="queries.isSea"/>
   <annotations xsi:type="viatra2logicannotations:TransfomedViatraQuery" target="//@relations.3" patternFullyQualifiedName="queries.isIsland"/>

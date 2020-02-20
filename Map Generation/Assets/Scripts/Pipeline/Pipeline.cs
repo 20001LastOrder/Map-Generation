@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Pipeline 
 {
+    public static bool IsExecuting => _isExecuting;
+
+    private static bool _isExecuting = false;
     // add pipeline stages here in order of executation
     private static List<PipelineStage> pipelineStages =
        new List<PipelineStage>() {
