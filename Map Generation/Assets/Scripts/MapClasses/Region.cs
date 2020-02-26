@@ -14,9 +14,12 @@ namespace GeneratedClasses
     using System.Collections.Generic;
 
 
-    public class Region
+    public abstract class Region
     {
-
+        public int Octaves { get; set; }
+        public double Persistence { get; set; }
+        public double Lacunarity { get; set; }
+        public double MeshHeightMultiplier { get; set; }
         public Region close;
         public List<Region> subregions;
 
