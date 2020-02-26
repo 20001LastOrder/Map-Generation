@@ -12,14 +12,14 @@ namespace GeneratedClasses
 {
     using System;
     using System.Collections.Generic;
-    
-    
+
+
     public class Region
     {
-        
+
         public Region close;
         public List<Region> subregions;
-        
+
         public Region()
         {
             subregions = new List<Region>();

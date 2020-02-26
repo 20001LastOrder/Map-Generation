@@ -116,8 +116,8 @@ graph
 			id	3
 			graphics
 			[
-				w	215.60000000000002
-				h	82
+				w	284.90000000000003
+				h	96
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -139,8 +139,9 @@ graph
 				text	"
 	Island class
 	Region class
-	ElementaryRegion class
+	CompositeRegion class
 	Region class UndefinedPart
+	CompositeRegion class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -176,7 +177,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	City class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -194,8 +195,8 @@ graph
 			id	5
 			graphics
 			[
-				w	215.60000000000002
-				h	82
+				w	284.90000000000003
+				h	96
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -217,8 +218,9 @@ graph
 				text	"
 	Island class
 	Region class
-	ElementaryRegion class
+	CompositeRegion class
 	Region class UndefinedPart
+	CompositeRegion class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -233,8 +235,8 @@ graph
 			id	6
 			graphics
 			[
-				w	215.60000000000002
-				h	82
+				w	284.90000000000003
+				h	96
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -256,8 +258,9 @@ graph
 				text	"
 	Island class
 	Region class
-	ElementaryRegion class
+	CompositeRegion class
 	Region class UndefinedPart
+	CompositeRegion class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -293,7 +296,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	City class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -332,7 +335,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Island class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -371,7 +374,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Island class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -389,8 +392,8 @@ graph
 			id	10
 			graphics
 			[
-				w	215.60000000000002
-				h	82
+				w	284.90000000000003
+				h	96
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -410,10 +413,11 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	Island class
 	Region class
-	ElementaryRegion class
+	CompositeRegion class
 	Region class UndefinedPart
+	CompositeRegion class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -449,7 +453,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -488,7 +492,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Island class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -527,7 +531,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -566,7 +570,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -605,7 +609,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Island class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -644,7 +648,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -683,7 +687,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Island class
+	City class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -722,7 +726,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	City class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -761,7 +765,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Island class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -800,7 +804,7 @@ graph
 			LabelGraphics
 			[
 				text	"
-	Continent class
+	Lake class
 	Region class
 	ElementaryRegion class
 	Region class UndefinedPart
@@ -818,8 +822,8 @@ graph
 			id	21
 			graphics
 			[
-				w	215.60000000000002
-				h	82
+				w	284.90000000000003
+				h	96
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -841,8 +845,9 @@ graph
 				text	"
 	Island class
 	Region class
-	ElementaryRegion class
+	CompositeRegion class
 	Region class UndefinedPart
+	CompositeRegion class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -993,8 +998,8 @@ graph
 		]
 	edge
 	[
-		source	8
-		target	7
+		source	4
+		target	8
 		graphics
 		[
 			fill	"#000000"
@@ -1012,8 +1017,8 @@ graph
 	]
 	edge
 	[
-		source	3
-		target	7
+		source	7
+		target	12
 		graphics
 		[
 			fill	"#000000"
@@ -1031,122 +1036,8 @@ graph
 	]
 	edge
 	[
-		source	5
-		target	4
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"close reference Region"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	6
-		target	11
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"close reference Region"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	9
-		target	4
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"close reference Region"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	12
-		target	4
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"close reference Region"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	15
-		target	4
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"close reference Region"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	17
+		source	18
 		target	16
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"close reference Region"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	19
-		target	4
 		graphics
 		[
 			fill	"#000000"
@@ -1184,7 +1075,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	3
 		target	4
 		graphics
 		[
@@ -1244,7 +1135,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	5
 		target	7
 		graphics
 		[
@@ -1264,7 +1155,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	3
 		target	8
 		graphics
 		[
@@ -1284,7 +1175,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	5
 		target	9
 		graphics
 		[
@@ -1324,7 +1215,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	10
 		target	11
 		graphics
 		[
@@ -1344,7 +1235,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	5
 		target	12
 		graphics
 		[
@@ -1364,7 +1255,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	10
 		target	13
 		graphics
 		[
@@ -1384,7 +1275,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	6
 		target	14
 		graphics
 		[
@@ -1404,7 +1295,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	10
 		target	15
 		graphics
 		[
@@ -1424,7 +1315,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	10
 		target	16
 		graphics
 		[
@@ -1444,7 +1335,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	10
 		target	17
 		graphics
 		[
@@ -1464,7 +1355,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	10
 		target	18
 		graphics
 		[
@@ -1484,7 +1375,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	6
 		target	19
 		graphics
 		[
@@ -1504,7 +1395,7 @@ graph
 	]
 	edge
 	[
-		source	0
+		source	6
 		target	20
 		graphics
 		[

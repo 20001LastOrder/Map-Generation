@@ -4,7 +4,7 @@ using GeneratedClasses;
 public static class MapShapeGenerator
 {
     // generate a default square map shape
-    public static Map GenerateDefaultShape(int length, int width)
+    /*public static Map GenerateDefaultShape(int length, int width)
     {
         Map map = new Map();
         List<GeneratedClasses.Grid> grids = new List<GeneratedClasses.Grid>();
@@ -41,5 +41,5 @@ public static class MapShapeGenerator
 
         map.Grids = grids;
         return map;
-    }
+    }*/
 }
