@@ -37,7 +37,7 @@ public class EcoreParser : PipelineStage
             basicInfo += string.Format(" lowerBound=\"{0}\"", reference.LowerBound);
         }
 
-        if (reference.Conptainment)
+        if (reference.Containment)
         {
             basicInfo += string.Format(" containment=\"true\"");
         }

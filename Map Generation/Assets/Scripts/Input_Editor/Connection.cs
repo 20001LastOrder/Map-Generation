@@ -6,7 +6,9 @@ public enum ConnectionType {
     Default,
     Prohibited,
     Probability,
-    Required
+    Required,
+    Insides,
+    Close
 }
 
 public class Connection

@@ -72,7 +72,7 @@ public class EReference
         }
     }
 
-    public bool Conptainment
+    public bool Containment
     {
         get => conptainment;
         set { conptainment = value; }
