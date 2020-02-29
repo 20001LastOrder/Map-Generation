@@ -11,8 +11,7 @@ public class RegionInstance
     public Region region;
 
     public Vector2 top_left;
-    public Vector2 bottom_right;
-    public float size;
+    public int size;
 
     public RegionInstance(Region _region)
     {

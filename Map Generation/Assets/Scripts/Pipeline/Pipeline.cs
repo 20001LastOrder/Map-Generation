@@ -15,7 +15,8 @@ public class Pipeline
         new EcoreParser(),
         new ConstraintParser(),
         new GraphSolverRunner(),
-        new RegionParser()
+        new RegionParser(),
+        new HeightMapGen()
        };
     public static void execute()
     {

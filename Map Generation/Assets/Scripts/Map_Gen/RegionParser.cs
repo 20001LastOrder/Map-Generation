@@ -6,7 +6,7 @@ using GeneratedClasses;
 public class RegionParser : PipelineStage
 {
     // TODO: make these parameters, its just hard coded for now
-    static float map_size = 1000.0f;
+    public static int map_size = 1000;
 
     public System.Object execute(System.Object input)
     {
@@ -27,37 +27,34 @@ public class RegionParser : PipelineStage
         regionInstance.parent = parent;
 
         Vector2 top_left;
-        Vector2 bottom_right;
-        float size;
+        int size;
         if(parent == null)
         {
-            top_left = new Vector2(-map_size, map_size);
-            bottom_right = new Vector2(map_size, -map_size);
-            size = map_size * 2.0f;
+            top_left = new Vector2(0.0f, 0.0f);
+            size = map_size;
         }
         else {
-            size = parent.size * Random.Range(0.1f, 0.6f);
-            top_left = new Vector2(Random.Range(parent.top_left.x, parent.bottom_right.x - size),
-                Random.Range(parent.top_left.y, parent.bottom_right.y - size));
-            bottom_right = new Vector2(top_left.x + size, top_left.y - size); 
+            size = (int)((float)parent.size * Random.Range(0.1f, 0.6f));
+            top_left = new Vector2(Random.Range(parent.top_left.x, parent.top_left.x + parent.size - size),
+                Random.Range(parent.top_left.y, parent.top_left.y + parent.size - size));
         }
 
         regionInstance.top_left = top_left;
-        regionInstance.bottom_right = bottom_right;
         regionInstance.size = size;
 
-        if(region is CompositeRegion)
+        if (region is CompositeRegion)
         {
-            CompositeRegion compRegion = (CompositeRegion) region;
+            CompositeRegion compRegion = (CompositeRegion)region;
             List<RegionInstance> children = new List<RegionInstance>();
-            
-            foreach(Region childRegion in compRegion.insides)
+
+            foreach (Region childRegion in compRegion.insides)
             {
                 children.Add(parseRegion(childRegion, regionInstance));
             }
 
             regionInstance.children = children;
         }
+        else regionInstance.children = new List<RegionInstance>();
 
         return regionInstance;
     }
