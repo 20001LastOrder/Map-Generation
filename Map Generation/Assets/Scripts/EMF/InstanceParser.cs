@@ -118,7 +118,7 @@ public static class InstanceParser
         }
 
         //set for child elements
-        if (ele.HasElements)
+        if (region is CompositeRegion)
         {
             var compositeRegion = (CompositeRegion)region;
             var xEles = ele.Elements().ToList(); 
@@ -143,7 +143,7 @@ public static class InstanceParser
         }
         var rootObject = (Region)Activator.CreateInstance(subtype);
         // Composite region with elements inside
-        if (root.HasElements)
+        if (rootObject is CompositeRegion)
         {
             var realRootObject = (CompositeRegion)rootObject;
             realRootObject.insides = new List<Region>();

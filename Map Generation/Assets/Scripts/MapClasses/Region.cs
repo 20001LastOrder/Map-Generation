@@ -8,25 +8,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
 namespace GeneratedClasses
 {
     using System;
     using System.Collections.Generic;
-
-
-    public abstract class Region
+    
+    
+    public class Region
     {
-        public int Octaves { get; set; }
-        public double Persistence { get; set; }
-        public double Lacunarity { get; set; }
-        public double MeshHeightMultiplier { get; set; }
+        
         public Region close;
-        public List<Region> subregions;
-
+        
         public Region()
         {
-            subregions = new List<Region>();
         }
     }
 }
