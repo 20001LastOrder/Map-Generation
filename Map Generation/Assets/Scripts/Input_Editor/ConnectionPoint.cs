@@ -15,6 +15,7 @@ public class ConnectionPoint
     {
         this.node = node;
         this.type = type;
+        rect = new Rect(5, 5, 5f, 5f);
         rect.y = node.rect.y + node.rect.height * 0.5f;
         rect.x = node.rect.x + node.rect.width * 0.5f;
     }
