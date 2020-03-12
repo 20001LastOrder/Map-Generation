@@ -39,7 +39,7 @@ public class HeightMapGen : PipelineStage
             (int)RegionParser.map_size];
         fillHeightMap(ref heightMap, (RegionInstance)input);
 
-        return null;
+        return heightMap;
     }
 
     private void fillHeightMap(ref float[,] heightMap, RegionInstance reg)
