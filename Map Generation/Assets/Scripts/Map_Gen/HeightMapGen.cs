@@ -30,6 +30,8 @@ public class HeightMapGen : PipelineStage
 
     public System.Object execute(System.Object input)
     {
+        Debug.Log("-----Executing HeighMapGen-----");
+
         graphEditor = EditorWindow.GetWindow<GraphEditor>("Graph Editor");
         nodes = graphEditor.getNodes();
 

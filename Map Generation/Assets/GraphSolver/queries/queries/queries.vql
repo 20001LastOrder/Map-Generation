@@ -7,11 +7,6 @@ pattern isSea(a:Region){
 pattern isIsland(a:Region){
 	Island(a);
 }
-@Constraint(key={a}, severity="error", message="error")
-pattern SeaInside(a: Sea){
-	Sea.insides(a,b);
-	neg find isIsland(b);
-}
 @Constraint(key={a, b}, severity="error", message="error")
 pattern SeaClose(a: Sea, b: Region){
 	Sea.close(a,b);}

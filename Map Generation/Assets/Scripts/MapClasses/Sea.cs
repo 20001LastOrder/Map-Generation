@@ -14,7 +14,7 @@ namespace GeneratedClasses
     using System.Collections.Generic;
     
     
-    public class Sea : CompositeRegion
+    public class Sea : ElementaryRegion
     {
         
         public Sea()
