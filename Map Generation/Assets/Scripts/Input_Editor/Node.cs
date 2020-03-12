@@ -31,6 +31,7 @@ public class Node
     public static readonly string[] types = { "int", "double", "string", "bool" };
     public string title;
     public int octaves;
+    public float scale;
     public float persistence;
     public float lacunarity;
     public float meshHeightMultiplier;
@@ -53,8 +54,9 @@ public class Node
         OnCompleteConnection = OnClickCompleteConnection;
 
         title = "";
-        octaves = 0;
+        octaves = 1;
         persistence = 1f;
+        scale = 1f;
         lacunarity = 1f;
         meshHeightMultiplier = 1f;
         meshHeightCurve = AnimationCurve.Linear(0, 0, 10, 10);

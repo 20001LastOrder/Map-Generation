@@ -105,6 +105,9 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Octaves:");
             selectedNode.octaves = EditorGUILayout.IntField(selectedNode.octaves);
 
+            GUILayout.Label("Noise Scale:");
+            selectedNode.scale = EditorGUILayout.FloatField(selectedNode.scale);
+
             GUILayout.Label("Persistence:");
             selectedNode.persistence = EditorGUILayout.Slider(selectedNode.persistence, 0, 1.0f);
 
