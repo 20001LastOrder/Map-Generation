@@ -8,33 +8,17 @@ using System;
 using System.Text.RegularExpressions;
 
 
-public static class InstanceParser 
+public class InstanceParser :PipelineStage
 {
     static XNamespace xsi = XNamespace.Get(EMFConfig.XMLNS_XSI);
-    /*    public static void WriteMapInstance(Map map)
-        {
-            var version = XNamespace.Get(EMFConfig.XMI_VERION);
-            var xmi = XNamespace.Get(EMFConfig.XMLNS_XMI);
-            var mapPackage = XNamespace.Get(EMFConfig.XMLNS_MAP_MAP);
 
-            var document = new XDocument(
-                new XDeclaration("1.0", "ASCII", "yes")
-            );
-            var root = new XElement(
-                       mapPackage + "Map",
-                       new XAttribute(xmi+"version", version.NamespaceName),
-                       new XAttribute(XNamespace.Xmlns + mapPackage.NamespaceName, mapPackage.NamespaceName),
-                       new XAttribute(XNamespace.Xmlns + "xmi", xmi.NamespaceName)
-            );
+    public object execute(object input)
+    {
+        Region r = ReadMapInstance((string)input);
+        return r;
+    }
 
-            foreach(var grid in map.Grids){
-                root.Add(CreateXMLGridInstance(grid));
-            }
-            document.Add(root);
-            document.Save("Assets/GraphSolver/instance1.xmi");
-        }*/
-
-    private static XElement CreateXMLGridInstance(GeneratedClasses.Grid grid)
+    private XElement CreateXMLGridInstance(GeneratedClasses.Grid grid)
     {
         var element = new XElement("grids");
 
@@ -65,7 +49,7 @@ public static class InstanceParser
         return element;
     }
 
-    public static Region ReadMapInstance(string path)
+    public Region ReadMapInstance(string path)
     {
         var document = XDocument.Load(path);
         var root = document.Root;
@@ -93,7 +77,7 @@ public static class InstanceParser
         return rootObject;
     }
 
-    public static void ResolveRelation(System.Reflection.FieldInfo attr, Region root, Region region, XElement ele)
+    public void ResolveRelation(System.Reflection.FieldInfo attr, Region root, Region region, XElement ele)
     {
         var xAttr = ele.Attribute(attr.Name);
 
@@ -109,7 +93,6 @@ public static class InstanceParser
             while (match.Success)
             {
                 int pos = int.Parse(match.Value);
-                Debug.Log(pos);
                 target = ((CompositeRegion)target).insides[pos];
                 match = match.NextMatch();
             }
@@ -129,7 +112,7 @@ public static class InstanceParser
         }
     }
 
-    public static Region ReadElement(XElement root, List<Type> types)
+    public Region ReadElement(XElement root, List<Type> types)
     {
         var type = root.Attribute(xsi + "type").Value.Split(':')[1];
 
@@ -156,7 +139,7 @@ public static class InstanceParser
         return rootObject;
     }
 
-    private static List<GridType> GetGridTypesFromXMLElement(XElement grid)
+    private List<GridType> GetGridTypesFromXMLElement(XElement grid)
     {
         var xsi = XNamespace.Get(EMFConfig.XMLNS_XSI);
 

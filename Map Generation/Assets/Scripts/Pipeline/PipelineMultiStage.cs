@@ -15,10 +15,10 @@ public class PipelineMultiStage : PipelineStage
     public System.Object execute(System.Object input)
     {
         System.Object cur_input = input;
-        Parallel.ForEach(stages, (stage) =>
+        foreach(var stage in stages)
         {
             cur_input = stage.execute(cur_input);
-        });
+        }
 
         return cur_input;
     }
