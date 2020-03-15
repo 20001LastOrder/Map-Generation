@@ -118,7 +118,7 @@ public class GraphEditor : EditorWindow
             selectedNode.persistence = EditorGUILayout.Slider(selectedNode.persistence, 0, 1.0f);
 
             GUILayout.Label("Lacunarity:");
-            selectedNode.lacunarity = EditorGUILayout.Slider(selectedNode.lacunarity, 0, 1.0f);
+            selectedNode.lacunarity = EditorGUILayout.Slider(selectedNode.lacunarity, 1f, 10);
 
             GUILayout.Label("Mesh Height Multiplier:");
             selectedNode.meshHeightMultiplier = EditorGUILayout.Slider(selectedNode.meshHeightMultiplier, 0, 1.0f);

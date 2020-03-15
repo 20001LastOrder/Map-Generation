@@ -61,10 +61,10 @@ public class Node
 
         title = "";
         octaves = 0;
-        persistence = 0f;
-        lacunarity = 0f;
-        meshHeightMultiplier = 0f;
-        meshHeightCurve = new AnimationCurve();
+        persistence = 1f;
+        lacunarity = 1f;
+        meshHeightMultiplier = 1f;
+        meshHeightCurve = AnimationCurve.Linear(0, 0, 10, 10);
         generationRange = new GenerationRange();
         attributes = new List<(string key, string value)>();
     }
