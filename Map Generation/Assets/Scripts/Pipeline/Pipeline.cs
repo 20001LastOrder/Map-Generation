@@ -27,6 +27,7 @@ public class Pipeline
         new Parser(),
         new EcoreParser(),
         new ConstraintParser(),
+        new GenerationConfigRunner(),
         new GraphSolverRunner()
    });
 

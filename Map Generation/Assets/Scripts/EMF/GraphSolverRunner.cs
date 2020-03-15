@@ -28,7 +28,10 @@ public class GraphSolverRunner : PipelineStage
 
     private static void OutputDataReceived(object sender,  System.Diagnostics.DataReceivedEventArgs e)
     {
-        Debug.Log(e.Data);
+        if(e.Data != null)
+        {
+            Debug.Log(e.Data);
+        }
     }
 
     private static void RunSolver(object input)

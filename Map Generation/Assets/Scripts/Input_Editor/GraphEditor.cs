@@ -126,6 +126,12 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Mesh Height Curve");
             selectedNode.meshHeightCurve = EditorGUILayout.CurveField(selectedNode.meshHeightCurve);
 
+            GUILayout.Label("Generation Range Minimum");
+            selectedNode.generationRange.min = EditorGUILayout.IntField(selectedNode.generationRange.min);
+
+            GUILayout.Label("Generation Range Maximum");
+            selectedNode.generationRange.max = EditorGUILayout.IntField(selectedNode.generationRange.max);
+
             RenderAttributeFields();
 
             if (GUILayout.Button("Add attribute"))
@@ -445,6 +451,8 @@ public class GraphEditor : EditorWindow
         file.WriteLine(node.lacunarity);
         file.WriteLine(node.meshHeightMultiplier);
         file.WriteLine(JsonUtility.ToJson(node.meshHeightCurve));
+        file.WriteLine(node.generationRange.max);
+        file.WriteLine(node.generationRange.min);
         file.WriteLine(node.isComposite);
     }
 
@@ -487,6 +495,8 @@ public class GraphEditor : EditorWindow
             node.lacunarity = float.Parse(file.ReadLine());
             node.meshHeightMultiplier = float.Parse(file.ReadLine());
             node.meshHeightCurve = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
+            node.generationRange.max = int.Parse(file.ReadLine());
+            node.generationRange.min = int.Parse(file.ReadLine());
             node.isComposite = bool.Parse(file.ReadLine());
 
             nodes.Add(node);
