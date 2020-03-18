@@ -64,7 +64,7 @@ public class Node
         persistence = 1f;
         lacunarity = 1f;
         meshHeightMultiplier = 1f;
-        meshHeightCurve = AnimationCurve.Linear(0, 0, 10, 10);
+        meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
         generationRange = new GenerationRange();
         attributes = new List<(string key, string value)>();
     }
