@@ -22,7 +22,7 @@ public class MapGen : PipelineStage
         gridManager.m_rootGrid = rootGridGO.AddComponent<Grid>();
         gridManager.initRootGrid();
 
-        GeneratedClasses.Map map = (GeneratedClasses.Map)input;
+        /*GeneratedClasses.Map map = (GeneratedClasses.Map)input;
         if (map.Grids.Count != (gridManager.m_rootGrid.m_subGrid.Count * gridManager.m_rootGrid.m_subGrid[0].Count)) Debug.Log("GRID SIZE MISMATCH!");
         else
         {
@@ -34,7 +34,7 @@ public class MapGen : PipelineStage
                     gridManager.m_rootGrid.m_subGrid[r][c].gridData = map.Grids[cur++];
                 }
             }
-        }
+        }*/
 
         return null;
     }

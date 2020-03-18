@@ -20,7 +20,7 @@ generate {
 	number = 1
 	runs = 1
 	config = {
-		log-level = normal
+		log-level = none
 	}
 	
 	debug = "debug"

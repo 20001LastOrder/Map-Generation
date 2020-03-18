@@ -14,10 +14,10 @@ namespace GeneratedClasses
     using System.Collections.Generic;
     
     
-    public class Town : ElementaryRegion
+    public class Mountain : ElementaryRegion
     {
         
-        public Town()
+        public Mountain()
         {
         }
     }

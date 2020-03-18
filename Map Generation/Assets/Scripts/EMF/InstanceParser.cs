@@ -1,40 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using GeneratedClasses;
 using UnityEngine;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System;
+using System.Text.RegularExpressions;
 
-public static class InstanceParser 
+
+public class InstanceParser :PipelineStage
 {
-    public static void WriteMapInstance(Map map)
-    {
-        var version = XNamespace.Get(EMFConfig.XMI_VERION);
-        var xmi = XNamespace.Get(EMFConfig.XMLNS_XMI);
-        var mapPackage = XNamespace.Get(EMFConfig.XMLNS_MAP_MAP);
-        
-        var document = new XDocument(
-            new XDeclaration("1.0", "ASCII", "yes")
-        );
-        var root = new XElement(
-                   mapPackage + "Map",
-                   new XAttribute(xmi+"version", version.NamespaceName),
-                   new XAttribute(XNamespace.Xmlns + mapPackage.NamespaceName, mapPackage.NamespaceName),
-                   new XAttribute(XNamespace.Xmlns + "xmi", xmi.NamespaceName)
-        );
+    static XNamespace xsi = XNamespace.Get(EMFConfig.XMLNS_XSI);
 
-        foreach(var grid in map.Grids){
-            root.Add(CreateXMLGridInstance(grid));
-        }
-        document.Add(root);
-        document.Save("Assets/GraphSolver/instance1.xmi");
+    public object execute(object input)
+    {
+        Region r = ReadMapInstance((string)input);
+        return r;
     }
 
-    private static XElement CreateXMLGridInstance(GeneratedClasses.Grid grid)
+    private XElement CreateXMLGridInstance(GeneratedClasses.Grid grid)
     {
         var element = new XElement("grids");
 
@@ -65,22 +49,97 @@ public static class InstanceParser
         return element;
     }
 
-    public static Map ReadMapInstance(string path, Map map)
+    public Region ReadMapInstance(string path)
     {
         var document = XDocument.Load(path);
-        XName id = "id";
         var root = document.Root;
 
-        foreach(var ele in root.Elements().ToArray())
+        var generatedTypes = Assembly.GetExecutingAssembly().GetTypes()
+                       .Where(t => t.Namespace == "GeneratedClasses")
+                       .ToList();
+        // the first element is different
+        // create composition hierarchy first
+        var type = root.Name.ToString().Split('}')[1];
+        var subtype = generatedTypes.Find(a => a.Name.Equals(type));
+        var rootObject = (CompositeRegion)Activator.CreateInstance(subtype);
+        rootObject.insides = new List<Region>();
+        foreach(var ele in root.Elements().ToList())
         {
-            var grid = map.Grids[int.Parse(ele.Attribute(id).Value)-1];
-            grid.Types = GetGridTypesFromXMLElement(ele);
+            rootObject.insides.Add(ReadElement(ele, generatedTypes));
         }
 
-        return map;
+        //figure out associations
+        foreach(var property in typeof(Region).GetFields())
+        {
+            ResolveRelation(property, rootObject, rootObject, root);
+        }
+
+        return rootObject;
     }
 
-    private static List<GridType> GetGridTypesFromXMLElement(XElement grid)
+    public void ResolveRelation(System.Reflection.FieldInfo attr, Region root, Region region, XElement ele)
+    {
+        var xAttr = ele.Attribute(attr.Name);
+
+
+        // if the field is defined
+        if (xAttr != null)
+        {
+            // if not null, parse the value and find corresponding reference
+            var value = xAttr.Value;
+            // find allocation index
+            var match = Regex.Match(value, "[0-9]+");
+            Region target = root;
+            while (match.Success)
+            {
+                int pos = int.Parse(match.Value);
+                target = ((CompositeRegion)target).insides[pos];
+                match = match.NextMatch();
+            }
+            attr.SetValue(region, target);
+
+        }
+
+        //set for child elements
+        if (region is CompositeRegion)
+        {
+            var compositeRegion = (CompositeRegion)region;
+            var xEles = ele.Elements().ToList(); 
+            for(var i = 0; i < compositeRegion.insides.Count; i++)
+            {
+                ResolveRelation(attr, root, compositeRegion.insides[i], xEles[i]);
+            }
+        }
+    }
+
+    public Region ReadElement(XElement root, List<Type> types)
+    {
+        var type = root.Attribute(xsi + "type").Value.Split(':')[1];
+
+        var regionCLass = typeof(Region);
+        var subtype = types.Find(a => a.Name.Equals(type));
+        //error handling
+        if(subtype == null)
+        {
+            Debug.LogError("ERROR: No Such Class Generated: " + subtype);
+            return null;
+        }
+        var rootObject = (Region)Activator.CreateInstance(subtype);
+        // Composite region with elements inside
+        if (rootObject is CompositeRegion)
+        {
+            var realRootObject = (CompositeRegion)rootObject;
+            realRootObject.insides = new List<Region>();
+            foreach (var ele in root.Elements().ToList())
+            {
+                realRootObject.insides.Add(ReadElement(ele, types));
+            }
+        }
+
+        return rootObject;
+    }
+
+    private List<GridType> GetGridTypesFromXMLElement(XElement grid)
     {
         var xsi = XNamespace.Get(EMFConfig.XMLNS_XSI);
 
