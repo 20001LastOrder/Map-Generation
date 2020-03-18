@@ -1,11 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Globalization;
 using System;
 using System.IO;
+using System.Collections;
 
 public class GraphEditor : EditorWindow
 {
@@ -23,6 +21,9 @@ public class GraphEditor : EditorWindow
 
     private Vector2 offset;
     private Vector2 drag;
+
+    private static GraphEditor _instance;
+    public static GraphEditor Instance => _instance;
 
     [MenuItem("Window/Graph Editor")]
     public static void ShowWindow()
@@ -45,10 +46,18 @@ public class GraphEditor : EditorWindow
         nodeStyle = new GUIStyle();
         nodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
         nodeStyle.border = new RectOffset(12, 12, 12, 12);
-
         selectedNodeStyle = new GUIStyle();
         selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
         selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
+
+        // set instance to be used in other thread 
+        _instance = this;
+    }
+
+    private void OnDisable()
+    {
+        // set instance to null
+        _instance = null;
     }
 
     private void OnGUI()
@@ -62,7 +71,7 @@ public class GraphEditor : EditorWindow
         GUILayout.BeginArea(mainArea);
         DrawGrid(20, 0.2f, Color.gray);
         DrawGrid(100, 0.4f, Color.gray);
-
+        
         DrawNodes();
         DrawConnections();
 
@@ -81,21 +90,14 @@ public class GraphEditor : EditorWindow
         if (GUI.changed) Repaint();
         EndWindows();
 
+        if (GUI.Button(new Rect(0, 0, position.width, position.height), "", GUIStyle.none))
+        {
+            GUI.FocusControl(null);
+        }
     }
 
     private void DrawInspector()
     {
-        // Draw inspector components for a selected connection
-        if (selectedConnection != null)
-        {
-            GUILayout.Label(selectedConnection.inPoint.node.title + " -> " + selectedConnection.outPoint.node.title);
-            if (selectedConnection.type == ConnectionType.Probability)
-            {
-                GUILayout.Label("Probability:");
-                selectedConnection.probability = EditorGUILayout.Slider(selectedConnection.probability, 0, 1.0f);
-            }
-        }
-
         // Draw inspector components for a selected node
         if (selectedNode != null)
         {
@@ -120,6 +122,12 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Mesh Height Curve");
             selectedNode.meshHeightCurve = EditorGUILayout.CurveField(selectedNode.meshHeightCurve);
 
+            GUILayout.Label("Generation Range Minimum");
+            selectedNode.generationRange.min = EditorGUILayout.IntField(selectedNode.generationRange.min);
+
+            GUILayout.Label("Generation Range Maximum");
+            selectedNode.generationRange.max = EditorGUILayout.IntField(selectedNode.generationRange.max);
+
             RenderAttributeFields();
 
             if (GUILayout.Button("Add attribute"))
@@ -143,8 +151,23 @@ public class GraphEditor : EditorWindow
         {
             Pipeline.execute();
         }
+
+        //check for if it is necessary to run the second stage
+        if(Pipeline.CurrentStatus == Pipeline.Status.Stage1Finished)
+        {
+            Pipeline.execute();
+        }
     }
 
+    public IEnumerator Test()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(10.0f);
+            Debug.Log("test!");
+        }
+    }
+    
     private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
     {
         int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
@@ -255,10 +278,6 @@ public class GraphEditor : EditorWindow
                 {
                     GUI.changed = true;
                 }
-            }
-            if (selectedNode != null && !selectedNode.isSelected)
-            {
-                selectedNode = null;
             }
         }
     }
@@ -424,6 +443,8 @@ public class GraphEditor : EditorWindow
         file.WriteLine(node.lacunarity);
         file.WriteLine(node.meshHeightMultiplier);
         file.WriteLine(JsonUtility.ToJson(node.meshHeightCurve));
+        file.WriteLine(node.generationRange.max);
+        file.WriteLine(node.generationRange.min);
         file.WriteLine(node.isComposite);
     }
 
@@ -466,6 +487,9 @@ public class GraphEditor : EditorWindow
             node.lacunarity = float.Parse(file.ReadLine());
             node.meshHeightMultiplier = float.Parse(file.ReadLine());
             node.meshHeightCurve = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
+            node.meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
+            node.generationRange.max = int.Parse(file.ReadLine());
+            node.generationRange.min = int.Parse(file.ReadLine());
             node.isComposite = bool.Parse(file.ReadLine());
 
             nodes.Add(node);

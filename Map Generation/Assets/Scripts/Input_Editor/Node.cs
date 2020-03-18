@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+[Serializable]
+public class GenerationRange{
+    public int min;
+    public int max;
+}
+
 public class Node
 {
     // For Display
@@ -36,6 +42,7 @@ public class Node
     public float lacunarity;
     public float meshHeightMultiplier;
     public AnimationCurve meshHeightCurve;
+    public GenerationRange generationRange;
 
     public bool isComposite;
     private List<(string, string)> attributes;
@@ -59,7 +66,8 @@ public class Node
         scale = 1f;
         lacunarity = 1f;
         meshHeightMultiplier = 1f;
-        meshHeightCurve = AnimationCurve.Linear(0, 0, 10, 10);
+        meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
+        generationRange = new GenerationRange();
         attributes = new List<(string key, string value)>();
     }
 
