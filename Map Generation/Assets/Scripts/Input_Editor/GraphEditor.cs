@@ -463,6 +463,7 @@ public class GraphEditor : EditorWindow
             node.lacunarity = float.Parse(file.ReadLine());
             node.meshHeightMultiplier = float.Parse(file.ReadLine());
             node.meshHeightCurve = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
+            node.meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
             node.isComposite = bool.Parse(file.ReadLine());
 
             nodes.Add(node);
