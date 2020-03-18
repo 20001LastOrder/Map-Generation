@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
 <map.map:Sea xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:map.map="map.map" xsi:schemaLocation="map.map models/Map.ecore">
   <insides xsi:type="map.map:Island">
-    <insides xsi:type="map.map:Lake"/>
-  </insides>
-  <insides xsi:type="map.map:Island">
-    <insides xsi:type="map.map:City"/>
     <insides xsi:type="map.map:Mountain"/>
     <insides xsi:type="map.map:City"/>
-    <insides xsi:type="map.map:City"/>
-  </insides>
-  <insides xsi:type="map.map:Island">
-    <insides xsi:type="map.map:Lake"/>
-  </insides>
-  <insides xsi:type="map.map:Island">
-    <insides xsi:type="map.map:Mountain"/>
-    <insides xsi:type="map.map:Mountain"/>
     <insides xsi:type="map.map:Mountain"/>
   </insides>
   <insides xsi:type="map.map:Island">
     <insides xsi:type="map.map:City"/>
+  </insides>
+  <insides xsi:type="map.map:Island"/>
+  <insides xsi:type="map.map:Island">
+    <insides xsi:type="map.map:City" close="//@insides.3/@insides.2"/>
     <insides xsi:type="map.map:Lake"/>
-    <insides xsi:type="map.map:City" close="//@insides.4/@insides.3"/>
     <insides xsi:type="map.map:Lake"/>
-    <insides xsi:type="map.map:Mountain"/>
+    <insides xsi:type="map.map:Lake"/>
+    <insides xsi:type="map.map:City" close="//@insides.3/@insides.3"/>
   </insides>
 </map.map:Sea>
