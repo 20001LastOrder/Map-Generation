@@ -1,28 +1,23 @@
 import epackage "models/Map.ecore"
 import viatra "queries/queries/queries.vql"
-
 generate {
 	metamodel = {package map}
 	partial-model = { "instance.xmi"}
 	constraints = { package queries }
-	
-
 	solver = ViatraSolver
-	
 	scope = {
-		//#<Island> += 5,
-		//#<Continent> += 5,
-		//#<City> += 4,
-		//#<Town> += 6
-		#node = 20
+		#<Sea> += 0,
+		#<Island> += 4,
+		#<City> += 2..4,
+		#<Mountain> += 1..4,
+		#<Lake> += 1..4
+
 	}
-	
 	number = 1
 	runs = 1
 	config = {
 		log-level = none
 	}
-	
 	debug = "debug"
 	output = "output/"
 }
