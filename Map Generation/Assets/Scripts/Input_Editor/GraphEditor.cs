@@ -90,21 +90,14 @@ public class GraphEditor : EditorWindow
         if (GUI.changed) Repaint();
         EndWindows();
 
+        if (GUI.Button(new Rect(0, 0, position.width, position.height), "", GUIStyle.none))
+        {
+            GUI.FocusControl(null);
+        }
     }
 
     private void DrawInspector()
     {
-        // Draw inspector components for a selected connection
-        if (selectedConnection != null)
-        {
-            GUILayout.Label(selectedConnection.inPoint.node.title + " -> " + selectedConnection.outPoint.node.title);
-            if (selectedConnection.type == ConnectionType.Probability)
-            {
-                GUILayout.Label("Probability:");
-                selectedConnection.probability = EditorGUILayout.Slider(selectedConnection.probability, 0, 1.0f);
-            }
-        }
-
         // Draw inspector components for a selected node
         if (selectedNode != null)
         {
@@ -282,10 +275,6 @@ public class GraphEditor : EditorWindow
                 {
                     GUI.changed = true;
                 }
-            }
-            if (selectedNode != null && !selectedNode.isSelected)
-            {
-                selectedNode = null;
             }
         }
     }
