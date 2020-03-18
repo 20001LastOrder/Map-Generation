@@ -35,9 +35,9 @@ public class Pipeline
         new List<PipelineStage>() {
         new InstanceParser(),
         new RegionParser(),
-        new HeightMapGen()
-    });
-
+        new HeightMapGen(),
+        new HeightMapDisplay()
+       };
     public static void execute()
     {
         if(_status == Status.Idle)

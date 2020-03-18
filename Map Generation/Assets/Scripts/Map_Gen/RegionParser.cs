@@ -6,7 +6,7 @@ using GeneratedClasses;
 public class RegionParser : PipelineStage
 {
     // TODO: make these parameters, its just hard coded for now
-    public static int map_size = 1000;
+    public static int map_size = 100;
 
     public System.Object execute(System.Object input)
     {
