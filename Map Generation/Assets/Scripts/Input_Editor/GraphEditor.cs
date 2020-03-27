@@ -52,12 +52,16 @@ public class GraphEditor : EditorWindow
 
         // set instance to be used in other thread 
         _instance = this;
+
     }
 
     private void OnDisable()
     {
         // set instance to null
         _instance = null;
+
+        // unregister the pipeline checking method
+        EditorApplication.update -= CheckPipeLineSecondStage;
     }
 
     private void OnGUI()
@@ -149,25 +153,49 @@ public class GraphEditor : EditorWindow
         }
         if (GUILayout.Button("Generate"))
         {
-            Pipeline.execute();
+            try
+            {
+                Pipeline.execute();
+
+                // register the pipeline second stage checking method
+                EditorApplication.update += CheckPipeLineSecondStage;
+            }
+            catch (Exception e)
+            {
+                // ensure that if any exception has happened, the pipeline can become to the original status
+                Debug.LogError(e.StackTrace);
+                Pipeline.CurrentStatus = Pipeline.Status.Idle;
+            }
         }
 
         //check for if it is necessary to run the second stage
-        if(Pipeline.CurrentStatus == Pipeline.Status.Stage1Finished)
+        
+    }
+
+    void CheckPipeLineSecondStage()
+    {
+
+        if (Pipeline.CurrentStatus == Pipeline.Status.Stage1Finished)
         {
-            Pipeline.execute();
+            Debug.Log("Stage II Started");
+            try
+            {
+                Pipeline.execute();
+            } 
+            catch (Exception e)
+            {
+                // ensure that if any exception has happened, the pipeline can become to the original status
+                Debug.LogError(e.StackTrace);
+                Pipeline.CurrentStatus = Pipeline.Status.Idle;
+            }
+            finally
+            {
+                // always unregister the second stage checking method
+                EditorApplication.update -= CheckPipeLineSecondStage;
+            }
         }
     }
 
-    public IEnumerator Test()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(10.0f);
-            Debug.Log("test!");
-        }
-    }
-    
     private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
     {
         int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
