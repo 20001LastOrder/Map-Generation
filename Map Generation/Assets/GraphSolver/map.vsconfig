@@ -7,10 +7,7 @@ generate {
 	solver = ViatraSolver
 	scope = {
 		#<Sea> += 0,
-		#<Island> += 4,
-		#<City> += 2..4,
-		#<Mountain> += 1..4,
-		#<Lake> += 1..4
+		#<Island> += 0
 
 	}
 	number = 1
