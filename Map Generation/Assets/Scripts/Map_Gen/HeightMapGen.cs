@@ -8,15 +8,17 @@ public class HeightMapParams
 {
     public int octaves;
     public float persistence;
+    public float scale;
     public float lacunarity;
     public float meshHeightMultiplier;
     public AnimationCurve meshHeightCurve;
 
-    public HeightMapParams(int _octaves, float _persistence,
+    public HeightMapParams(int _octaves, float _scale, float _persistence, 
         float _lacunarity, float _meshHeightMultiplier, AnimationCurve _heightCurve)
     {
         octaves = _octaves;
         persistence = _persistence;
+        scale = _scale;
         lacunarity = _lacunarity;
         meshHeightMultiplier = _meshHeightMultiplier;
         meshHeightCurve = _heightCurve;
@@ -30,6 +32,8 @@ public class HeightMapGen : PipelineStage
 
     public System.Object execute(System.Object input)
     {
+        Debug.Log("-----Executing HeighMapGen-----");
+
         graphEditor = EditorWindow.GetWindow<GraphEditor>("Graph Editor");
         nodes = graphEditor.getNodes();
 
@@ -37,14 +41,14 @@ public class HeightMapGen : PipelineStage
             (int)RegionParser.map_size];
         fillHeightMap(ref heightMap, (RegionInstance)input);
 
-        return null;
+        return heightMap;
     }
 
     private void fillHeightMap(ref float[,] heightMap, RegionInstance reg)
     {
         HeightMapParams hParams = getHeightMapParams(getRegionTypeString(reg.region));
         float[,] curHeightMap = Noise.getNoiseMap(reg.size, reg.size, 
-            42, 80.0f, hParams.octaves,
+            42, hParams.scale, hParams.octaves,
             hParams.persistence, hParams.lacunarity, Vector2.zero);
 
         for(int c = 0; c < reg.size; c++)
@@ -72,7 +76,7 @@ public class HeightMapGen : PipelineStage
         {
             if(node.title.Equals(regionName))
             {
-                heightMapParams = new HeightMapParams(node.octaves,
+                heightMapParams = new HeightMapParams(node.octaves, node.scale,
                     node.persistence, node.lacunarity, node.meshHeightMultiplier,
                     node.meshHeightCurve);
 

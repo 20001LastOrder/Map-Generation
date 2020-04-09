@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class GridManager : MonoBehaviour
 {
     public static int rootGridDim = 5;
@@ -9,7 +11,7 @@ public class GridManager : MonoBehaviour
     public Material greenMaterial;
 
     public Grid m_rootGrid;
-    
+    public bool coroutineStarted = false;
     public void initRootGrid()
     {
         if(m_rootGrid == null)
@@ -96,19 +98,22 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    void Start()
+    void OnEnable()
     {
-        GameObject rootGridGO = new GameObject("rootGridGO");
+        /*GameObject rootGridGO = new GameObject("rootGridGO");
         m_rootGrid = rootGridGO.AddComponent<Grid>();
 
-        initRootGrid();
+        initRootGrid();*/
 
         //Pipeline.execute();
+        Debug.Log("start");
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+    // Update is called once per frame
+
 }
