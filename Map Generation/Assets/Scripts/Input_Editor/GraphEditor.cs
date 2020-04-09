@@ -466,6 +466,7 @@ public class GraphEditor : EditorWindow
     {
         file.WriteLine(JsonUtility.ToJson(new Vector2(node.rect.x, node.rect.y)));
         file.WriteLine(node.title);
+        file.WriteLine(node.scale);
         file.WriteLine(node.octaves);
         file.WriteLine(node.persistence);
         file.WriteLine(node.lacunarity);
@@ -510,6 +511,7 @@ public class GraphEditor : EditorWindow
             Node node = new Node(positionSaved, nodeStyle, selectedNodeStyle, OnClickRemoveNode, OnClickCreateConnection, OnClickNode);
 
             node.title = file.ReadLine();
+            node.scale = float.Parse(file.ReadLine());
             node.octaves = int.Parse(file.ReadLine());
             node.persistence = float.Parse(file.ReadLine());
             node.lacunarity = float.Parse(file.ReadLine());
