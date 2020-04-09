@@ -4,9 +4,6 @@ using UnityEngine;
 
 public enum ConnectionType {
     Default,
-    Prohibited,
-    Probability,
-    Required,
     Insides,
     Close
 }
