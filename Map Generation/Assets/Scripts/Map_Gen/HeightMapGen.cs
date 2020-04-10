@@ -25,6 +25,18 @@ public class HeightMapParams
     }
 }
 
+public class DisplayData
+{
+    public float[,] heightMap;
+    public Color[] colorMap;
+
+    public DisplayData(float[,] height, Color[] color)
+    {
+        heightMap = height;
+        colorMap = color;
+    }
+}
+
 public class HeightMapGen : PipelineStage
 {
     GraphEditor graphEditor;
@@ -37,11 +49,33 @@ public class HeightMapGen : PipelineStage
         graphEditor = EditorWindow.GetWindow<GraphEditor>("Graph Editor");
         nodes = graphEditor.getNodes();
 
+        int map_size = RegionParser.map_size;
+
         float[,] heightMap = new float[(int)RegionParser.map_size,
             (int)RegionParser.map_size];
         fillHeightMap(ref heightMap, (RegionInstance)input);
 
-        return heightMap;
+        // TODO: this is a very bad hack, replace with something better
+        TerrainType[] regions = GameObject.FindObjectOfType<MapGenerator>().regions;
+
+        Color[] colorMap = new Color[map_size * map_size];
+        for (int y = 0; y < map_size; y++)
+        {
+            for (int x = 0; x < map_size; x++)
+            {
+                float curHeight = heightMap[x, y];
+                for (int i = 0; i < regions.Length; i++)
+                {
+                    if (curHeight <= regions[i].height)
+                    {
+                        colorMap[y * map_size + x] = regions[i].color;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return new DisplayData(heightMap, colorMap);
     }
 
     private void fillHeightMap(ref float[,] heightMap, RegionInstance reg)

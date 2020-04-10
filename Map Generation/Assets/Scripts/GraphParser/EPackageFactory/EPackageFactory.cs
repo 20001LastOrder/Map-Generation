@@ -31,7 +31,7 @@ public class EPackageFactory : PipelineStage
         {
             if(connection.type == ConnectionType.Insides)
             {
-                connection.outPoint.node.isComposite = true;
+                connection.inPoint.node.isComposite = true;
             }
         }
 

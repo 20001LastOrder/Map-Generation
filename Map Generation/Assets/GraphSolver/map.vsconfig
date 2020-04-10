@@ -6,11 +6,8 @@ generate {
 	constraints = { package queries }
 	solver = ViatraSolver
 	scope = {
-		#<Sea> += 0,
-		#<Island> += 4,
-		#<City> += 2..4,
-		#<Mountain> += 1..4,
-		#<Lake> += 1..4
+		#<Island> += 3..4,
+		#<Sea> += 0
 
 	}
 	number = 1
