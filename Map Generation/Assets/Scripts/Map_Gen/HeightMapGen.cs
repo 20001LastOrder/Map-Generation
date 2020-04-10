@@ -53,7 +53,7 @@ public class HeightMapGen : PipelineStage
 
         float[,] heightMap = new float[(int)RegionParser.map_size,
             (int)RegionParser.map_size];
-        fillHeightMap(ref heightMap, (RegionInstance)input);
+        fillHeightMap(ref heightMap, (RegionInstance)input, 42);
 
         // TODO: this is a very bad hack, replace with something better
         TerrainType[] regions = GameObject.FindObjectOfType<MapGenerator>().regions;
@@ -78,11 +78,11 @@ public class HeightMapGen : PipelineStage
         return new DisplayData(heightMap, colorMap);
     }
 
-    private void fillHeightMap(ref float[,] heightMap, RegionInstance reg)
+    private void fillHeightMap(ref float[,] heightMap, RegionInstance reg, int seed)
     {
         HeightMapParams hParams = getHeightMapParams(getRegionTypeString(reg.region));
         float[,] curHeightMap = Noise.getNoiseMap(reg.size, reg.size, 
-            42, hParams.scale, hParams.octaves,
+            seed, hParams.scale, hParams.octaves,
             hParams.persistence, hParams.lacunarity, Vector2.zero);
 
         for(int c = 0; c < reg.size; c++)
@@ -90,14 +90,14 @@ public class HeightMapGen : PipelineStage
             for(int r = 0; r < reg.size; r++)
             {
                 heightMap[r + (int)reg.top_left.y, c + (int)reg.top_left.x] =
-                    curHeightMap[r, c];
+                    curHeightMap[r, c] * hParams.meshHeightMultiplier;
             }
         }
         BlurUtil.blurRegionEdges(reg, heightMap, 13);
 
         foreach(RegionInstance child in reg.children)
         {
-            fillHeightMap(ref heightMap, child);
+            fillHeightMap(ref heightMap, child, seed + 1);
         }
     }
 

@@ -52,15 +52,15 @@ public class BlurUtil
     {
         int half_offset = offset / 2;
         float[,] heightMapCp = (float[,])heightMap.Clone();
-        for(int c = 0;  c < (reg.size + (offset * 2)); c++)
+        for(int c = 0;  c < (reg.size + offset); c++)
         {
-            for(int r = 0; r < (reg.size + (offset * 2)); r++)
+            for(int r = 0; r < (reg.size + offset); r++)
             {
                 int real_r = r + (int)reg.top_left.y - half_offset;
                 int real_c = c + (int)reg.top_left.x - half_offset;
 
-                if (c >= offset && c <= (offset + reg.size) &&
-                    r >= offset && r <= (offset + reg.size)) continue;
+                if (c >= offset && c <= reg.size &&
+                    r >= offset && r <= reg.size) continue;
 
                 if (real_r < 0 || real_r >= heightMap.GetLength(0) ||
                     real_c < 0 || real_c >= heightMap.GetLength(1)) continue;
