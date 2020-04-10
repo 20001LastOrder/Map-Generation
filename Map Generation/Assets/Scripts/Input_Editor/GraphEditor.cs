@@ -50,6 +50,9 @@ public class GraphEditor : EditorWindow
         selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
         selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
 
+        LoadNodes();
+        LoadConnections();
+
         // set instance to be used in other thread 
         _instance = this;
 
@@ -57,6 +60,9 @@ public class GraphEditor : EditorWindow
 
     private void OnDisable()
     {
+        // Save data
+        Save();
+
         // set instance to null
         _instance = null;
 
@@ -65,7 +71,7 @@ public class GraphEditor : EditorWindow
     }
 
     private void OnGUI()
-    {   
+    {
         Rect sidebar = new Rect(position.width * 3 / 4, 0, position.width / 4, position.height);
         Rect mainArea = new Rect(0, 0, position.width * 3 / 4, position.height);
 
