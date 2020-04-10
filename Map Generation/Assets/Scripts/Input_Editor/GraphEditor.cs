@@ -148,7 +148,8 @@ public class GraphEditor : EditorWindow
 
         // Add generate button
         GUILayout.FlexibleSpace();
-        if (GUILayout.Button("Save"))
+        if (GUILayout.Button("Save") && EditorUtility.DisplayDialog("Manual Save?",
+                "Are you sure you want to manually save?", "Save", "Cancel"))
         {
             Save();
         }
