@@ -4,9 +4,6 @@ using UnityEngine;
 
 public enum ConnectionType {
     Default,
-    Prohibited,
-    Probability,
-    Required,
     Insides,
     Close
 }
@@ -66,9 +63,9 @@ public class Connection
             outPoint.rect.y = outPoint.node.rect.y + outPoint.node.rect.height;
 
             Vector3[] arrowLine = new Vector3[3];
-            arrowLine[0] = new Vector3(inPoint.rect.x - 10, inPoint.rect.y - 10);
+            arrowLine[0] = new Vector3(inPoint.rect.x - 6, inPoint.rect.y - 8);
             arrowLine[1] = new Vector3(inPoint.rect.x, inPoint.rect.y);
-            arrowLine[2] = new Vector3(inPoint.rect.x + 10, inPoint.rect.y - 10);
+            arrowLine[2] = new Vector3(inPoint.rect.x + 6, inPoint.rect.y - 8);
 
             Handles.DrawAAPolyLine(2f, arrowLine);
         }
@@ -78,9 +75,9 @@ public class Connection
             outPoint.rect.y = outPoint.node.rect.y;
 
             Vector3[] arrowLine = new Vector3[3];
-            arrowLine[0] = new Vector3(inPoint.rect.x - 10, inPoint.rect.y + 10);
+            arrowLine[0] = new Vector3(inPoint.rect.x - 6, inPoint.rect.y + 8);
             arrowLine[1] = new Vector3(inPoint.rect.x, inPoint.rect.y);
-            arrowLine[2] = new Vector3(inPoint.rect.x + 10, inPoint.rect.y + 10);
+            arrowLine[2] = new Vector3(inPoint.rect.x + 6, inPoint.rect.y + 8);
 
             Handles.DrawAAPolyLine(2f, arrowLine);
         }

@@ -37,7 +37,7 @@ public class Pipeline
         new RegionParser(),
         new HeightMapGen(),
         new HeightMapDisplay()
-    });
+   });
     public static void execute()
     {
         if(_status == Status.Idle)
