@@ -93,6 +93,7 @@ public class HeightMapGen : PipelineStage
                     curHeightMap[r, c];
             }
         }
+        BlurUtil.blurRegionEdges(reg, heightMap, 5);
 
         foreach(RegionInstance child in reg.children)
         {
