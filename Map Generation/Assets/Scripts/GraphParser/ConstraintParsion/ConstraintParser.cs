@@ -78,7 +78,7 @@ public class ConstraintParser : PipelineStage
         {
             if(connection.type == ConnectionType.Insides)
             {
-                composites[connection.outPoint.node.title].Add(connection.inPoint.node.title);
+                composites[connection.inPoint.node.title].Add(connection.outPoint.node.title);
             }
         }
 
@@ -111,10 +111,10 @@ public class ConstraintParser : PipelineStage
             constraints += "pattern " + cl.Name + "Close(a: " + cl.Name + ", b: " + parent.Name + "){\n";
             constraints += "\t" + cl.Name + ".close(a,b);";
 
-            var closeConnections= connections.FindAll(n => n.type == ConnectionType.Close && n.inPoint.node.title.Equals(cl.Name));
+            var closeConnections= connections.FindAll(n => n.type == ConnectionType.Close && n.outPoint.node.title.Equals(cl.Name));
             foreach(var connect in closeConnections)
             {
-                constraints += "\t neg find is" + connect.outPoint.node.title + "(b);\n";
+                constraints += "\t neg find is" + connect.inPoint.node.title + "(b);\n";
             }
             constraints += "}\n";
         }

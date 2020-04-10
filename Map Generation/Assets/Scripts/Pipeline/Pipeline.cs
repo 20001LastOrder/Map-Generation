@@ -38,6 +38,7 @@ public class Pipeline
         new HeightMapGen(),
         new HeightMapDisplay()
    });
+
     public static void execute()
     {
         if(_status == Status.Idle)
