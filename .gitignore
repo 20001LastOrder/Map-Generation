@@ -43,3 +43,10 @@ nodes.dat
 connections.dat
 connections.dat.meta
 nodes.dat.meta
+
+#graph solver inputs and outputs
+*.vsconfig
+*.xmi
+*.ecore
+*.vql
+Map Generation/Asset/GraphSolver/output/*
