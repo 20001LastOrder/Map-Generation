@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
-<map.map:Sea xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:map.map="map.map" xsi:schemaLocation="map.map models/Map.ecore">
+<map.map:Lake xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:map.map="map.map" xsi:schemaLocation="map.map models/Map.ecore">
   <insides xsi:type="map.map:Island"/>
   <insides xsi:type="map.map:Island"/>
   <insides xsi:type="map.map:Island"/>
-</map.map:Sea>
+</map.map:Lake>

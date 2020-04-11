@@ -1,4 +1,4 @@
-Error occured (DiagnosticWrappedException): org.eclipse.emf.ecore.xmi.ClassNotFoundException: Class 'Sea' is not found or is abstract. (file:///D:/Personal%20Files/Unity/Map-Generation/Map%20Generation/Assets/GraphSolver/instance.xmi, 2, 191)
+Error occured (DiagnosticWrappedException): java.io.FileNotFoundException: D:\Personal Files\Unity\Map-Generation\Map Generation\Assets\GraphSolver\instance.xmi (The system cannot find the file specified)
     org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
     org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
     org.eclipse.xtext.resource.XtextResourceSet.getResource(XtextResourceSet.java:265)
