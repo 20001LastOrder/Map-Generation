@@ -13,7 +13,6 @@ public class ConstraintParser : PipelineStage
         return input;
     }
 
-
     public void ParseConstraintOnPackage(EPackage package, GraphEditor graph, string outputFilename)
     {
         var constraints = "";
