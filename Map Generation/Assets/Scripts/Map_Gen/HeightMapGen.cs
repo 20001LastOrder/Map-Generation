@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -44,7 +45,7 @@ public class HeightMapGen : PipelineStage
 
     public System.Object execute(System.Object input)
     {
-        Debug.Log("-----Executing HeighMapGen-----");
+        Debug.Log("-----Executing HeightMapGen-----");
 
         graphEditor = EditorWindow.GetWindow<GraphEditor>("Graph Editor");
         nodes = graphEditor.getNodes();
@@ -53,7 +54,7 @@ public class HeightMapGen : PipelineStage
 
         float[,] heightMap = new float[(int)RegionParser.map_size,
             (int)RegionParser.map_size];
-        fillHeightMap(ref heightMap, (RegionInstance)input, 42);
+        fillHeightMap(ref heightMap, (RegionInstance)input);
 
         // TODO: this is a very bad hack, replace with something better
         TerrainType[] regions = GameObject.FindObjectOfType<MapGenerator>().regions;
@@ -78,9 +79,12 @@ public class HeightMapGen : PipelineStage
         return new DisplayData(heightMap, colorMap);
     }
 
-    private void fillHeightMap(ref float[,] heightMap, RegionInstance reg, int seed)
+    private void fillHeightMap(ref float[,] heightMap, RegionInstance reg)
     {
         HeightMapParams hParams = getHeightMapParams(getRegionTypeString(reg.region));
+
+        int seed = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        Debug.Log("Seed: " + seed);
         float[,] curHeightMap = Noise.getNoiseMap(reg.size, reg.size, 
             seed, hParams.scale, hParams.octaves,
             hParams.persistence, hParams.lacunarity, Vector2.zero);
@@ -97,7 +101,7 @@ public class HeightMapGen : PipelineStage
 
         foreach(RegionInstance child in reg.children)
         {
-            fillHeightMap(ref heightMap, child, seed + 1);
+            fillHeightMap(ref heightMap, child);
         }
     }
 
