@@ -13,9 +13,11 @@ public class HeightMapParams
     public float lacunarity;
     public float meshHeightMultiplier;
     public AnimationCurve meshHeightCurve;
+    public AnimationCurve heightRemapCurve;
 
     public HeightMapParams(int _octaves, float _scale, float _persistence, 
-        float _lacunarity, float _meshHeightMultiplier, AnimationCurve _heightCurve)
+        float _lacunarity, float _meshHeightMultiplier, AnimationCurve _heightCurve,
+        AnimationCurve _remapCurve)
     {
         octaves = _octaves;
         persistence = _persistence;
@@ -23,6 +25,7 @@ public class HeightMapParams
         lacunarity = _lacunarity;
         meshHeightMultiplier = _meshHeightMultiplier;
         meshHeightCurve = _heightCurve;
+        heightRemapCurve = _remapCurve;
     }
 }
 
@@ -52,14 +55,13 @@ public class HeightMapGen : PipelineStage
 
         int map_size = RegionParser.map_size;
 
-        float[,] heightMap = new float[(int)RegionParser.map_size,
-            (int)RegionParser.map_size];
-        fillHeightMap(ref heightMap, (RegionInstance)input);
+        float[,] heightMap = new float[map_size, map_size];
+        Color[] colorMap = new Color[map_size * map_size];
+        fillHeightMap(heightMap, (RegionInstance)input);
 
         // TODO: this is a very bad hack, replace with something better
         TerrainType[] regions = GameObject.FindObjectOfType<MapGenerator>().regions;
 
-        Color[] colorMap = new Color[map_size * map_size];
         for (int y = 0; y < map_size; y++)
         {
             for (int x = 0; x < map_size; x++)
@@ -79,7 +81,7 @@ public class HeightMapGen : PipelineStage
         return new DisplayData(heightMap, colorMap);
     }
 
-    private void fillHeightMap(ref float[,] heightMap, RegionInstance reg)
+    private void fillHeightMap(float[,] heightMap, RegionInstance reg)
     {
         HeightMapParams hParams = getHeightMapParams(getRegionTypeString(reg.region));
 
@@ -93,15 +95,18 @@ public class HeightMapGen : PipelineStage
         {
             for(int r = 0; r < reg.size; r++)
             {
-                heightMap[r + (int)reg.top_left.y, c + (int)reg.top_left.x] =
-                    curHeightMap[r, c] * hParams.meshHeightMultiplier;
+                float val = curHeightMap[r, c] * 
+                    hParams.meshHeightMultiplier *
+                    hParams.meshHeightCurve.Evaluate(curHeightMap[r, c]);
+                heightMap[r + (int)reg.top_left.y, c + (int)reg.top_left.x] = 
+                    hParams.heightRemapCurve.Evaluate(val);
             }
         }
         BlurUtil.blurRegionEdges(reg, heightMap, 13);
 
         foreach(RegionInstance child in reg.children)
         {
-            fillHeightMap(ref heightMap, child);
+            fillHeightMap(heightMap, child);
         }
     }
 
@@ -117,7 +122,7 @@ public class HeightMapGen : PipelineStage
             {
                 heightMapParams = new HeightMapParams(node.octaves, node.scale,
                     node.persistence, node.lacunarity, node.meshHeightMultiplier,
-                    node.meshHeightCurve);
+                    node.meshHeightCurve, node.heightRemap);
 
                 break;
             }

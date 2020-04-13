@@ -42,6 +42,7 @@ public class Node
     public float lacunarity;
     public float meshHeightMultiplier;
     public AnimationCurve meshHeightCurve;
+    public AnimationCurve heightRemap;
     public GenerationRange generationRange;
 
     public bool isComposite;
@@ -67,6 +68,7 @@ public class Node
         lacunarity = 1f;
         meshHeightMultiplier = 1f;
         meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
+        heightRemap = AnimationCurve.Linear(0, 0, 1, 1);
         generationRange = new GenerationRange();
         attributes = new List<(string key, string value)>();
     }
