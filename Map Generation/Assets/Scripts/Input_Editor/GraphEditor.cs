@@ -529,6 +529,8 @@ public class GraphEditor : EditorWindow
             node.meshHeightMultiplier = float.Parse(file.ReadLine());
             node.meshHeightCurve = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
             node.heightRemap = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
+            node.meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
+            node.heightRemap = AnimationCurve.Linear(0, 0, 1, 1);
             node.generationRange.max = int.Parse(file.ReadLine());
             node.generationRange.min = int.Parse(file.ReadLine());
             node.isComposite = bool.Parse(file.ReadLine());
