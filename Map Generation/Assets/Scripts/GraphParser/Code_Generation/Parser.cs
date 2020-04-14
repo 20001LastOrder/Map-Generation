@@ -44,4 +44,9 @@ public class Parser : PipelineStage
         }
         AssetDatabase.Refresh();
     }
+
+    public string GetInfo()
+    {
+        return "Generating Region Classes...";
+    }
 }

@@ -180,4 +180,9 @@ public class EcoreParser : PipelineStage
 
         System.IO.File.WriteAllText((path + filename), string.Format(instanceDef, backgroundRegionName));
     }
+
+    public string GetInfo()
+    {
+        return "Parsing Ecore Files...";
+    }
 }

@@ -33,6 +33,11 @@ public class GenerationConfigRunner : PipelineStage
         return input;
     }
 
+    public string GetInfo()
+    {
+        return "Generating Configuration Files...";
+    }
+
     public void WriteConfig(string filename, Dictionary<string, string> configuration)
     {
         // set scope configuration
