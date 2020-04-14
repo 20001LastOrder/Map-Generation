@@ -17,7 +17,7 @@ public class EcoreParser : PipelineStage
 
         EPackage package = (EPackage)input;
         SaveEcore(package, "map.ecore");
-
+        CreateBackgroundRegionInstance("instance.xmi");
         return input;
     }
 
@@ -140,6 +140,49 @@ public class EcoreParser : PipelineStage
     {
         string path = Application.dataPath + "/GraphSolver/models/";
         string packageInfo = ParseEPackage(package);
+
+        // check and make the directories
+        System.IO.Directory.CreateDirectory(path);
         System.IO.File.WriteAllText((path + filename), FILE_HEADER+packageInfo);
+    }
+
+    private static void CreateBackgroundRegionInstance(string filename)
+    {
+        string path = Application.dataPath + "/GraphSolver/";
+        string instanceDef = "<?xml version=\"1.0\" encoding=\"ASCII\"?>\r\n<map.map:{0} xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:map.map=\"map.map\" xsi:schemaLocation=\"map.map models/map.ecore\">\r\n\r\n</map.map:{0}>";
+        var graphEditor = UnityEditor.EditorWindow.GetWindow<GraphEditor>("Graph Editor");
+
+        // find the region that is not inside any other region and that is the background region
+        var nonBackgroundRegions = new HashSet<string>();
+        foreach(var connection in graphEditor.GetConnections()){
+            if(connection.type == ConnectionType.Insides)
+            {
+                nonBackgroundRegions.Add(connection.outPoint.node.title);
+            }
+        }
+
+        string backgroundRegionName = null;
+        var nodes = graphEditor.getNodes();
+        foreach (var node in nodes)
+        {
+            if (!nonBackgroundRegions.Contains(node.title))
+            {
+                backgroundRegionName = node.title;
+                break;
+            }
+        }
+
+        if(backgroundRegionName == null)
+        {
+            Debug.LogError("Cannot find background region, using the first region as background...");
+            backgroundRegionName = nodes[0].title;
+        }
+
+        System.IO.File.WriteAllText((path + filename), string.Format(instanceDef, backgroundRegionName));
+    }
+
+    public string GetInfo()
+    {
+        return "Parsing Ecore Files...";
     }
 }

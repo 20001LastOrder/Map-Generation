@@ -25,6 +25,10 @@ public class GraphEditor : EditorWindow
     private static GraphEditor _instance;
     public static GraphEditor Instance => _instance;
 
+    private bool _hasProgressBarLog = false;
+    private string _progressBarInfo;
+    private float _progressBarProgress;
+
     [MenuItem("Window/Graph Editor")]
     public static void ShowWindow()
     {
@@ -68,6 +72,7 @@ public class GraphEditor : EditorWindow
 
         // unregister the pipeline checking method
         EditorApplication.update -= CheckPipeLineSecondStage;
+        EditorApplication.update -= CheckProgressBarLog;
     }
 
     private void OnGUI()
@@ -169,6 +174,7 @@ public class GraphEditor : EditorWindow
 
                 // register the pipeline second stage checking method
                 EditorApplication.update += CheckPipeLineSecondStage;
+                EditorApplication.update += CheckProgressBarLog;
             }
             catch (Exception e)
             {
@@ -182,7 +188,7 @@ public class GraphEditor : EditorWindow
         
     }
 
-    void CheckPipeLineSecondStage()
+    private void CheckPipeLineSecondStage()
     {
 
         if (Pipeline.CurrentStatus == Pipeline.Status.Stage1Finished)
@@ -202,7 +208,18 @@ public class GraphEditor : EditorWindow
             {
                 // always unregister the second stage checking method
                 EditorApplication.update -= CheckPipeLineSecondStage;
+                EditorApplication.update -= CheckProgressBarLog;
+                ClearProgressBar();
             }
+        }
+    }
+
+    private void CheckProgressBarLog()
+    {
+        if (_hasProgressBarLog)
+        {
+            ShowProgressBar(_progressBarInfo, _progressBarProgress);
+            _hasProgressBarLog = false;
         }
     }
 
@@ -566,5 +583,23 @@ public class GraphEditor : EditorWindow
             connections.Add(connection);
         }
         file.Close();
+    }
+
+    public void ShowProgressBarAsync(string info, float progress)
+    {
+        //flag to update the progress
+        _progressBarInfo = info;
+        _progressBarProgress = progress;
+        _hasProgressBarLog = true;
+    }
+
+    public void ShowProgressBar(string info, float progress)
+    {
+        EditorUtility.DisplayProgressBar("Map Generation Progress", info, progress);
+    }
+
+    public void ClearProgressBar()
+    {
+        EditorUtility.ClearProgressBar();
     }
 }

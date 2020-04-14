@@ -4,11 +4,9 @@ using UnityEditor;
 using UnityEngine;
 
 public class EPackageFactory : PipelineStage
-{
+{ 
     public System.Object execute(System.Object input)
     {
-        Debug.Log("-----Executing EPackageFactory-----");
-
         GraphEditor graphEditor = EditorWindow.GetWindow<GraphEditor>("Graph Editor");
         List<Node> nodes = graphEditor.getNodes();
         List<Connection> connections = graphEditor.GetConnections();
@@ -31,7 +29,7 @@ public class EPackageFactory : PipelineStage
         {
             if(connection.type == ConnectionType.Insides)
             {
-                connection.outPoint.node.isComposite = true;
+                connection.inPoint.node.isComposite = true;
             }
         }
 
@@ -78,5 +76,10 @@ public class EPackageFactory : PipelineStage
 
 
         return package;
+    }
+
+    public string GetInfo()
+    {
+        return "Generating EPackage...";
     }
 }

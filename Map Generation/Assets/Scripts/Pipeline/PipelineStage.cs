@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface PipelineStage
 {
+    string GetInfo();
     System.Object execute(System.Object input);
 }

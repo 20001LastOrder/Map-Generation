@@ -59,6 +59,11 @@ public class RegionParser : PipelineStage
         return false;
     }
 
+    public string GetInfo()
+    {
+        return "Preparing Visualization...";
+    }
+
     RegionInstance parseRegion(Region region, RegionInstance parent,
         List<RegCollisionInfo> curRegs)
     {

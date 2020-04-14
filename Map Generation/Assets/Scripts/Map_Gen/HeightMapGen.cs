@@ -141,5 +141,8 @@ public class HeightMapGen : PipelineStage
         return full.Substring(full.IndexOf('.') + 1);
     }
 
-
+    public string GetInfo()
+    {
+        return "Visualizing...";
+    }
 }

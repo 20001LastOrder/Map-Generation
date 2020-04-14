@@ -2,23 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pipeline 
+public static class Pipeline 
 {
     public enum Status
     {
         Idle, Stage1, Stage1Finished, Stage2
     }
 
+
     private static Status _status = Status.Idle;
 
-    private static GraphEditor _editor;
+    private static int _currentStageNumber = 0;
+
+    private static int _overallStages = 0;
    
     private static object _intermediateOutput = null;
-    public static GraphEditor Editor => _editor;
+
     public static Status CurrentStatus {
         get => _status;
         set => _status = value;
     }
+
+    public static int CurrentStageNumber
+    {
+        get => _currentStageNumber;
+        set => _currentStageNumber = value;
+    }
+
+    public static int StagesLength
+    {
+        get => _overallStages;
+    }
+
+
 
     // add pipeline stages here in order of execution
     private static PipelineMultiStage pipelineStagesPart1 = new PipelineMultiStage(
@@ -40,7 +56,9 @@ public class Pipeline
    });
     public static void execute()
     {
-        if(_status == Status.Idle)
+        _overallStages = pipelineStagesPart1.GetLength() + pipelineStagesPart2.GetLength();
+        _currentStageNumber = 0;
+        if (_status == Status.Idle)
         {
             Debug.Log("-----Executing Pipeline Part 1-----");
             _status = Status.Stage1;

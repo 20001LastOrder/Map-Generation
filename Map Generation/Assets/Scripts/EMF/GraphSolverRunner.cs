@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Threading;
+using System.Linq;
 
 public class GraphSolverRunner : PipelineStage
 {
-    [SerializeField]
-    private string ecoreFileName = "map.ecore";
-
-    private volatile bool isSolverRunning = false;
     private string path;
     public System.Object execute(System.Object input)
     {
@@ -28,9 +25,17 @@ public class GraphSolverRunner : PipelineStage
 
     private static void OutputDataReceived(object sender,  System.Diagnostics.DataReceivedEventArgs e)
     {
-        if(e.Data != null)
+        float progress = (float)Pipeline.CurrentStageNumber / Pipeline.StagesLength;
+        if (e.Data != null)
         {
-            Debug.Log(e.Data);
+            if (e.Data.All(char.IsDigit))
+            {
+                GraphEditor.Instance.ShowProgressBarAsync("Graph Generation Status: Current Generated Regions: " + e.Data, progress);
+            }
+            else
+            {
+                GraphEditor.Instance.ShowProgressBarAsync("Graph Generation Status: " + e.Data, progress);
+            }
         }
     }
 
@@ -54,5 +59,10 @@ public class GraphSolverRunner : PipelineStage
         process.WaitForExit();
         Pipeline.CurrentStatus = Pipeline.Status.Stage1Finished;
         Debug.Log("Solver Generation Done");
+    }
+
+    public string GetInfo()
+    {
+        return "Running Graph Generator...";
     }
 }
