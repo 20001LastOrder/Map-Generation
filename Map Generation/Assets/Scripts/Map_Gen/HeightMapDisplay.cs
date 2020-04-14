@@ -7,6 +7,8 @@ public class HeightMapDisplay : PipelineStage
 
     public System.Object execute(System.Object input)
     {
+        Debug.Log("-----Executing HeightMapDisplay-----");
+
         DisplayData displayData = (DisplayData)input;
         float[,] heightMap = (float[,])displayData.heightMap;
         Color[] colorMap = (Color[])displayData.colorMap;

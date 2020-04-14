@@ -132,10 +132,13 @@ public class GraphEditor : EditorWindow
             selectedNode.lacunarity = EditorGUILayout.Slider(selectedNode.lacunarity, 1f, 10);
 
             GUILayout.Label("Mesh Height Multiplier:");
-            selectedNode.meshHeightMultiplier = EditorGUILayout.Slider(selectedNode.meshHeightMultiplier, 0, 1.0f);
+            selectedNode.meshHeightMultiplier = EditorGUILayout.FloatField(selectedNode.meshHeightMultiplier);
 
             GUILayout.Label("Mesh Height Curve");
             selectedNode.meshHeightCurve = EditorGUILayout.CurveField(selectedNode.meshHeightCurve);
+
+            GUILayout.Label("Height Remap");
+            selectedNode.heightRemap = EditorGUILayout.CurveField(selectedNode.heightRemap);
 
             GUILayout.Label("Generation Range Minimum");
             selectedNode.generationRange.min = EditorGUILayout.IntField(selectedNode.generationRange.min);
@@ -496,6 +499,7 @@ public class GraphEditor : EditorWindow
         file.WriteLine(node.lacunarity);
         file.WriteLine(node.meshHeightMultiplier);
         file.WriteLine(JsonUtility.ToJson(node.meshHeightCurve));
+        file.WriteLine(JsonUtility.ToJson(node.heightRemap));
         file.WriteLine(node.generationRange.max);
         file.WriteLine(node.generationRange.min);
         file.WriteLine(node.isComposite);
@@ -541,7 +545,9 @@ public class GraphEditor : EditorWindow
             node.lacunarity = float.Parse(file.ReadLine());
             node.meshHeightMultiplier = float.Parse(file.ReadLine());
             node.meshHeightCurve = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
+            node.heightRemap = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
             node.meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
+            node.heightRemap = AnimationCurve.Linear(0, 0, 1, 1);
             node.generationRange.max = int.Parse(file.ReadLine());
             node.generationRange.min = int.Parse(file.ReadLine());
             node.isComposite = bool.Parse(file.ReadLine());

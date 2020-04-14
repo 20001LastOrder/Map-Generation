@@ -54,7 +54,6 @@ public static class Pipeline
         new HeightMapGen(),
         new HeightMapDisplay()
    });
-
     public static void execute()
     {
         _overallStages = pipelineStagesPart1.GetLength() + pipelineStagesPart2.GetLength();
