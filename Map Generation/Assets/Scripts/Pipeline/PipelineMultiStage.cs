@@ -17,9 +17,27 @@ public class PipelineMultiStage : PipelineStage
         System.Object cur_input = input;
         foreach(var stage in stages)
         {
+            float progress = (float)Pipeline.CurrentStageNumber / Pipeline.StagesLength;
+            GraphEditor.Instance.ShowProgressBar(stage.GetInfo(), progress);
             cur_input = stage.execute(cur_input);
+            Pipeline.CurrentStageNumber++;
         }
 
         return cur_input;
+    }
+
+    public string GetInfo()
+    {
+        return "Running Multistage...";
+    }
+
+    public int GetLength()
+    {
+        if(stages == null)
+        {
+            return 0;
+        }
+
+        return stages.Count;
     }
 }

@@ -38,4 +38,9 @@ public class MapGen : PipelineStage
 
         return null;
     }
+
+    public string GetInfo()
+    {
+        return "Map Generating...";
+    }
 }

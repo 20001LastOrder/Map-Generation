@@ -157,4 +157,9 @@ public class InstanceParser :PipelineStage
 
         return types;
     }
+
+    public string GetInfo()
+    {
+        return "Parsing Generated Graph...";
+    }
 }

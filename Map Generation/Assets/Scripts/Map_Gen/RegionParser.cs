@@ -20,6 +20,10 @@ public class RegionParser : PipelineStage
         return regionInstance;
     }
 
+    public string GetInfo()
+    {
+        return "Preparing Visualization...";
+    }
 
     RegionInstance parseRegion(Region region, RegionInstance parent)
     {

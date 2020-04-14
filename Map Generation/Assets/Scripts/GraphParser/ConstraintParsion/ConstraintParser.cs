@@ -9,7 +9,11 @@ public class ConstraintParser : PipelineStage
     {
         EPackage package = (EPackage)input;
         GraphEditor graphEditor = EditorWindow.GetWindow<GraphEditor>("Graph Editor");
-        ParseConstraintOnPackage(package, graphEditor, Application.dataPath + "/GraphSolver/queries/queries/queries.vql");
+
+        // check and make the directories
+        string path = Application.dataPath + "/GraphSolver/queries/";
+        System.IO.Directory.CreateDirectory(path);
+        ParseConstraintOnPackage(package, graphEditor, path + "queries.vql");
         return input;
     }
 
@@ -128,5 +132,10 @@ public class ConstraintParser : PipelineStage
             cl = cl.ESuperType;
         }
         return cl;
+    }
+
+    public string GetInfo()
+    {
+        return "Pasring Constraints...";
     }
 }

@@ -31,4 +31,9 @@ public class HeightMapDisplay : PipelineStage
 
         return null;
     }
+
+    public string GetInfo()
+    {
+        return "Finalizing Visualization...";
+    }
 }

@@ -140,6 +140,9 @@ public class EcoreParser : PipelineStage
     {
         string path = Application.dataPath + "/GraphSolver/models/";
         string packageInfo = ParseEPackage(package);
+
+        // check and make the directories
+        System.IO.Directory.CreateDirectory(path);
         System.IO.File.WriteAllText((path + filename), FILE_HEADER+packageInfo);
     }
 
@@ -176,5 +179,10 @@ public class EcoreParser : PipelineStage
         }
 
         System.IO.File.WriteAllText((path + filename), string.Format(instanceDef, backgroundRegionName));
+    }
+
+    public string GetInfo()
+    {
+        return "Parsing Ecore Files...";
     }
 }
