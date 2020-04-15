@@ -179,8 +179,8 @@ public class GraphEditor : EditorWindow
             catch (Exception e)
             {
                 // ensure that if any exception has happened, the pipeline can become to the original status
-                Debug.LogError(e.StackTrace);
                 Pipeline.CurrentStatus = Pipeline.Status.Idle;
+                throw e;
             }
         }
 
@@ -190,7 +190,7 @@ public class GraphEditor : EditorWindow
 
     private void CheckPipeLineSecondStage()
     {
-
+        Exception exception = null;
         if (Pipeline.CurrentStatus == Pipeline.Status.Stage1Finished)
         {
             Debug.Log("Stage II Started");
@@ -201,7 +201,7 @@ public class GraphEditor : EditorWindow
             catch (Exception e)
             {
                 // ensure that if any exception has happened, the pipeline can become to the original status
-                Debug.LogError(e.StackTrace);
+                exception = e;
                 Pipeline.CurrentStatus = Pipeline.Status.Idle;
             }
             finally
@@ -210,6 +210,11 @@ public class GraphEditor : EditorWindow
                 EditorApplication.update -= CheckPipeLineSecondStage;
                 EditorApplication.update -= CheckProgressBarLog;
                 ClearProgressBar();
+
+                if(exception != null)
+                {
+                    throw exception;
+                }
             }
         }
     }
@@ -467,10 +472,14 @@ public class GraphEditor : EditorWindow
 
     public void Save()
     {
-        File.WriteAllText(@"Assets/Scripts/Input_Editor/Objects/nodes.dat", string.Empty);
-        File.WriteAllText(@"Assets/Scripts/Input_Editor/Objects/connections.dat", string.Empty);
+        //check and create the folder for keep savings
+        string path = @"Assets/Scripts/Input_Editor/Objects/";
+        System.IO.Directory.CreateDirectory(path);
 
-        using (StreamWriter file = new StreamWriter(@"Assets/Scripts/Input_Editor/Objects/nodes.dat"))
+        File.WriteAllText(path + "nodes.dat", string.Empty);
+        File.WriteAllText(path + "connections.dat", string.Empty);
+
+        using (StreamWriter file = new StreamWriter(path + "nodes.dat"))
         {
             foreach (Node node in nodes)
             {
@@ -479,7 +488,7 @@ public class GraphEditor : EditorWindow
             file.Close();
         }
 
-        using (StreamWriter file = new StreamWriter(@"Assets/Scripts/Input_Editor/Objects/connections.dat"))
+        using (StreamWriter file = new StreamWriter(path + "connections.dat"))
         {
             foreach (Connection connection in connections)
             {
@@ -529,8 +538,21 @@ public class GraphEditor : EditorWindow
             selectedInNode = null;
             selectedOutNode = null;
         }
-        
-        StreamReader file = new StreamReader(@"Assets/Scripts/Input_Editor/Objects/nodes.dat");
+
+        string path = @"Assets/Scripts/Input_Editor/Objects/";
+        System.IO.Directory.CreateDirectory(path);
+
+        StreamReader file = null;
+        try
+        {
+            file = new StreamReader(path + "nodes.dat");
+        }
+        catch (FileNotFoundException)
+        {
+            Debug.Log("No Graph Input Save Found.");
+            return;
+        }
+
         string line = "";
         while ((line = file.ReadLine()) != null)
         {
