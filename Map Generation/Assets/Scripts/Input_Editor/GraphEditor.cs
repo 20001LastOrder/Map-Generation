@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Collections;
+using UnityEditor.Callbacks;
 
 public class GraphEditor : EditorWindow
 {
@@ -591,7 +592,19 @@ public class GraphEditor : EditorWindow
             selectedConnection = null;
         }
 
-        StreamReader file = new StreamReader(@"Assets/Scripts/Input_Editor/Objects/connections.dat");
+        string path = @"Assets/Scripts/Input_Editor/Objects/";
+        System.IO.Directory.CreateDirectory(path);
+
+        StreamReader file = null;
+        try
+        {
+            file = new StreamReader(path + "connections.dat");
+        }
+        catch (FileNotFoundException)
+        {
+            Debug.Log("No Graph Input Save Found.");
+            return;
+        }
         string line = "";
         while ((line = file.ReadLine()) != null)
         {

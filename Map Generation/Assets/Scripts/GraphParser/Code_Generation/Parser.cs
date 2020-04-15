@@ -42,6 +42,7 @@ public class Parser : PipelineStage
             classGen.AddConstructor();
             classGen.GenerateCSharpCode(destinationFolder + "\\" + eClass.Name + ".cs");
         }
+
         AssetDatabase.Refresh();
     }
 
