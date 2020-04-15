@@ -538,8 +538,21 @@ public class GraphEditor : EditorWindow
             selectedInNode = null;
             selectedOutNode = null;
         }
-        
-        StreamReader file = new StreamReader(@"Assets/Scripts/Input_Editor/Objects/nodes.dat");
+
+        string path = @"Assets/Scripts/Input_Editor/Objects/";
+        System.IO.Directory.CreateDirectory(path);
+
+        StreamReader file = null;
+        try
+        {
+            file = new StreamReader(path + "nodes.dat");
+        }
+        catch (FileNotFoundException)
+        {
+            Debug.Log("No Graph Input Save Found.");
+            return;
+        }
+
         string line = "";
         while ((line = file.ReadLine()) != null)
         {
