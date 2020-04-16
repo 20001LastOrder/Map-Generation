@@ -54,3 +54,9 @@ nodes.dat.meta
 *.ecore.meta
 *.vql.meta
 Map Generation/Asset/GraphSolver/output/*
+
+# generated classes
+Map Generation/Assets/Scripts/MapClasses/*
+!Map Generation/Assets/Scripts/MapClasses/Region.cs
+!Map Generation/Assets/Scripts/MapClasses/CompositeRegion.cs
+!Map Generation/Assets/Scripts/MapClasses/ElementaryRegion.cs
