@@ -6,6 +6,7 @@ using System.IO;
 using System.Collections;
 using UnityEditor.Callbacks;
 
+[InitializeOnLoadAttribute]
 public class GraphEditor : EditorWindow
 {
     private List<Node> nodes;
@@ -30,6 +31,9 @@ public class GraphEditor : EditorWindow
     private string _progressBarInfo;
     private float _progressBarProgress;
 
+	private bool waitingForReload = false;
+	private static bool justReload = false;
+
     [MenuItem("Window/Graph Editor")]
     public static void ShowWindow()
     {
@@ -45,6 +49,14 @@ public class GraphEditor : EditorWindow
     {
         return connections;
     }
+
+	public void WaitForReload() {
+		waitingForReload = true;
+	}
+
+	static GraphEditor() {
+		justReload = true;
+	}
 
     private void OnEnable()
     {
@@ -112,7 +124,15 @@ public class GraphEditor : EditorWindow
         }
     }
 
-    private void DrawInspector()
+	public void Update() {
+		if (waitingForReload && justReload) {
+			waitingForReload = false;
+			StartGeneration();
+		}
+		justReload = false;
+	}
+
+	private void DrawInspector()
     {
         // Draw inspector components for a selected node
         if (selectedNode != null)
@@ -169,25 +189,24 @@ public class GraphEditor : EditorWindow
         }
         if (GUILayout.Button("Generate"))
         {
-            try
-            {
-                Pipeline.execute();
+			StartGeneration();
 
-                // register the pipeline second stage checking method
-                EditorApplication.update += CheckPipeLineSecondStage;
-                EditorApplication.update += CheckProgressBarLog;
-            }
-            catch (Exception e)
-            {
-                // ensure that if any exception has happened, the pipeline can become to the original status
-                Pipeline.CurrentStatus = Pipeline.Status.Idle;
-                throw e;
-            }
-        }
-
-        //check for if it is necessary to run the second stage
-        
+		}        
     }
+
+	private void StartGeneration() {
+		try {
+			Pipeline.execute();
+
+			// register the pipeline second stage checking method
+			EditorApplication.update += CheckPipeLineSecondStage;
+			EditorApplication.update += CheckProgressBarLog;
+		} catch (Exception e) {
+			// ensure that if any exception has happened, the pipeline can become to the original status
+			Pipeline.CurrentStatus = Pipeline.Status.Idle;
+			throw e;
+		}
+	}
 
     private void CheckPipeLineSecondStage()
     {
@@ -211,8 +230,8 @@ public class GraphEditor : EditorWindow
                 EditorApplication.update -= CheckPipeLineSecondStage;
                 EditorApplication.update -= CheckProgressBarLog;
                 ClearProgressBar();
-
-                if(exception != null)
+				waitingForReload = false;
+				if (exception != null)
                 {
                     throw exception;
                 }
