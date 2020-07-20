@@ -46,6 +46,9 @@ public class Node
     public GenerationRange generationRange;
 
     public bool isComposite;
+
+	// this property is inferred during the generation
+	public bool isRoot;
     private List<(string, string)> attributes;
 
     public Node(Vector2 position, GUIStyle nodeStyle, GUIStyle selectedStyle, Action<Node> OnClickRemoveNode, Action<Node> OnClickCreateConnection, Action<Node> OnClickCompleteConnection)
@@ -71,6 +74,7 @@ public class Node
         heightRemap = AnimationCurve.Linear(0, 0, 1, 1);
         generationRange = new GenerationRange();
         attributes = new List<(string key, string value)>();
+		isRoot = false;
     }
 
     public void Drag(Vector2 delta)

@@ -168,6 +168,7 @@ public class EcoreParser : PipelineStage
             if (!nonBackgroundRegions.Contains(node.title))
             {
                 backgroundRegionName = node.title;
+				node.isRoot = true;
                 break;
             }
         }

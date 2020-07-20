@@ -6,7 +6,7 @@ using UnityEngine;
 public class GenerationConfigRunner : PipelineStage
 {
     const string PREFIX = "import epackage \"models/Map.ecore\"\r\nimport viatra \"queries/queries.vql\"\r\ngenerate {\r\n\tmetamodel = {package map}\r\n\tpartial-model = { \"instance.xmi\"}\r\n\tconstraints = { package queries }\r\n\tsolver = ViatraSolver\r\n\tscope = {\r\n";
-    const string SUFFIX = "\r\n\t}\r\n\tnumber = 1\r\n\truns = 1\r\n\tconfig = {\r\n\t\tlog-level = none\r\n\t}\r\n\tdebug = \"debug\"\r\n\toutput = \"output/\"\r\n}";
+    const string SUFFIX = "\r\n\t}\r\n\tnumber = 1\r\n\truns = 1\r\n\tconfig = {\r\n\t\tlog-level = normal\r\n\t}\r\n\tdebug = \"debug\"\r\n\toutput = \"output/\"\r\n}";
     const string FILE_NAME = "/GraphSolver/map.vsconfig";
 
     public object execute(object input)
@@ -17,6 +17,11 @@ public class GenerationConfigRunner : PipelineStage
         //input is not changed
         foreach(var node in graphEditor.getNodes())
         {
+			// only contains one root
+			if (node.isRoot) {
+				continue;
+			}
+
             int min = node.generationRange.min;
             int max = node.generationRange.max;
             if (max != min)
