@@ -14,7 +14,7 @@ namespace GeneratedClasses
     using System.Collections.Generic;
     
     
-    public class Lake : CompositeRegion
+    public class Lake : ElementaryRegion
     {
         
         public Lake()

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public enum ConnectionPointType { In, Out }
-
+[Serializable]
 public class ConnectionPoint
 {
     public Rect rect;

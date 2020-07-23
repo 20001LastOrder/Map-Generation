@@ -12,10 +12,11 @@ public class HeightMapParams
     public float scale;
     public float lacunarity;
     public float meshHeightMultiplier;
+	public float height;
     public AnimationCurve meshHeightCurve;
     public AnimationCurve heightRemapCurve;
 
-    public HeightMapParams(int _octaves, float _scale, float _persistence, 
+	public HeightMapParams(int _octaves, float _scale, float _height, float _persistence, 
         float _lacunarity, float _meshHeightMultiplier, AnimationCurve _heightCurve,
         AnimationCurve _remapCurve)
     {
@@ -26,6 +27,7 @@ public class HeightMapParams
         meshHeightMultiplier = _meshHeightMultiplier;
         meshHeightCurve = _heightCurve;
         heightRemapCurve = _remapCurve;
+		height = _height;
     }
 }
 
@@ -86,10 +88,10 @@ public class HeightMapGen : PipelineStage
         HeightMapParams hParams = getHeightMapParams(getRegionTypeString(reg.region));
 
         int seed = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        Debug.Log("Seed: " + seed);
-        float[,] curHeightMap = Noise.getNoiseMap(reg.size, reg.size, 
+
+		float[,] curHeightMap = Noise.getNoiseMap(reg.size, reg.size, 
             seed, hParams.scale, hParams.octaves,
-            hParams.persistence, hParams.lacunarity, Vector2.zero);
+            hParams.persistence, hParams.lacunarity, Vector2.zero, hParams.height);
 
         for(int c = 0; c < reg.size; c++)
         {
@@ -120,7 +122,7 @@ public class HeightMapGen : PipelineStage
         {
             if(node.title.Equals(regionName))
             {
-                heightMapParams = new HeightMapParams(node.octaves, node.scale,
+                heightMapParams = new HeightMapParams(node.octaves, node.scale, node.noiseHeight,
                     node.persistence, node.lacunarity, node.meshHeightMultiplier,
                     node.meshHeightCurve, node.heightRemap);
 

@@ -8,7 +8,7 @@ public class GenerationRange{
     public int min;
     public int max;
 }
-
+[Serializable]
 public class Node
 {
     // For Display
@@ -19,13 +19,13 @@ public class Node
     public ConnectionPoint inPoint;
     public ConnectionPoint outPoint;
 
-    public GUIStyle style;
-    public GUIStyle defaultNodeStyle;
-    public GUIStyle selectedNodeStyle;
+    private GUIStyle style;
+	private GUIStyle defaultNodeStyle;
+	private GUIStyle selectedNodeStyle;
 
-    public Action<Node> OnRemoveNode;
-    public Action<Node> OnCreateConnection;
-    public Action<Node> OnCompleteConnection;
+	private Action<Node> OnRemoveNode;
+	private Action<Node> OnCreateConnection;
+	private Action<Node> OnCompleteConnection;
 
     public float width = 150;
     public float height = 50;
@@ -38,6 +38,7 @@ public class Node
     public string title;
     public int octaves;
     public float scale;
+	public float noiseHeight;
     public float persistence;
     public float lacunarity;
     public float meshHeightMultiplier;
@@ -45,11 +46,13 @@ public class Node
     public AnimationCurve heightRemap;
     public GenerationRange generationRange;
 
-    public bool isComposite;
+	[NonSerialized]
+	public bool isComposite;
 
 	// this property is inferred during the generation
+	[NonSerialized]
 	public bool isRoot;
-    private List<(string, string)> attributes;
+	private List<(string, string)> attributes;
 
     public Node(Vector2 position, GUIStyle nodeStyle, GUIStyle selectedStyle, Action<Node> OnClickRemoveNode, Action<Node> OnClickCreateConnection, Action<Node> OnClickCompleteConnection)
     {
@@ -218,4 +221,20 @@ public class Node
         }
         return 0;
     }
+
+	public Node CopyTo(Node other) {
+		other.rect = new Rect(rect.x, rect.y, rect.width, rect.height);
+		other.title = this.title;
+		other.scale = this.scale;
+		other.noiseHeight = this.noiseHeight;
+		other.octaves = this.octaves;
+		other.persistence = this.persistence;
+		other.lacunarity = this.lacunarity;
+		other.meshHeightMultiplier = this.meshHeightMultiplier;
+		other.meshHeightCurve = new AnimationCurve(this.meshHeightCurve.keys);
+		other.heightRemap = new AnimationCurve(this.heightRemap.keys);
+		other.generationRange.max = this.generationRange.max;
+		other.generationRange.min = this.generationRange.min;
+		return other;
+	}
 }

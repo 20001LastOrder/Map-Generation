@@ -11,7 +11,7 @@ public class GraphEditor : EditorWindow
 {
     private List<Node> nodes;
     private List<Connection> connections;
-
+	private GraphEditorData data;
     private GUIStyle nodeStyle;
     private GUIStyle selectedNodeStyle;
 
@@ -66,12 +66,12 @@ public class GraphEditor : EditorWindow
         selectedNodeStyle = new GUIStyle();
         selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
         selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
-
-        LoadNodes();
-        LoadConnections();
-
-        // set instance to be used in other thread 
-        _instance = this;
+		// Then we apply them to this window
+		//LoadNodes();
+		//LoadConnections();
+		Load();
+		// set instance to be used in other thread 
+		_instance = this;
 
     }
 
@@ -146,7 +146,10 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Noise Scale:");
             selectedNode.scale = EditorGUILayout.FloatField(selectedNode.scale);
 
-            GUILayout.Label("Persistence:");
+			GUILayout.Label("Height:");
+			selectedNode.noiseHeight = EditorGUILayout.FloatField(selectedNode.noiseHeight);
+
+			GUILayout.Label("Persistence:");
             selectedNode.persistence = EditorGUILayout.Slider(selectedNode.persistence, 0, 1.0f);
 
             GUILayout.Label("Lacunarity:");
@@ -184,8 +187,7 @@ public class GraphEditor : EditorWindow
         }
         if (GUILayout.Button("Load"))
         {
-            LoadNodes();
-            LoadConnections();
+			Load();
         }
         if (GUILayout.Button("Generate"))
         {
@@ -204,7 +206,7 @@ public class GraphEditor : EditorWindow
 		} catch (Exception e) {
 			// ensure that if any exception has happened, the pipeline can become to the original status
 			Pipeline.CurrentStatus = Pipeline.Status.Idle;
-			throw e;
+			throw new Exception("Exception Happened", e);
 		}
 	}
 
@@ -233,6 +235,7 @@ public class GraphEditor : EditorWindow
 				waitingForReload = false;
 				if (exception != null)
                 {
+					Debug.Log(exception.StackTrace);
                     throw exception;
                 }
             }
@@ -492,60 +495,22 @@ public class GraphEditor : EditorWindow
 
     public void Save()
     {
-        //check and create the folder for keep savings
-        string path = @"Assets/Scripts/Input_Editor/Objects/";
-        System.IO.Directory.CreateDirectory(path);
+		data.SaveData(this);
+		EditorUtility.SetDirty(data);
+	}
 
-        File.WriteAllText(path + "nodes.dat", string.Empty);
-        File.WriteAllText(path + "connections.dat", string.Empty);
+	public void Load() {
+		data = AssetDatabase.LoadAssetAtPath<GraphEditorData>("Assets/Resources/GraphEditorData.asset");
+		if (data == null) {
+			data = CreateInstance<GraphEditorData>();
+			data.Initialize();
+			AssetDatabase.CreateAsset(data, "Assets/Resources/GraphEditorData.asset");
+		}
+		LoadNodes(data.nodeData);
+		LoadConnections(data.connectionData);
+	}
 
-        using (StreamWriter file = new StreamWriter(path + "nodes.dat"))
-        {
-            foreach (Node node in nodes)
-            {
-                serializeNode(node, file);
-            }
-            file.Close();
-        }
-
-        using (StreamWriter file = new StreamWriter(path + "connections.dat"))
-        {
-            foreach (Connection connection in connections)
-            {
-                serializeConnection(connection, file);
-            }
-            file.Close();
-        }
-    }
-
-    public void serializeNode(Node node, StreamWriter file)
-    {
-        file.WriteLine(JsonUtility.ToJson(new Vector2(node.rect.x, node.rect.y)));
-        file.WriteLine(node.title);
-        file.WriteLine(node.scale);
-        file.WriteLine(node.octaves);
-        file.WriteLine(node.persistence);
-        file.WriteLine(node.lacunarity);
-        file.WriteLine(node.meshHeightMultiplier);
-        file.WriteLine(JsonUtility.ToJson(node.meshHeightCurve));
-        file.WriteLine(JsonUtility.ToJson(node.heightRemap));
-        file.WriteLine(node.generationRange.max);
-        file.WriteLine(node.generationRange.min);
-        file.WriteLine(node.isComposite);
-    }
-
-    public void serializeConnection(Connection connection, StreamWriter file)
-    {
-        int inNodeIndex = nodes.IndexOf(connection.inPoint.node);
-        int outNodeIndex = nodes.IndexOf(connection.outPoint.node);
-        ConnectionType conType = connection.type;
-
-        file.WriteLine(inNodeIndex);
-        file.WriteLine(outNodeIndex);
-        file.WriteLine(JsonUtility.ToJson(conType));
-    }
-
-    public void LoadNodes()
+	public void LoadNodes(List<NodeData> datas)
     {
         if (nodes == null)
         {
@@ -559,47 +524,27 @@ public class GraphEditor : EditorWindow
             selectedOutNode = null;
         }
 
-        string path = @"Assets/Scripts/Input_Editor/Objects/";
-        System.IO.Directory.CreateDirectory(path);
-
-        StreamReader file = null;
-        try
-        {
-            file = new StreamReader(path + "nodes.dat");
-        }
-        catch (FileNotFoundException)
-        {
-            Debug.Log("No Graph Input Save Found.");
-            return;
-        }
-
-        string line = "";
-        while ((line = file.ReadLine()) != null)
-        {
-            Vector2 positionSaved = JsonUtility.FromJson<Vector2>(line);
-
-            Node node = new Node(positionSaved, nodeStyle, selectedNodeStyle, OnClickRemoveNode, OnClickCreateConnection, OnClickNode);
-
-            node.title = file.ReadLine();
-            node.scale = float.Parse(file.ReadLine());
-            node.octaves = int.Parse(file.ReadLine());
-            node.persistence = float.Parse(file.ReadLine());
-            node.lacunarity = float.Parse(file.ReadLine());
-            node.meshHeightMultiplier = float.Parse(file.ReadLine());
-            node.meshHeightCurve = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
-            node.heightRemap = JsonUtility.FromJson<AnimationCurve>(file.ReadLine());
-            node.meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
-            node.heightRemap = AnimationCurve.Linear(0, 0, 1, 1);
-            node.generationRange.max = int.Parse(file.ReadLine());
-            node.generationRange.min = int.Parse(file.ReadLine());
-            node.isComposite = bool.Parse(file.ReadLine());
-
-            nodes.Add(node);
-        }
-        file.Close();
+        foreach (var data in datas) {
+			Node node = new Node(new Vector2(data.rect.x, data.rect.y), nodeStyle, selectedNodeStyle, OnClickRemoveNode, OnClickCreateConnection, OnClickNode) {
+				title = data.title,
+				scale = data.scale,
+				noiseHeight = data.noiseHeight,
+				octaves = data.octaves,
+				persistence = data.persistence,
+				lacunarity = data.lacunarity,
+				meshHeightMultiplier = data.meshHeightMultiplier,
+				meshHeightCurve = new AnimationCurve(data.meshHeightCurve.keys),
+				heightRemap = new AnimationCurve(data.heightRemap.keys),
+				generationRange = new GenerationRange {
+					max = data.generationRange.max,
+					min = data.generationRange.min
+				}
+			};
+			nodes.Add(node);
+		}
     }
 
-    public void LoadConnections()
+    public void LoadConnections(List<ConnectionData> datas)
     {
         if (connections == null)
         {
@@ -611,33 +556,13 @@ public class GraphEditor : EditorWindow
             selectedConnection = null;
         }
 
-        string path = @"Assets/Scripts/Input_Editor/Objects/";
-        System.IO.Directory.CreateDirectory(path);
-
-        StreamReader file = null;
-        try
-        {
-            file = new StreamReader(path + "connections.dat");
-        }
-        catch (FileNotFoundException)
-        {
-            Debug.Log("No Graph Input Save Found.");
-            return;
-        }
-        string line = "";
-        while ((line = file.ReadLine()) != null)
-        {
-            int inNodeIndex = int.Parse(line);
-            int outNodeIndex = int.Parse(file.ReadLine());
-            ConnectionType connectionType = JsonUtility.FromJson<ConnectionType>(file.ReadLine());
-
-            Connection connection = new Connection(nodes[inNodeIndex].inPoint, nodes[outNodeIndex].outPoint, OnClickConnection);
-            connection.type = connectionType;
-
-            connections.Add(connection);
-        }
-        file.Close();
-    }
+		foreach (var data in datas) {
+			var connection = new Connection(nodes[data.inNodeIndex].inPoint, nodes[data.outNodeIndex].outPoint, OnClickConnection) {
+				type = data.type
+			};
+			connections.Add(connection);
+		}
+	}
 
     public void ShowProgressBarAsync(string info, float progress)
     {

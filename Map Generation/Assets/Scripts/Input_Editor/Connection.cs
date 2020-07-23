@@ -7,7 +7,7 @@ public enum ConnectionType {
     Insides,
     Close
 }
-
+[Serializable]
 public class Connection
 {
     public ConnectionType type;

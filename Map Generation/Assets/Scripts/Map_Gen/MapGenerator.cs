@@ -35,7 +35,7 @@ public class MapGenerator : MonoBehaviour
     public void generateMap()
     {
         float[,] noiseMap = Noise.getNoiseMap(mapWidth, mapHeight, seed,
-            noiseScale, octaves, persistance, lacunarity, offset);
+            noiseScale, octaves, persistance, lacunarity, offset, 0);
 
         Color[] colorMap = new Color[mapWidth * mapHeight];
         for (int y = 0; y < mapHeight; y++)
