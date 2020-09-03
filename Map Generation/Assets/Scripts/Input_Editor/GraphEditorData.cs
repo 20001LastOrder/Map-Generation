@@ -22,6 +22,7 @@ public class NodeData {
 	public AnimationCurve meshHeightCurve;
 	public AnimationCurve heightRemap;
 	public GenerationRange generationRange;
+	public GenerationSize generationSize;
 }
 
 public class GraphEditorData : ScriptableObject
@@ -67,6 +68,10 @@ public class GraphEditorData : ScriptableObject
 				generationRange = new GenerationRange {
 					max = node.generationRange.max,
 					min = node.generationRange.min
+				},
+				generationSize = new GenerationSize {
+					max = node.generationSize.max,
+					min = node.generationSize.min
 				}
 			};
 			nodeData.Add(data);

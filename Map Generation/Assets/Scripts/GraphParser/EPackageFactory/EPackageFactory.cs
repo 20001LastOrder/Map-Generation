@@ -19,10 +19,11 @@ public class EPackageFactory : PipelineStage
         var elementaryRegionClass = new EClass("ElementaryRegion") { IsAbstract = true, ESuperType = regionClass };
         
         var insides = new EReference("insides", regionClass) { UpperBound = -1, LowerBound = 0, Containment = true};
-        var close = new EReference("close", regionClass) { UpperBound = 1, LowerBound = 0};
+        var next = new EReference("next", regionClass) { UpperBound = 1, LowerBound = 0};
         
         compositeRegionClass.EReferences.Add(insides);
-        regionClass.EReferences.Add(close);
+		regionClass.EReferences.Add(next);
+		next.EOpposite = next;
 
         // set composite regions
         foreach(var connection in connections)

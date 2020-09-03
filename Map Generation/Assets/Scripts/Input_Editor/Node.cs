@@ -8,7 +8,13 @@ public class GenerationRange{
     public int min;
     public int max;
 }
+
 [Serializable]
+
+public class GenerationSize {
+	public int min;
+	public int max;
+}
 public class Node
 {
     // For Display
@@ -45,8 +51,9 @@ public class Node
     public AnimationCurve meshHeightCurve;
     public AnimationCurve heightRemap;
     public GenerationRange generationRange;
+	public GenerationSize generationSize;
 
-	[NonSerialized]
+
 	public bool isComposite;
 
 	// this property is inferred during the generation
@@ -76,7 +83,8 @@ public class Node
         meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
         heightRemap = AnimationCurve.Linear(0, 0, 1, 1);
         generationRange = new GenerationRange();
-        attributes = new List<(string key, string value)>();
+		generationSize = new GenerationSize();
+		attributes = new List<(string key, string value)>();
 		isRoot = false;
     }
 
@@ -89,7 +97,9 @@ public class Node
     {
         inPoint.Draw();
         outPoint.Draw();
-        GUI.Box(rect, title);
+		GUIStyle boxStyle = new GUIStyle(GUI.skin.box);
+		boxStyle.fontSize = 20;
+		GUI.Box(rect, title, boxStyle);
     }
 
     public bool ProcessEvents(Event e)

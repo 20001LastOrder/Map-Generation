@@ -17,7 +17,7 @@ namespace GeneratedClasses
     public class Region
     {
         
-        public Region close;
+        public Region next;
         
         public Region()
         {

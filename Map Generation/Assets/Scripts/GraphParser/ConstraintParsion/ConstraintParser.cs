@@ -114,7 +114,7 @@ public class ConstraintParser : PipelineStage
             constraints += "pattern " + cl.Name + "Close(a: " + cl.Name + ", b: " + parent.Name + "){\n";
             constraints += "\t" + cl.Name + ".close(a,b);";
 
-            var closeConnections= connections.FindAll(n => n.type == ConnectionType.Close && n.outPoint.node.title.Equals(cl.Name));
+            var closeConnections= connections.FindAll(n => n.type == ConnectionType.Next && n.outPoint.node.title.Equals(cl.Name));
             foreach(var connect in closeConnections)
             {
                 constraints += "\t neg find is" + connect.inPoint.node.title + "(b);\n";

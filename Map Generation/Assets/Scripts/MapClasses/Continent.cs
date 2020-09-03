@@ -14,7 +14,7 @@ namespace GeneratedClasses
     using System.Collections.Generic;
     
     
-    public class Continent : ElementaryRegion
+    public class Continent : CompositeRegion
     {
         
         public Continent()

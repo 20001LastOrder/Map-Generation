@@ -5,7 +5,7 @@ using UnityEngine;
 public enum ConnectionType {
     Default,
     Insides,
-    Close
+    Next
 }
 [Serializable]
 public class Connection
@@ -31,23 +31,50 @@ public class Connection
 
         int direction = inPoint.node.rect.center.y > outPoint.node.rect.center.y ? 1 : -1;
 
-        Handles.DrawBezier(
-            inPoint.rect.center,
-            outPoint.rect.center,
-            inPoint.rect.center + direction * Vector2.down * 50f,
-            outPoint.rect.center + direction * Vector2.up * 50f,
-            Color.white,
-            null,
-            2f
-        );
+
+		if (inPoint.node != outPoint.node) {
+			Handles.DrawBezier(
+				inPoint.rect.center,
+				outPoint.rect.center,
+				inPoint.rect.center + direction * Vector2.down * 50f,
+				outPoint.rect.center + direction * Vector2.up * 50f,
+				Color.white,
+				null,
+				2f
+			);
+		} else {
+			Handles.DrawBezier(
+				inPoint.rect.center,
+				outPoint.rect.center,
+				inPoint.rect.center + new Vector2(1, 1) * 150,
+				outPoint.rect.center + new Vector2(1, -1) * 150,
+				Color.white,
+				null,
+				2f
+			);
+		}
+
 
         string displayType = type == ConnectionType.Default ? "" : type.ToString();
-        Handles.Label((inPoint.rect.center + outPoint.rect.center) * 0.5f, displayType);
+		GUIStyle boxStyle = new GUIStyle(GUI.skin.label);
+		boxStyle.fontSize = 15;
+		if (inPoint.node != outPoint.node) {
+			Handles.Label((inPoint.rect.center + outPoint.rect.center) * 0.5f, displayType, boxStyle);
+		} else {
+			Handles.Label((inPoint.rect.center + outPoint.rect.center) * 0.5f + Vector2.right * 110, displayType, boxStyle);
+		}
 
-        if (Handles.Button((inPoint.rect.center + outPoint.rect.center) * 0.5f, Quaternion.identity, 4, 8, Handles.RectangleHandleCap))
-        {
-            OnClickConnection(this);
-        }
+		if (inPoint.node != outPoint.node) {
+			if (Handles.Button((inPoint.rect.center + outPoint.rect.center) * 0.5f, Quaternion.identity, 4, 8, Handles.RectangleHandleCap)) {
+				OnClickConnection(this);
+			}
+		} else {
+			if (Handles.Button((inPoint.rect.center + outPoint.rect.center) * 0.5f + Vector2.right * 110, Quaternion.identity, 4, 8, Handles.RectangleHandleCap)) {
+				OnClickConnection(this);
+			}
+		}
+
+		
     }
 
     public void SetType(ConnectionType type)

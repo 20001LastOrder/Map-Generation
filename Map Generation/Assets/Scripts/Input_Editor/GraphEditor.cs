@@ -19,6 +19,8 @@ public class GraphEditor : EditorWindow
     private Node selectedInNode;
     private Node selectedOutNode;
 
+	private SerializedObject serializedObject;
+
     private Connection selectedConnection;
 
     private Vector2 offset;
@@ -33,6 +35,8 @@ public class GraphEditor : EditorWindow
 
 	private bool waitingForReload = false;
 	private static bool justReload = false;
+
+	private List<TerrainType> types = new List<TerrainType>();
 
     [MenuItem("Window/Graph Editor")]
     public static void ShowWindow()
@@ -67,12 +71,10 @@ public class GraphEditor : EditorWindow
         selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
         selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
 		// Then we apply them to this window
-		//LoadNodes();
-		//LoadConnections();
 		Load();
 		// set instance to be used in other thread 
 		_instance = this;
-
+		serializedObject = new SerializedObject(this);
     }
 
     private void OnDisable()
@@ -137,40 +139,49 @@ public class GraphEditor : EditorWindow
         // Draw inspector components for a selected node
         if (selectedNode != null)
         {
-            GUILayout.Label("Title:");
+			GUIStyle style = new GUIStyle(GUI.skin.label) {
+				fontSize = 15
+			};
+			GUILayout.Label("Title:", style);
             selectedNode.title = GUILayout.TextField(selectedNode.title);
 
-            GUILayout.Label("Octaves:");
+            GUILayout.Label("Octaves:", style);
             selectedNode.octaves = EditorGUILayout.IntField(selectedNode.octaves);
 
-            GUILayout.Label("Noise Scale:");
+            GUILayout.Label("Noise Scale:", style);
             selectedNode.scale = EditorGUILayout.FloatField(selectedNode.scale);
 
-			GUILayout.Label("Height:");
-			selectedNode.noiseHeight = EditorGUILayout.FloatField(selectedNode.noiseHeight);
+			//GUILayout.Label("Height:");
+			//selectedNode.noiseHeight = EditorGUILayout.FloatField(selectedNode.noiseHeight);
 
-			GUILayout.Label("Persistence:");
+			GUILayout.Label("Persistence:", style);
             selectedNode.persistence = EditorGUILayout.Slider(selectedNode.persistence, 0, 1.0f);
 
-            GUILayout.Label("Lacunarity:");
+            GUILayout.Label("Lacunarity:", style);
             selectedNode.lacunarity = EditorGUILayout.Slider(selectedNode.lacunarity, 1f, 10);
 
-            GUILayout.Label("Mesh Height Multiplier:");
+            GUILayout.Label("Mesh Height Multiplier:", style);
             selectedNode.meshHeightMultiplier = EditorGUILayout.FloatField(selectedNode.meshHeightMultiplier);
 
-            GUILayout.Label("Mesh Height Curve");
+            GUILayout.Label("Mesh Height Curve", style);
             selectedNode.meshHeightCurve = EditorGUILayout.CurveField(selectedNode.meshHeightCurve);
 
-            GUILayout.Label("Height Remap");
+            GUILayout.Label("Height Remap", style);
             selectedNode.heightRemap = EditorGUILayout.CurveField(selectedNode.heightRemap);
 
-            GUILayout.Label("Generation Range Minimum");
+            GUILayout.Label("Generation Range Minimum", style);
             selectedNode.generationRange.min = EditorGUILayout.IntField(selectedNode.generationRange.min);
 
-            GUILayout.Label("Generation Range Maximum");
+            GUILayout.Label("Generation Range Maximum", style);
             selectedNode.generationRange.max = EditorGUILayout.IntField(selectedNode.generationRange.max);
 
-            RenderAttributeFields();
+			//GUILayout.Label("Generation Size Maximum");
+			//selectedNode.generationSize.max = EditorGUILayout.IntField(selectedNode.generationRange.max);
+
+			//GUILayout.Label("Generation Size Maximum");
+			//selectedNode.generationSize.min = EditorGUILayout.IntField(selectedNode.generationRange.max);
+
+			RenderAttributeFields();
 
             if (GUILayout.Button("Add attribute"))
             {
@@ -178,8 +189,8 @@ public class GraphEditor : EditorWindow
             }
         }
 
-        // Add generate button
-        GUILayout.FlexibleSpace();
+		// Add generate button
+		GUILayout.FlexibleSpace();
         if (GUILayout.Button("Save") && EditorUtility.DisplayDialog("Manual Save?",
                 "Are you sure you want to manually save?", "Save", "Cancel"))
         {
@@ -236,7 +247,7 @@ public class GraphEditor : EditorWindow
 				if (exception != null)
                 {
 					Debug.Log(exception.StackTrace);
-                    throw exception;
+                    throw new Exception("Exception Happened", exception);
                 }
             }
         }
@@ -491,7 +502,7 @@ public class GraphEditor : EditorWindow
     public void SetSelectedNode(Node node)
     {
         selectedNode = node;
-    }
+	}
 
     public void Save()
     {
@@ -538,6 +549,10 @@ public class GraphEditor : EditorWindow
 				generationRange = new GenerationRange {
 					max = data.generationRange.max,
 					min = data.generationRange.min
+				},
+				generationSize = new GenerationSize {
+					max = data.generationSize.max,
+					min = data.generationSize.min
 				}
 			};
 			nodes.Add(node);
