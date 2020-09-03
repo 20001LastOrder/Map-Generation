@@ -26,7 +26,7 @@ public class RegCollisionInfo
 public class RegionParser : PipelineStage
 {
     // TODO: make these parameters, its just hard coded for now
-    public static int map_size = 200;
+    public static int map_size = 100;
 
     public System.Object execute(System.Object input)
     {
@@ -80,7 +80,7 @@ public class RegionParser : PipelineStage
                 size = map_size;
             }
             else {
-                size = (int)((float)parent.size * Random.Range(0.1f, 0.6f));
+                size = (int)((float)parent.size * Random.Range(0.1f, 0.7f));
                 top_left = new Vector2(Random.Range(parent.top_left.x, parent.top_left.x + parent.size - size),
                     Random.Range(parent.top_left.y, parent.top_left.y + parent.size - size));
             }

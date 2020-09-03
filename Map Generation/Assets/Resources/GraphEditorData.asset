@@ -15,8 +15,8 @@ MonoBehaviour:
   nodeData:
   - rect:
       serializedVersion: 2
-      x: 168
-      y: 302
+      x: 136
+      y: 235
       width: 150
       height: 50
     title: Island
@@ -25,15 +25,15 @@ MonoBehaviour:
     noiseHeight: 0
     persistence: 1
     lacunarity: 1
-    meshHeightMultiplier: 1
+    meshHeightMultiplier: 2
     meshHeightCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
+        time: 0.007385254
+        value: 0.50942993
         inSlope: 0
-        outSlope: 1
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
+        inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
@@ -54,10 +54,10 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
+        time: 0.0014762878
+        value: 0.49765015
         inSlope: 0
-        outSlope: 1
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
+        inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
@@ -82,8 +82,8 @@ MonoBehaviour:
       max: 0
   - rect:
       serializedVersion: 2
-      x: 369
-      y: 148
+      x: 337
+      y: 82
       width: 150
       height: 50
     title: Sea
@@ -149,176 +149,18 @@ MonoBehaviour:
       max: 0
   - rect:
       serializedVersion: 2
-      x: 564
-      y: 306
+      x: 522
+      y: 242
       width: 150
       height: 50
     title: Continent
-    octaves: 1
-    scale: 1
+    octaves: 10
+    scale: 10
     noiseHeight: 0
     persistence: 0.635
     lacunarity: 2
-    meshHeightMultiplier: 1
+    meshHeightMultiplier: 2
     meshHeightCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    heightRemap:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    generationRange:
-      min: 0
-      max: 0
-    generationSize:
-      min: 0
-      max: 0
-  - rect:
-      serializedVersion: 2
-      x: 68
-      y: 566
-      width: 150
-      height: 50
-    title: Lake
-    octaves: 1
-    scale: 1
-    noiseHeight: 0
-    persistence: 1
-    lacunarity: 1
-    meshHeightMultiplier: 1
-    meshHeightCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    heightRemap:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    generationRange:
-      min: 0
-      max: 0
-    generationSize:
-      min: 0
-      max: 0
-  - rect:
-      serializedVersion: 2
-      x: 399
-      y: 591
-      width: 150
-      height: 50
-    title: Mountain
-    octaves: 5
-    scale: 35
-    noiseHeight: 0
-    persistence: 0.635
-    lacunarity: 2.27
-    meshHeightMultiplier: 3.2
-    meshHeightCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    heightRemap:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -342,16 +184,174 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    heightRemap:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0014762878
+        value: 0.23114014
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     generationRange:
-      min: 3
-      max: 3
+      min: 1
+      max: 1
     generationSize:
       min: 0
       max: 0
   - rect:
       serializedVersion: 2
-      x: 629
-      y: 586
+      x: 36
+      y: 500
+      width: 150
+      height: 50
+    title: Lake
+    octaves: 1
+    scale: 1
+    noiseHeight: 0
+    persistence: 1
+    lacunarity: 1
+    meshHeightMultiplier: 1
+    meshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9881592
+        value: 0.49528122
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    heightRemap:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.99102783
+        value: 0.30260086
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    generationRange:
+      min: 0
+      max: 0
+    generationSize:
+      min: 0
+      max: 0
+  - rect:
+      serializedVersion: 2
+      x: 367
+      y: 525
+      width: 150
+      height: 50
+    title: Mountain
+    octaves: 5
+    scale: 35
+    noiseHeight: 0
+    persistence: 0.635
+    lacunarity: 2.27
+    meshHeightMultiplier: 3.2
+    meshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.71932983
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    heightRemap:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.011817932
+        value: 0.71224976
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    generationRange:
+      min: 0
+      max: 0
+    generationSize:
+      min: 0
+      max: 0
+  - rect:
+      serializedVersion: 2
+      x: 597
+      y: 520
       width: 150
       height: 50
     title: City

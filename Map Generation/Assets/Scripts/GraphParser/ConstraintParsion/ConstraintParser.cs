@@ -23,17 +23,22 @@ public class ConstraintParser : PipelineStage
         constraints += GenerateHeaderInformation(package);
         constraints += GenerateIdentificationQuery(package);
         constraints += GenerateInsideConstraint(package, graph.getNodes(), graph.GetConnections());
-        constraints += GenerateCloseConstraint(package, graph.GetConnections());
+        //constraints += GenerateCloseConstraint(package, graph.GetConnections());
 
-        // same parent close
-        constraints += "@Constraint(key={a,b}, severity=\"error\", message=\"error\")"
-                        +"pattern outerClose(a: Region, b: Region){\n"
-                        +"Region.close(a, b);\n"
-                        +"CompositeRegion.insides(R1, a);\n"
-                        +"CompositeRegion.insides(R2, b);\n"
-                        +"R1 != R2;\n"
-                        + "}\n";
+        //// same parent close
+        //constraints += "@Constraint(key={a,b}, severity=\"error\", message=\"error\")"
+        //                +"pattern outerClose(a: Region, b: Region){\n"
+        //                +"Region.close(a, b);\n"
+        //                +"CompositeRegion.insides(R1, a);\n"
+        //                +"CompositeRegion.insides(R2, b);\n"
+        //                +"R1 != R2;\n"
+        //                + "}\n";
         System.IO.File.WriteAllText(outputFilename, constraints);
+
+		if (graph.getExtraConstraintFilePath() != null && !graph.getExtraConstraintFilePath().Trim().Equals("")) {
+			string content = System.IO.File.ReadAllText(graph.getExtraConstraintFilePath());
+			System.IO.File.AppendAllText(outputFilename, content);
+		}
     }
 
     private static string GenerateHeaderInformation(EPackage package)

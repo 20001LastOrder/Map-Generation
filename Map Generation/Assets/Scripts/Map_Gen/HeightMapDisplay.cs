@@ -11,7 +11,7 @@ public class HeightMapDisplay : PipelineStage
 
         DisplayData displayData = (DisplayData)input;
         float[,] heightMap = (float[,])displayData.heightMap;
-        Color[] colorMap = (Color[])displayData.colorMap;
+        Color[] colorMap = displayData.colorMap;
 
         GameObject plane = GameObject.Find("NoiseMapPlane");
         Texture2D noiseTexture = TextureGenerator.TextureFromHeightMap(heightMap);

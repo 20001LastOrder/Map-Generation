@@ -47,16 +47,16 @@ public class MapGenerator : MonoBehaviour
                 {
                     if (curHeight <= regions[i].height)
                     {
-                        colorMap[y * mapWidth + x] = regions[i].color;
+                        colorMap[y * mapWidth + x] = Color.grey;
                         break;
                     }
                 }
             }
         }
 
-        MapDisplay display = FindObjectOfType<MapDisplay>();
+		MapDisplay display = FindObjectOfType<MapDisplay>();
 
-        if (drawMode == DrawMode.NoiseMap)
+		if (drawMode == DrawMode.NoiseMap)
         {
             display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
         }
@@ -67,11 +67,14 @@ public class MapGenerator : MonoBehaviour
         }
         else if(drawMode == DrawMode.Mesh)
         {
-            display.DrawMesh(
-                MeshGenerator.GenerateTerrainMesh(noiseMap, 
-                    meshHeightMultiplier, meshHeightCurve),
-                TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
-        }
+			//display.DrawMesh(
+			//    MeshGenerator.GenerateTerrainMesh(noiseMap, 
+			//        meshHeightMultiplier, meshHeightCurve),
+			//    TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
+			var displayData = new DisplayData(noiseMap, colorMap);
+			HeightMapDisplay meshDisplay = new HeightMapDisplay();
+			meshDisplay.execute(displayData);
+		}
     }
 
     void OnValidate()

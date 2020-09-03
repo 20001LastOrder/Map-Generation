@@ -73,7 +73,7 @@ public class HeightMapGen : PipelineStage
                 {
                     if (curHeight <= regions[i].height)
                     {
-                        colorMap[y * map_size + x] = regions[i].color;
+						colorMap[y * map_size + x] = regions[i].color;
                         break;
                     }
                 }

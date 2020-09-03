@@ -17,17 +17,17 @@
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialIntegerInterpretation" elements="//@openWorldElements.0"/>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialRealInterpretation" elements="//@openWorldElements.1"/>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialStringInterpretation" elements="//@openWorldElements.2"/>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.0" supertypeInterpretation="//@partialtypeinterpratation.12 //@partialtypeinterpratation.10">
-    <elements href="debug/generation.logicproblem#//@elements.0"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.0" supertypeInterpretation="//@partialtypeinterpratation.12 //@partialtypeinterpratation.10 //@partialtypeinterpratation.15 //@partialtypeinterpratation.14">
     <interpretationOf href="debug/generation.logicproblem#//@types.0"/>
   </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.1" supertypeInterpretation="//@partialtypeinterpratation.12 //@partialtypeinterpratation.10 //@partialtypeinterpratation.15 //@partialtypeinterpratation.14">
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.1" supertypeInterpretation="//@partialtypeinterpratation.12 //@partialtypeinterpratation.10">
+    <elements href="debug/generation.logicproblem#//@elements.0"/>
     <interpretationOf href="debug/generation.logicproblem#//@types.1"/>
   </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.2" supertypeInterpretation="//@partialtypeinterpratation.11 //@partialtypeinterpratation.10 //@partialtypeinterpratation.14">
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.2" supertypeInterpretation="//@partialtypeinterpratation.12 //@partialtypeinterpratation.10 //@partialtypeinterpratation.15 //@partialtypeinterpratation.14">
     <interpretationOf href="debug/generation.logicproblem#//@types.2"/>
   </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.3" supertypeInterpretation="//@partialtypeinterpratation.12 //@partialtypeinterpratation.10 //@partialtypeinterpratation.15 //@partialtypeinterpratation.14">
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.3" supertypeInterpretation="//@partialtypeinterpratation.11 //@partialtypeinterpratation.10 //@partialtypeinterpratation.14">
     <interpretationOf href="debug/generation.logicproblem#//@types.3"/>
   </partialtypeinterpratation>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.4" supertypeInterpretation="//@partialtypeinterpratation.11 //@partialtypeinterpratation.10 //@partialtypeinterpratation.14">
@@ -47,7 +47,7 @@
     <elements href="debug/generation.logicproblem#//@elements.0"/>
     <interpretationOf href="debug/generation.logicproblem#//@types.8"/>
   </partialtypeinterpratation>
-  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.9" supertypeInterpretation="//@partialtypeinterpratation.4 //@partialtypeinterpratation.12 //@partialtypeinterpratation.10 //@partialtypeinterpratation.15 //@partialtypeinterpratation.14">
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.9" supertypeInterpretation="//@partialtypeinterpratation.5 //@partialtypeinterpratation.12 //@partialtypeinterpratation.10 //@partialtypeinterpratation.15 //@partialtypeinterpratation.14">
     <interpretationOf href="debug/generation.logicproblem#//@types.10"/>
   </partialtypeinterpratation>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.10" supertypeInterpretation="//@partialtypeinterpratation.10">
@@ -60,12 +60,12 @@
   <openWorldElements xsi:type="partialinterpretation:RealElement" name="New Reals"/>
   <openWorldElements xsi:type="partialinterpretation:StringElement" name="New Strings"/>
   <openWorldElements name="New Objects"/>
-  <scopes targetTypeInterpretation="//@partialtypeinterpratation.4"/>
-  <scopes minNewElements="2" maxNewElements="2" targetTypeInterpretation="//@partialtypeinterpratation.5"/>
-  <scopes minNewElements="1" maxNewElements="1" targetTypeInterpretation="//@partialtypeinterpratation.6"/>
-  <scopes minNewElements="1" maxNewElements="1" targetTypeInterpretation="//@partialtypeinterpratation.7"/>
-  <scopes minNewElements="4" maxNewElements="4" targetTypeInterpretation="//@partialtypeinterpratation.8"/>
-  <scopes minNewElements="4" maxNewElements="4" targetTypeInterpretation="//@partialtypeinterpratation.9"/>
+  <scopes maxNewElements="0" targetTypeInterpretation="//@partialtypeinterpratation.4"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.5"/>
+  <scopes minNewElements="3" maxNewElements="3" targetTypeInterpretation="//@partialtypeinterpratation.6"/>
+  <scopes maxNewElements="0" targetTypeInterpretation="//@partialtypeinterpratation.7"/>
+  <scopes maxNewElements="0" targetTypeInterpretation="//@partialtypeinterpratation.8"/>
+  <scopes maxNewElements="0" targetTypeInterpretation="//@partialtypeinterpratation.9"/>
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.10"/>
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.11"/>
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.12"/>

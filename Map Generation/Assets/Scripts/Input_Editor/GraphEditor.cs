@@ -37,6 +37,7 @@ public class GraphEditor : EditorWindow
 	private static bool justReload = false;
 
 	private List<TerrainType> types = new List<TerrainType>();
+	private string extraConstraintFilePath;
 
     [MenuItem("Window/Graph Editor")]
     public static void ShowWindow()
@@ -191,7 +192,18 @@ public class GraphEditor : EditorWindow
 
 		// Add generate button
 		GUILayout.FlexibleSpace();
-        if (GUILayout.Button("Save") && EditorUtility.DisplayDialog("Manual Save?",
+		GUILayout.Label("Currently Selected File: " + (extraConstraintFilePath ?? ""));
+		GUILayout.BeginHorizontal();
+		if (GUILayout.Button("Select Extra Constraints File")) {
+			extraConstraintFilePath = EditorUtility.OpenFilePanel("Choose VIATRA Constraint file", Application.dataPath, "vql");
+		}
+
+		if (GUILayout.Button("Clear Extra Constraint File")) {
+			extraConstraintFilePath = null;
+		}
+		GUILayout.EndHorizontal();
+
+		if (GUILayout.Button("Save") && EditorUtility.DisplayDialog("Manual Save?",
                 "Are you sure you want to manually save?", "Save", "Cancel"))
         {
             Save();
@@ -596,4 +608,8 @@ public class GraphEditor : EditorWindow
     {
         EditorUtility.ClearProgressBar();
     }
+
+	public string getExtraConstraintFilePath() {
+		return extraConstraintFilePath;
+	}
 }
