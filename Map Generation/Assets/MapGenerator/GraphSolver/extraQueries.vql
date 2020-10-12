@@ -1,0 +1,49 @@
+pattern walkable(a: Region){
+	neg find isSea(a);
+	neg find isLake(a);
+}
+
+pattern isInside(a: Region, b: Region) {
+	CompositeRegion.insides(a, b);
+}
+
+pattern directReachable(a: Region, b: Region) {
+	a != b;
+	find isInside(container, a);
+	find walkable(container);
+	find isInside+(container, b);
+}
+
+pattern reachable(a: Region, b: Region) {
+	a != b;
+	find directReachable+(a, b);
+}
+
+pattern next(a: Region, b: Region) {
+	Region.next(a, b);
+
+}
+
+@Constraint(key={a, b}, severity="error", message="error")
+pattern nextNotReachable(a: City, b: City) {
+	City.next(a, b);
+	neg find reachable(a, b);
+}
+
+@Constraint(key={a}, severity="error", message="error")
+pattern cityNoNext(a: City) {
+	CompositeRegion.insides(cont, a);
+	find isContinent(cont);
+	neg find next(a, _);
+}
+
+pattern cities(a: Region, b: Region) {
+	find isCity(a);
+	find isCity(b);
+}
+
+@Constraint(key={a}, severity="error", message="error")
+pattern noOtherNext(a: Region, b: Region) {
+	Region.next(a, b);
+	neg find cities(a, b);
+}

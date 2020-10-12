@@ -48,11 +48,9 @@ nodes.dat.meta
 *.vsconfig
 *.xmi
 *.ecore
-*.vql
 *.vsconfig.meta
 *.xmi.meta
 *.ecore.meta
-*.vql.meta
 Map Generation/Asset/GraphSolver/output/*
 
 # generated classes
