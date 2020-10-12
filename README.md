@@ -15,7 +15,7 @@ Map-Generation is  prototype model-based game world map generator integrated wit
 - Provide consistency guarantees in terms of constraints during the map generation process
 
 ## Installation
-1. Install [Java](https://www.oracle.com/ca-en/java/technologies/javase-downloads.html) $(\ge 1.8)$.
+1. Install [Java](https://www.oracle.com/ca-en/java/technologies/javase-downloads.html) (After 1.8).
 2. Install the latest version of [Unity](https://unity.com/)
 3. Create a new unity project
 4. Clone the repository
