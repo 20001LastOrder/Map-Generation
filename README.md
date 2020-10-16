@@ -1,13 +1,12 @@
 # Map-Generation
-## Descriotion
+## Description
 
 Map-Generation is  prototype model-based game world map generator integrated with Unity.
 
-- [Map-Generation](#map-generation)
-  - [Descriotion](#descriotion)
-  - [Scope](#scope)
-  - [Installation](#installation)
-  - [Geting Started](#geting-started)
+- [Description](#descriotion)
+- [Scope](#scope)
+- [Installation](#installation)
+- [Geting Started](#geting-started)
 
 ## Scope 
 - Investigate the usage of model-based techniques in the context of game map generation
@@ -15,7 +14,7 @@ Map-Generation is  prototype model-based game world map generator integrated wit
 - Provide consistency guarantees in terms of constraints during the map generation process
 
 ## Installation
-1. Install [Java](https://www.oracle.com/ca-en/java/technologies/javase-downloads.html) $(\ge 1.8)$.
+1. Install [Java](https://www.oracle.com/ca-en/java/technologies/javase-downloads.html) (After 1.8).
 2. Install the latest version of [Unity](https://unity.com/)
 3. Create a new unity project
 4. Clone the repository
@@ -38,6 +37,6 @@ If the installation is successfull, you should see a **Graph Editor** option ava
 - Currently the constraints for **Insides** edge type is auto-generated, while the constraints for other edge type can be specified as  [Viatra Query Language](https://www.eclipse.org/viatra/documentation/query-language.html).
 - Extra constraint file can be added using the option at the right bottom corner.
 - Drug the **MapGenerator prefab** in the MapGenerator folder to the desired game scene.
-- When ready, press generate and a Terrain Mesh will be generated to the **MapGenerator prefab**. A sample result is shown below: 
-- ![](Doc/Readme/Images/result.png)
+- When ready, press generate and a Terrain Mesh will be generated to the **MapGenerator prefab**. A sample result is shown below: <br>
+![](Doc/Readme/Images/result.png)
 
