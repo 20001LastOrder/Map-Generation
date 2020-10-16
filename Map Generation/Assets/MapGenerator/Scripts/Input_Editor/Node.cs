@@ -12,8 +12,8 @@ public class GenerationRange{
 [Serializable]
 
 public class GenerationSize {
-	public int min;
-	public int max;
+    public float min { get; set; }
+    public float max { get; set; }
 }
 public class Node
 {
@@ -83,7 +83,7 @@ public class Node
         meshHeightCurve = AnimationCurve.Linear(0, 0, 1, 1);
         heightRemap = AnimationCurve.Linear(0, 0, 1, 1);
         generationRange = new GenerationRange();
-		generationSize = new GenerationSize();
+        generationSize = new GenerationSize() { max =0.7f, min=0.1f};
 		attributes = new List<(string key, string value)>();
 		isRoot = false;
     }
@@ -245,6 +245,8 @@ public class Node
 		other.heightRemap = new AnimationCurve(this.heightRemap.keys);
 		other.generationRange.max = this.generationRange.max;
 		other.generationRange.min = this.generationRange.min;
+        other.generationSize.max = this.generationSize.max;
+        other.generationSize.min = this.generationSize.min;
 		return other;
 	}
 }

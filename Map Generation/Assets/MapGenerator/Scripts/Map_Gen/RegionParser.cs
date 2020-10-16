@@ -27,7 +27,7 @@ public class RegionParser : PipelineStage
 {
     // TODO: make these parameters, its just hard coded for now
     public static int map_size = 100;
-
+    List<Node> nodes;
     public System.Object execute(System.Object input)
     {
         Debug.Log("-----Executing RegionParser-----");
@@ -36,6 +36,7 @@ public class RegionParser : PipelineStage
 
 
         List<RegCollisionInfo> curRegs = new List<RegCollisionInfo>();
+        nodes = GraphEditor.Instance.getNodes();
         RegionInstance regionInstance = parseRegion(region, null, curRegs);
 
         return regionInstance;
@@ -69,9 +70,10 @@ public class RegionParser : PipelineStage
     {
         RegionInstance regionInstance = new RegionInstance(region);
         regionInstance.parent = parent;
-
+        Node regionInput = nodes.Find(x => x.title.Equals(getRegionTypeString(region)));
         Vector2 top_left;
         int size;
+        int i = 0;
         do
         {
             if(parent == null)
@@ -80,11 +82,17 @@ public class RegionParser : PipelineStage
                 size = map_size;
             }
             else {
-                size = (int)((float)parent.size * Random.Range(0.1f, 0.7f));
+                size = (int)((float)parent.size * Random.Range(regionInput.generationSize.min, regionInput.generationSize.max));
                 top_left = new Vector2(Random.Range(parent.top_left.x, parent.top_left.x + parent.size - size),
                     Random.Range(parent.top_left.y, parent.top_left.y + parent.size - size));
             }
-        } while(checkRegionCollision(top_left, size, parent, curRegs));
+            i++;
+        } while(checkRegionCollision(top_left, size, parent, curRegs) && i < 2000);
+
+        if (i == 2000)
+        {
+            throw new System.Exception("Fail to generate region without collision, check the region size setting");
+        }
 
         regionInstance.top_left = top_left;
         regionInstance.size = size;
@@ -105,5 +113,11 @@ public class RegionParser : PipelineStage
         else regionInstance.children = new List<RegionInstance>();
 
         return regionInstance;
+    }
+
+    public string getRegionTypeString(Region region)
+    {
+        string full = region.GetType().ToString();
+        return full.Substring(full.IndexOf('.') + 1);
     }
 }

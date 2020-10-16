@@ -176,13 +176,13 @@ public class GraphEditor : EditorWindow
             GUILayout.Label("Generation Range Maximum", style);
             selectedNode.generationRange.max = EditorGUILayout.IntField(selectedNode.generationRange.max);
 
-			//GUILayout.Label("Generation Size Maximum");
-			//selectedNode.generationSize.max = EditorGUILayout.IntField(selectedNode.generationRange.max);
+            GUILayout.Label("Region Size Maximum");
+            selectedNode.generationSize.max = Math.Min(EditorGUILayout.FloatField(selectedNode.generationSize.max), 1);
 
-			//GUILayout.Label("Generation Size Maximum");
-			//selectedNode.generationSize.min = EditorGUILayout.IntField(selectedNode.generationRange.max);
+            GUILayout.Label("Region Size Minimum");
+            selectedNode.generationSize.min = Math.Max(EditorGUILayout.FloatField(selectedNode.generationSize.min), 0);
 
-			RenderAttributeFields();
+            RenderAttributeFields();
 
             if (GUILayout.Button("Add attribute"))
             {

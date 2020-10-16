@@ -156,6 +156,320 @@ graph
 			id	4
 			graphics
 			[
+				w	215.60000000000002
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	Mountain class
+	Region class
+	ElementaryRegion class
+	Region class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	5
+			graphics
+			[
+				w	284.90000000000003
+				h	96
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	Continent class
+	Region class
+	CompositeRegion class
+	Region class UndefinedPart
+	CompositeRegion class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	6
+			graphics
+			[
+				w	215.60000000000002
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	Mountain class
+	Region class
+	ElementaryRegion class
+	Region class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	7
+			graphics
+			[
+				w	215.60000000000002
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	City class
+	Region class
+	ElementaryRegion class
+	Region class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	8
+			graphics
+			[
+				w	215.60000000000002
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	Mountain class
+	Region class
+	ElementaryRegion class
+	Region class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	9
+			graphics
+			[
+				w	215.60000000000002
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	Lake class
+	Region class
+	ElementaryRegion class
+	Region class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	10
+			graphics
+			[
+				w	284.90000000000003
+				h	96
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	Island class
+	Region class
+	CompositeRegion class
+	Region class UndefinedPart
+	CompositeRegion class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	11
+			graphics
+			[
+				w	215.60000000000002
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	City class
+	Region class
+	ElementaryRegion class
+	Region class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	12
+			graphics
+			[
 				w	112.2
 				h	26
 				type	"rectangle"
@@ -188,7 +502,7 @@ graph
 	
 	node
 		[
-			id	5
+			id	13
 			graphics
 			[
 				w	85.80000000000001
@@ -223,7 +537,7 @@ graph
 	
 	node
 		[
-			id	6
+			id	14
 			graphics
 			[
 				w	103.4
@@ -258,7 +572,7 @@ graph
 	
 	node
 		[
-			id	7
+			id	15
 			graphics
 			[
 				w	103.4
@@ -292,8 +606,8 @@ graph
 		]
 	edge
 	[
-		source	0
-		target	0
+		source	11
+		target	7
 		graphics
 		[
 			fill	"#000000"
@@ -311,8 +625,8 @@ graph
 	]
 	edge
 	[
-		source	0
-		target	0
+		source	7
+		target	11
 		graphics
 		[
 			fill	"#000000"
@@ -332,6 +646,166 @@ graph
 	[
 		source	0
 		target	3
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"insides reference CompositeRegion"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	3
+		target	4
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"insides reference CompositeRegion"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	0
+		target	5
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"insides reference CompositeRegion"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	5
+		target	6
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"insides reference CompositeRegion"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	5
+		target	7
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"insides reference CompositeRegion"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	5
+		target	8
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"insides reference CompositeRegion"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	5
+		target	9
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"insides reference CompositeRegion"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	0
+		target	10
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"insides reference CompositeRegion"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	5
+		target	11
 		graphics
 		[
 			fill	"#000000"

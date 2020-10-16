@@ -15,37 +15,37 @@ MonoBehaviour:
   nodeData:
   - rect:
       serializedVersion: 2
-      x: 136
-      y: 235
+      x: 299
+      y: 330
       width: 150
       height: 50
     title: Island
-    octaves: 1
-    scale: 1
+    octaves: 10
+    scale: 10
     noiseHeight: 0
-    persistence: 1
-    lacunarity: 1
+    persistence: 0.466
+    lacunarity: 3.3
     meshHeightMultiplier: 2
     meshHeightCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.007385254
-        value: 0.50942993
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        time: -0.012500763
+        value: 0.035369873
+        inSlope: 0.007083974
+        outSlope: 0.007083974
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        time: 0.9874878
+        value: 0.042453766
+        inSlope: 0.007083974
+        outSlope: 0.007083974
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -75,15 +75,12 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     generationRange:
-      min: 0
-      max: 0
-    generationSize:
-      min: 0
-      max: 0
+      min: 1
+      max: 1
   - rect:
       serializedVersion: 2
-      x: 337
-      y: 82
+      x: 499
+      y: 178
       width: 150
       height: 50
     title: Sea
@@ -144,13 +141,10 @@ MonoBehaviour:
     generationRange:
       min: 0
       max: 0
-    generationSize:
-      min: 0
-      max: 0
   - rect:
       serializedVersion: 2
-      x: 522
-      y: 242
+      x: 683
+      y: 338
       width: 150
       height: 50
     title: Continent
@@ -164,8 +158,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
+        time: -0.020832062
+        value: 0.22640991
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -175,8 +169,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -188,8 +182,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0014762878
-        value: 0.23114014
+        time: 0.004131317
+        value: 0.29690552
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -197,8 +191,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
+        time: 0.9916687
+        value: 0.5359535
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -209,15 +203,12 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     generationRange:
-      min: 1
-      max: 1
-    generationSize:
-      min: 0
-      max: 0
+      min: 2
+      max: 2
   - rect:
       serializedVersion: 2
-      x: 36
-      y: 500
+      x: 196
+      y: 595
       width: 150
       height: 50
     title: Lake
@@ -232,21 +223,21 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        value: -0.023590088
+        inSlope: 0.000003830713
+        outSlope: 0.000003830713
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.9881592
-        value: 0.49528122
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 0
+        time: 0.9958191
+        value: -0.023586273
+        inSlope: 0.000003830713
+        outSlope: 0.000003830713
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -276,15 +267,12 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     generationRange:
-      min: 0
-      max: 0
-    generationSize:
-      min: 0
-      max: 0
+      min: 1
+      max: 1
   - rect:
       serializedVersion: 2
-      x: 367
-      y: 525
+      x: 528
+      y: 620
       width: 150
       height: 50
     title: Mountain
@@ -322,36 +310,33 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.011817932
-        value: 0.71224976
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        time: -0.0041160583
+        value: 0.39285278
+        inSlope: 0.573866
+        outSlope: 0.573866
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        time: 0.98750204
+        value: 0.9619087
+        inSlope: 0.573866
+        outSlope: 0.573866
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     generationRange:
-      min: 0
-      max: 0
-    generationSize:
-      min: 0
-      max: 0
+      min: 3
+      max: 3
   - rect:
       serializedVersion: 2
-      x: 597
-      y: 520
+      x: 759
+      y: 616
       width: 150
       height: 50
     title: City
@@ -365,22 +350,22 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 1
-        tangentMode: 0
+        time: 0.016666412
+        value: 0.49057007
+        inSlope: -0.0023930839
+        outSlope: -0.0023930839
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
-        tangentMode: 0
+        time: 1.0041809
+        value: 0.48820686
+        inSlope: -0.0023930839
+        outSlope: -0.0023930839
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -389,32 +374,29 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 1
-        tangentMode: 0
+        time: -0.029167175
+        value: 1.0094299
+        inSlope: -0.009162682
+        outSlope: -0.009162682
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 0
-        tangentMode: 0
+        inSlope: -0.009162682
+        outSlope: -0.009162682
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     generationRange:
-      min: 0
-      max: 0
-    generationSize:
-      min: 0
-      max: 0
+      min: 2
+      max: 2
   connectionData:
   - inNodeIndex: 1
     outNodeIndex: 0
@@ -427,9 +409,6 @@ MonoBehaviour:
     type: 1
   - inNodeIndex: 0
     outNodeIndex: 4
-    type: 1
-  - inNodeIndex: 0
-    outNodeIndex: 5
     type: 1
   - inNodeIndex: 2
     outNodeIndex: 3

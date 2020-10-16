@@ -1,0 +1,89 @@
+package queries 
+import epackage "map.map"
+
+pattern isIsland(a:Region){
+	Island(a);
+}
+pattern isSea(a:Region){
+	Sea(a);
+}
+pattern isContinent(a:Region){
+	Continent(a);
+}
+pattern isLake(a:Region){
+	Lake(a);
+}
+pattern isMountain(a:Region){
+	Mountain(a);
+}
+pattern isCity(a:Region){
+	City(a);
+}
+@Constraint(key={a}, severity="error", message="error")
+pattern IslandInside(a: Island){
+	Island.insides(a,b);
+	neg find isLake(b);
+	neg find isMountain(b);
+}
+@Constraint(key={a}, severity="error", message="error")
+pattern SeaInside(a: Sea){
+	Sea.insides(a,b);
+	neg find isIsland(b);
+	neg find isContinent(b);
+}
+@Constraint(key={a}, severity="error", message="error")
+pattern ContinentInside(a: Continent){
+	Continent.insides(a,b);
+	neg find isLake(b);
+	neg find isMountain(b);
+	neg find isCity(b);
+}
+pattern walkable(a: Region){
+	neg find isSea(a);
+	neg find isLake(a);
+}
+
+pattern isInside(a: Region, b: Region) {
+	CompositeRegion.insides(a, b);
+}
+
+pattern directReachable(a: Region, b: Region) {
+	a != b;
+	find isInside(container, a);
+	find walkable(container);
+	find isInside+(container, b);
+}
+
+pattern reachable(a: Region, b: Region) {
+	a != b;
+	find directReachable+(a, b);
+}
+
+pattern next(a: Region, b: Region) {
+	Region.next(a, b);
+
+}
+
+@Constraint(key={a, b}, severity="error", message="error")
+pattern nextNotReachable(a: City, b: City) {
+	City.next(a, b);
+	neg find reachable(a, b);
+}
+
+@Constraint(key={a}, severity="error", message="error")
+pattern cityNoNext(a: City) {
+	CompositeRegion.insides(cont, a);
+	find isContinent(cont);
+	neg find next(a, _);
+}
+
+pattern cities(a: Region, b: Region) {
+	find isCity(a);
+	find isCity(b);
+}
+
+@Constraint(key={a}, severity="error", message="error")
+pattern noOtherNext(a: Region, b: Region) {
+	Region.next(a, b);
+	neg find cities(a, b);
+}
