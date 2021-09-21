@@ -7,6 +7,7 @@ Map-Generation is  prototype model-based game world map generator integrated wit
 - [Scope](#scope)
 - [Installation](#installation)
 - [Geting Started](#geting-started)
+- [MODELS 2020 Conference Paper](https://dl.acm.org/doi/10.1145/3417990.3422001)
 
 ## Scope 
 - Investigate the usage of model-based techniques in the context of game map generation
